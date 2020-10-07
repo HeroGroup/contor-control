@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store(Request $request)
+    {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect('/admin/users');
+    }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $user->update($request->all());
+        return redirect('/admin/users');
+    }
+
+    public function destroy(User $user)
+    {
+        return redirect('/admin/users')->with('message', 'در حال حاضر امکان حذف وجود ندارد.')->with('type', 'danger');
+    }
+
+    public function resetPassword(User $user)
+    {
+        try {
+            $user->update(['password' => Hash::make($user->mobile)]);
+
+            return $this->success('رمز عبور با موفقیت به شماره موبایل کاربر تغییر یافت.');
+        } catch (\Exception $exception) {
+            return $this->fail($exception->getMessage());
+        }
+    }
+}

@@ -1,0 +1,2 @@
+
+[2020/09/5 06:19]  [getAMIGatewayConfig implode(): Argument must be an array]
