@@ -65,8 +65,8 @@
                 <tr id='${id}'>
                     <td><input name='start-time-${id}' type='text' class='time start form-control' /></td>
                     <td><input name='end-time-${id}' type='text' class='time end form-control' /></td>
-                    <td>{!! Form::select('mode-${id}', $modes, null, array('class' => 'form-control', 'placeholder' => 'انتخاب کنید ...')) !!}</td>
-                    <td>{!! Form::number('degree-${id}', null, array('class' => 'form-control')) !!}</td>
+                    <td>{!! Form::select('mode-${id}', $modes, null, array('class' => 'form-control', 'placeholder' => 'انتخاب کنید ...', 'onchange' => 'modesListChange(${id})')) !!}</td>
+                    <td>{!! Form::select('degree-${id}', config('enums.degrees'), null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}</td>
                     <td><button type='button' class='btn btn-danger pull-left' onclick='document.getElementById(${id}).remove()'><i class='fa fa-remove'></i></button></td>
                 </tr>`;
 
@@ -86,6 +86,16 @@
             var datepair = new Datepair(document.getElementById(`${id}`));
 
             id++;
+        }
+
+        function modesListChange(id) {
+            var selected = $(`select[name=mode-${id}]`);
+            if (selected.val() === "4" || selected.val() === "5") { // enable degree
+                selected.parent().next().children().prop("disabled", false);
+            } else { // disable degree
+                selected.parent().next().children().val("");
+                selected.parent().next().children().prop("disabled", true);
+            }
         }
 
         function save() {

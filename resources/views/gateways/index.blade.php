@@ -62,7 +62,8 @@
                         <th>شماره سریال</th>
                         <th>درگاه اصلی</th>
                         <th>بازه زمانی ارسال اطلاعات (ثانیه)</th>
-                        <th>وضعیت</th>
+                        <th>وضعیت رله 1</th>
+                        <th>وضعیت رله 2</th>
                         <th>تاریخ ایجاد</th>
                         <th>عملیات</th>
                     </tr>
@@ -74,14 +75,20 @@
                             <td>{{$gateway->parentGateway ? $gateway->parentGateway->serial_number : 'ندارد'}}</td>
                             <td>{{$gateway->send_data_duration_seconds}}</td>
                             <td>
-                                {{--<span class="label label-default">{{$gateway->electricalMeters->first()->relay1_status == 1 ? "روشن" : "خاموش"}}</span>--}}
                                 <span> روشن </span>
                                 <label class="switch">
                                     <input type="checkbox" @if($gateway->electricalMeters->first()->relay1_status == 1) checked @endif onchange="changeGatewayRelayStatus('{{$gateway->serial_number}}', this.checked)">
                                     <span class="slider round"></span>
                                 </label>
                                 <span> خاموش </span>
-                                {{--<a href="#" onclick="event.preventDefault();">تغییر وضعیت</a>--}}
+                            </td>
+                            <td>
+                                <span> روشن </span>
+                                <label class="switch">
+                                    <input type="checkbox" @if($gateway->electricalMeters->first()->relay2_status == 1) checked @endif onchange="changeGatewayRelay2Status('{{$gateway->serial_number}}', this.checked)">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span> خاموش </span>
                             </td>
                             <td>{{jdate('H:i - Y/m/j', strtotime($gateway->created_at))}}</td>
                             @component('components.links')
@@ -108,6 +115,20 @@
                     gateway_id: id,
                     relay1_status: checked ? 1 : 0,
                     relay2_status: 0
+                },
+                success: function (response) {
+                    swal(response.message);
+                }
+            })
+        }
+        function changeGatewayRelay2Status(id, checked) {
+            console.log(id, checked);
+            $.ajax("{{route('updateElectricityMeterRelay2Status')}}", {
+                type: "post",
+                data: {
+                    gateway_id: id,
+                    relay1_status: 0,
+                    relay2_status: checked ? 1 : 0
                 },
                 success: function (response) {
                     swal(response.message);

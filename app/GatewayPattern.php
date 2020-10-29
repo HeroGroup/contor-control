@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GatewayPattern extends Model
 {
     protected $fillable = [
-        'gateway_id',
-        'max_current', 'minutes_after', 'relay_status', 'off_minutes',
-        // 'pattern_id'
+        'gateway_id', 'pattern_id'
     ];
 
     public function gateway()

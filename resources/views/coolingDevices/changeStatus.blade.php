@@ -7,13 +7,13 @@
                 <div class="form-group">
                     <label for="mode" class="col-sm-2 control-label">حالت کار</label>
                     <div class="col-sm-4">
-                        {!! Form::select('mode', $modes, $device->mode, array('class' => 'form-control', 'id' => 'mode', 'placeholder' => 'انتخاب کنید ...')) !!}
+                        {!! Form::select('mode', $modes, $device->mode, array('class' => 'form-control', 'id' => 'mode', 'placeholder' => 'انتخاب کنید ...', 'onchange' => 'modesListChange()')) !!}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="degree" class="col-sm-2 control-label">درجه</label>
                     <div class="col-sm-4">
-                        <input type="number" name="degree" id="degree" class="form-control" value="{{$device->degree}}">
+                        {!! Form::select('degree', config('enums.degrees'), $device->degree, array('class' => 'form-control', 'id' => 'degree')) !!}
                     </div>
                 </div>
 
@@ -27,6 +27,10 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            modesListChange();
+        });
+
         function sendUpdateRequest() {
             $.ajax("{{route('updateCoolingDevice')}}", {
                 type: "post",
@@ -36,9 +40,25 @@
                     temperature: $("#degree").val()
                 },
                 success: function(response) {
-                    swal(response.message);
+                    swal({
+                        title: "",
+                        text: response.message,
+                        type: "success"
+                    }).then(function() {
+                        window.location.href = "{{route('coolingDevices.index', 0)}}";
+                    });
                 }
             })
+        }
+
+        function modesListChange() {
+            var selected = $("#mode").val(), degree = $("#degree");
+            if (selected === "4" || selected === "5") { // enable degree
+                degree.prop("disabled", false);
+            } else { // disable degree
+                degree.val("");
+                degree.prop("disabled", true);
+            }
         }
     </script>
 @endsection

@@ -16,7 +16,7 @@
         </a>
         <ul class="dropdown-menu dropdown-user">
             <li>
-                <a href="#"><i class="fa fa-user fa-fw text-success"></i> پروفایل</a>
+                <a href="{{route('users.changePassword', auth()->id())}}"><i class="fa fa-user fa-fw text-success"></i> پروفایل</a>
             </li>
             <li class="divider"></li>
             <li>

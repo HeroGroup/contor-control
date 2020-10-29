@@ -243,6 +243,29 @@ class GatewayController extends Controller
         }
     }
 
+    public function updateElectricityMeterRelay2Status(Request $request)
+    {
+        return $this->updateRelayStatus($request->gateway_id, null, $request->relay2_status);
+    }
+
+    public function updateRelayStatus($serialNumber, $relay1, $relay2)
+    {
+        $gateway = Gateway::where('serial_number','like',$serialNumber)->first();
+        $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
+        if ($electricalMeter) {
+            ModifyContor::create([
+                'gateway_id' => $gateway->id,
+                'electrical_meter_id' => $electricalMeter->id,
+                'relay1_status' => $relay1,
+                'relay2_status' => $relay2
+            ]);
+
+            return $this->success('درخواست تغییر وضعیت کنتور با موفقیت ارسال شد.');
+        } else {
+            return $this->fail('invalid associated gateway id');
+        }
+    }
+
     public function updateCoolingDevice(Request $request)
     {
         $coolingDevice = CoolingDevice::where('serial_number', $request->cooling_device)->first();

@@ -16,6 +16,7 @@
                         <th>درجه</th>
                         <th>ساعت شروع</th>
                         <th>ساعت پایان</th>
+                        <th>عملیات</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,10 @@
                         <td>{{$pattern->degree}}</td>
                         <td>{{$pattern->start_time}}</td>
                         <td>{{$pattern->end_time}}</td>
+                        @component('components.links')
+                            @slot('itemId'){{$pattern->id}}@endslot
+                            @slot('routeDelete'){{route('patterns.destroy',$pattern->id)}}@endslot
+                        @endcomponent
                     </tr>
                 @endforeach
                 </tbody>

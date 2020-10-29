@@ -22,6 +22,7 @@ class VerifyCsrfToken extends Middleware
         'api/postElectricityMeterData',
         'api/postElectricityMeterFieldModifyConfirm',
         'api/updateElectricityMeterRelayStatus',
+        'api/updateElectricityMeterRelay2Status',
         'api/updateCoolingDevice',
     ];
 }

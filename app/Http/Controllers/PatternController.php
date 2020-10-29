@@ -21,6 +21,18 @@ class PatternController extends Controller
         }
     }
 
+    public function create()
+    {
+        return view('patterns.create');
+    }
+
+    public function destroy(Pattern $pattern)
+    {
+        $device = $pattern->cooling_device_id;
+        $pattern->delete();
+        return redirect(route('coolingDevices.patterns', $device));
+    }
+
     public function createCoolingDevicePattern($gateway=null, $device=null)
     {
         $gateways = Gateway::pluck('serial_number', 'id')->toArray();
@@ -49,7 +61,7 @@ class PatternController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function storeCoolingDevicePattern(Request $request)
     {
         if ($request->gateway) {
             if ($request->device) {

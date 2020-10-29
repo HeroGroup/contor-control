@@ -7,6 +7,7 @@ use App\CoolingDeviceHistory;
 use App\CoolingDeviceModes;
 use App\CoolingDevicePattern;
 use App\Gateway;
+use App\Pattern;
 use Illuminate\Http\Request;
 
 class CoolingDeviceController extends Controller
@@ -62,7 +63,8 @@ class CoolingDeviceController extends Controller
 
     public function patterns(CoolingDevice $device)
     {
-        $patterns = CoolingDevicePattern::where('cooling_device_id', $device->id)->get();
+        // $patterns = CoolingDevicePattern::where('cooling_device_id', $device->id)->get();
+        $patterns = Pattern::where('cooling_device_id', $device->id)->get();
         $gateway = $device->gateway->id;
         return view('coolingDevices.patterns', compact('device', 'patterns', 'gateway'));
     }

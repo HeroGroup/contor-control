@@ -1,5 +1,5 @@
 <?php
-Auth::routes(/*['register' => false]*/);
+Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () { return redirect('/admin/gateways'); })->name('client.home');
 Route::get('/client/login', function () { return view('client.home'); })->name('client.login');
@@ -31,8 +31,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::resource('users', 'UserController');
     Route::get('users/{user}/resetPassword', 'UserController@resetPassword')->name('users.resetPassword');
+    Route::get('users/{user}/changePassword','UserController@changePassword')->name('users.changePassword');
+    Route::post('users/updatePassword', 'UserController@updatePassword')->name('users.updatePassword');
 
+    Route::get('/patterns/create', 'PatternController@create')->name('patterns.create');
     Route::post('/patterns/store', 'PatternController@store')->name('patterns.store');
+    Route::delete('/patterns/{pattern}', 'PatternController@destroy')->name('patterns.destroy');
     Route::get('/getDevicesList/{gateway?}', 'PatternController@getDevices');
 
 });
@@ -43,6 +47,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('/getAMIGatewayConfig/{gateway}', 'GatewayController@getAMIGatewayConfig')->name('getAMIGatewayConfig');
     Route::get('/getLatestElectricalMeterConfig/{gatewayId}', 'GatewayController@getLatestElectricalMeterConfig')->name('getLatestElectricalMeterConfig');
     Route::post('/updateElectricityMeterRelayStatus', 'GatewayController@updateElectricityMeterRelayStatus')->name('updateElectricityMeterRelayStatus');
+    Route::post('/updateElectricityMeterRelay2Status', 'GatewayController@updateElectricityMeterRelay2Status')->name('updateElectricityMeterRelay2Status');
     Route::post('/updateCoolingDevice', 'GatewayController@updateCoolingDevice')->name('updateCoolingDevice');
     Route::get('/getElectricityMeterFieldModify/{gateway}', 'GatewayController@getElectricityMeterFieldModify')->name('getElectricityMeterFieldModify');
     Route::post('postElectricityMeterFieldModifyConfirm', 'GatewayController@confirmFieldModify')->name('confirmFieldModify');
