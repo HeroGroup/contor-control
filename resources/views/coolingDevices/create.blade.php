@@ -12,6 +12,12 @@
                         <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{old('serial_number')}}" required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">عنوان</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" required>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="gateway_id" class="col-lg-2 control-label">درگاه (gateway)</label>

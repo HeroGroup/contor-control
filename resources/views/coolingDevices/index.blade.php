@@ -8,11 +8,12 @@
                     <thead>
                     <tr>
                         <th>شماره سریال</th>
+                        <th>عنوان</th>
                         <th>درگاه</th>
                         <th>الگوی در حال پیروی</th>
                         <th>آخرین حالت کار</th>
                         <th>درجه</th>
-                        <th>تاریخ ایجاد</th>
+                        {{--<th>تاریخ ایجاد</th>--}}
                         <th>عملیات</th>
                     </tr>
                     </thead>
@@ -20,6 +21,7 @@
                     @foreach($coolingDevices as $coolingDevice)
                         <tr>
                             <td>{{$coolingDevice->serial_number}}</td>
+                            <td>{{$coolingDevice->name}}</td>
                             <td>{{$coolingDevice->gateway->serial_number}}</td>
                             <td>
                                 {!! Form::select('patterns', $patterns, \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first() ? \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first()->pattern_id : '', array('class' => 'form-control', 'placeholder' => 'انتخاب کنید...', 'id' => $coolingDevice->id)) !!}
@@ -43,7 +45,7 @@
                                 @endif
                             </td>
                             <td>{{$coolingDevice->degree}}</td>
-                            <td>{{jdate('H:i - Y/m/j', strtotime($coolingDevice->created_at))}}</td>
+                            {{--<td>{{jdate('H:i - Y/m/j', strtotime($coolingDevice->created_at))}}</td>--}}
                             {{--@component('components.links')--}}
                                 {{--@slot('routeChangeStatus'){{route('coolingDevices.changeStatus',$coolingDevice->id)}}@endslot--}}
                                 {{--@slot('routeEdit'){{route('coolingDevices.edit',$coolingDevice->id)}}@endslot--}}

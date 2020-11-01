@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CoolingDevice extends Model
 {
-    protected $fillable = ['gateway_id', 'serial_number', 'mode', 'degree'];
+    protected $fillable = ['gateway_id', 'serial_number', 'name', 'mode', 'degree'];
 
     public function gateway()
     {
