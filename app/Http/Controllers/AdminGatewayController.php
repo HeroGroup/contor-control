@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ElectricalMeter;
 use App\Gateway;
-use Illuminate\Auth\Access\Gate;
+use App\GatewayPattern;
+use App\Pattern;
 use Illuminate\Http\Request;
 
 class AdminGatewayController extends Controller
@@ -61,5 +62,13 @@ class AdminGatewayController extends Controller
     public function devices(Gateway $gateway)
     {
         return redirect(route('coolingDevices.index', $gateway));
+    }
+
+    public function patterns(Gateway $gateway)
+    {
+        $gatewayPatterns = GatewayPattern::where('gateway_id', $gateway->id)->orderBy('id', 'asc')->get();
+        // $users = User::where('user_type' ,'LIKE', 'client')->selectRaw('id, CONCAT(mobile,\' - \',name) as info')->pluck('info', 'id')->toArray();
+        $patterns = Pattern::where('pattern_type',2)->pluck('name','id')->toArray();
+        return view('gateways.patterns', compact('gateway', 'gatewayPatterns','patterns'));
     }
 }

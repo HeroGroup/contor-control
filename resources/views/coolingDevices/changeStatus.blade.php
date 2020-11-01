@@ -53,7 +53,7 @@
 
         function modesListChange() {
             var selected = $("#mode").val(), degree = $("#degree");
-            if (selected === "4" || selected === "5") { // enable degree
+            if (selected === "3" || selected === "4") { // enable degree
                 degree.prop("disabled", false);
             } else { // disable degree
                 degree.val("");

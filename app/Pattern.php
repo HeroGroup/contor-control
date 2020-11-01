@@ -7,13 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pattern extends Model
 {
     protected $fillable = [
-        'start_time', 'end_time', 'mode_id', 'degree',
-        'max_current', 'minutes_after', 'relay_status', 'off_minutes',
-        'type', // cooling, gateway
+        'name', 'pattern_type', // cooling, gateway
     ];
 
-    public function mode()
+    public function rows()
     {
-        return $this->belongsTo(CoolingDeviceModes::class);
+        return $this->hasMany(PatternRow::class, 'pattern_id', 'id');
     }
 }

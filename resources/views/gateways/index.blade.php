@@ -91,13 +91,48 @@
                                 <span> خاموش </span>
                             </td>
                             <td>{{jdate('H:i - Y/m/j', strtotime($gateway->created_at))}}</td>
-                            @component('components.links')
-                                @slot('routeEdit'){{route('gateways.edit',$gateway->id)}}@endslot
-                                @slot('routeDevices'){{route('gateways.devices',$gateway->id)}}@endslot
-                                @slot('routeHistory'){{route('electricalMeters.history',$gateway->electricalMeters->first()->id)}}@endslot
-                                @slot('itemId'){{$gateway->id}}@endslot
-                                @slot('routeDelete'){{route('gateways.destroy',$gateway->id)}}@endslot
-                            @endcomponent
+                            {{--@component('components.links')--}}
+                                {{--@slot('routeEdit'){{route('gateways.edit',$gateway->id)}}@endslot--}}
+                                {{--@slot('routeDevices'){{route('gateways.devices',$gateway->id)}}@endslot--}}
+                                {{--@slot('routePatterns'){{route('gateways.patterns',$gateway->id)}}@endslot--}}
+                                {{--@slot('routeHistory'){{route('electricalMeters.history',$gateway->electricalMeters->first()->id)}}@endslot--}}
+                                {{--@slot('itemId'){{$gateway->id}}@endslot--}}
+                                {{--@slot('routeDelete'){{route('gateways.destroy',$gateway->id)}}@endslot--}}
+                            {{--@endcomponent--}}
+                            <td><div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                    عملیات
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-left" role="menu">
+                                    <li>
+                                        <a href="{{route('gateways.edit',$gateway->id)}}">
+                                            <span class="text-warning">ویرایش</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('gateways.devices',$gateway->id)}}">
+                                            <span class="text-info">دستگاه ها</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('gateways.patterns',$gateway->id)}}">
+                                            <span class="text-primary">الگوی مصرف</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('electricalMeters.history',$gateway->electricalMeters->first()->id)}}">
+                                            <span class="text-success">تاریخچه</span>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-fw fa-trash text-danger"></i><span class="text-danger">حذف</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -108,13 +143,12 @@
 
     <script>
         function changeGatewayRelayStatus(id, checked) {
-            console.log(id, checked);
             $.ajax("{{route('updateElectricityMeterRelayStatus')}}", {
                 type: "post",
                 data: {
                     gateway_id: id,
                     relay1_status: checked ? 1 : 0,
-                    relay2_status: 0
+                    relay2_status: null
                 },
                 success: function (response) {
                     swal(response.message);
@@ -122,12 +156,11 @@
             })
         }
         function changeGatewayRelay2Status(id, checked) {
-            console.log(id, checked);
             $.ajax("{{route('updateElectricityMeterRelay2Status')}}", {
                 type: "post",
                 data: {
                     gateway_id: id,
-                    relay1_status: 0,
+                    relay1_status: null,
                     relay2_status: checked ? 1 : 0
                 },
                 success: function (response) {

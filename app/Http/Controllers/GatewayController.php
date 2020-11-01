@@ -136,7 +136,7 @@ class GatewayController extends Controller
                     if ($coolingDevice) {
                         CoolingDeviceHistory::create([
                             'cooling_device_id' => $coolingDevice->id,
-                            'mode' => $data[1],
+                            'mode_id' => $data[1],
                             'degree' => $data[2]
                         ]);
                         /*
@@ -227,20 +227,7 @@ class GatewayController extends Controller
 
     public function updateElectricityMeterRelayStatus(Request $request)
     {
-        $gateway = Gateway::where('serial_number','like',$request->gateway_id)->first();
-        $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
-        if ($electricalMeter) {
-            ModifyContor::create([
-                'gateway_id' => $gateway->id,
-                'electrical_meter_id' => $electricalMeter->id,
-                'relay1_status' => $request->relay1_status,
-                'relay2_status' => $request->relay2_status ? $request->relay2_status : 0
-            ]);
-
-            return $this->success('درخواست تغییر وضعیت کنتور با موفقیت ارسال شد.');
-        } else {
-            return $this->fail('invalid associated gateway id');
-        }
+        return $this->updateRelayStatus($request->gateway_id, $request->relay1_status, null);
     }
 
     public function updateElectricityMeterRelay2Status(Request $request)
@@ -250,14 +237,36 @@ class GatewayController extends Controller
 
     public function updateRelayStatus($serialNumber, $relay1, $relay2)
     {
+        $r1 = $relay1;
+        $r2 = $relay2;
         $gateway = Gateway::where('serial_number','like',$serialNumber)->first();
         $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
         if ($electricalMeter) {
+            if ($r1 == null) {
+                $maxId = ModifyContor::where('gateway_id', $gateway->id)
+                    ->whereNotNull('electrical_meter_id')
+                    ->where('checked', 0)
+                    ->max('id');
+
+                $latestModify = ModifyContor::find($maxId);
+
+                $r1 = $latestModify ? $latestModify->relay1_status : $electricalMeter->relay1_status;
+            }
+
+            if ($r2 == null) {
+                $maxId = ModifyContor::where('gateway_id', $gateway->id)
+                    ->whereNotNull('electrical_meter_id')
+                    ->where('checked', 0)
+                    ->max('id');
+                $latestModify = ModifyContor::find($maxId);
+                $r2 = $latestModify ? $latestModify->relay2_status : $electricalMeter->relay2_status;
+            }
+
             ModifyContor::create([
                 'gateway_id' => $gateway->id,
                 'electrical_meter_id' => $electricalMeter->id,
-                'relay1_status' => $relay1,
-                'relay2_status' => $relay2
+                'relay1_status' => $r1,
+                'relay2_status' => $r2
             ]);
 
             return $this->success('درخواست تغییر وضعیت کنتور با موفقیت ارسال شد.');
@@ -293,10 +302,11 @@ class GatewayController extends Controller
                 $gateways = Gateway::where('id', $parentGateway->id)->orWhere('gateway_id', $parentGateway->id)->get();
                 $result = [];
                 foreach ($gateways as $gateway) {
-                    $gateWayModified = ModifyContor::where('gateway_id', $gateway->id)
+                    $maxId = ModifyContor::where('gateway_id', $gateway->id)
                         ->whereNotNull('electrical_meter_id')
                         ->where('checked', 0)
-                        ->first();
+                        ->max('id');
+                    $gateWayModified = ModifyContor::find($maxId);
 
                     if ($gateWayModified) {
                         $resultItem = $gateway->serial_number . "&" . $gateWayModified->relay1_status . "&" . $gateWayModified->relay2_status;
@@ -371,6 +381,12 @@ class GatewayController extends Controller
                             ->update(['checked' => 1]);
 
                         $coolingDevice->update(['mode' => $coolingData[1], 'degree' => $coolingData[2]]);
+
+                        CoolingDeviceHistory::create([
+                            'cooling_device_id' => $coolingDevice->id,
+                            'mode_id' => $coolingData[1],
+                            'degree' => $coolingData[2]
+                        ]);
                     }
                 }
             }
@@ -379,11 +395,6 @@ class GatewayController extends Controller
         } catch (\Exception $exception) {
             return $this->fail($exception->getLine() . ': ' . $exception->getMessage());
         }
-    }
-
-    public function patterns(Gateway $gateway)
-    {
-
     }
 
 }

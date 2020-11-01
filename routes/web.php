@@ -11,9 +11,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/', function() { return redirect('/admin/gateways'); });
     Route::resource('gateways', 'AdminGatewayController');
     Route::get('gateways/{gateway}/coolingDevices', 'AdminGatewayController@devices')->name('gateways.devices');
+    Route::get('gateways/patterns/index', 'PatternController@gatewayPatternsIndex')->name('gateways.patterns.index');
     Route::get('gateways/{gateway}/patterns', 'AdminGatewayController@patterns')->name('gateways.patterns');
     Route::get('gateways/patterns/create', 'PatternController@createGatewayPattern')->name('gateways.patterns.create');
     Route::post('gateways/patterns/store', 'PatternController@storeGatewayPattern')->name('gateways.patterns.store');
+    Route::post('gateways/patterns/massStore', 'PatternController@massStore')->name('gateways.patterns.massStore');
+    Route::delete('gateways/patterns/{pattern}', 'PatternController@destroyGatewayPattern')->name('gateways.patterns.destroy');
+    Route::get('gateways/{gateway}/destroySinglePatternRow/{pattern}', 'PatternController@destroySingleGatewayPattern')->name('gateways.patterns.destroySingle');
 
     Route::resource('electricalMeterTypes', 'ElectricalMeterTypeController');
 
@@ -28,17 +32,22 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::get('coolingDevices/{device}/patterns', 'CoolingDeviceController@patterns')->name('coolingDevices.patterns');
     Route::get('coolingDevices/patterns/new/{gateway?}/{device?}', 'PatternController@createCoolingDevicePattern')->name('coolingDevices.patterns.new');
+    Route::post('coolingDevices/patterns/store', 'CoolingDeviceController@storePattern')->name('coolingDevices.patterns.store');
+    Route::post('coolingDevices/patterns/massStore', 'CoolingDeviceController@massStore')->name('coolingDevices.patterns.massStore');
 
     Route::resource('users', 'UserController');
     Route::get('users/{user}/resetPassword', 'UserController@resetPassword')->name('users.resetPassword');
     Route::get('users/{user}/changePassword','UserController@changePassword')->name('users.changePassword');
     Route::post('users/updatePassword', 'UserController@updatePassword')->name('users.updatePassword');
 
+    Route::get('/patterns', 'PatternController@index')->name('patterns.index');
     Route::get('/patterns/create', 'PatternController@create')->name('patterns.create');
-    Route::post('/patterns/store', 'PatternController@store')->name('patterns.store');
+    Route::post('/patterns/store', 'PatternController@storeCoolingDevicePattern')->name('patterns.store');
+    Route::get('/patterns/{pattern}/show', 'PatternController@show')->name('patterns.show');
+    Route::delete('/patterns/rows/{row}', 'PatternController@destroyRow')->name('patterns.rows.destroy');
     Route::delete('/patterns/{pattern}', 'PatternController@destroy')->name('patterns.destroy');
     Route::get('/getDevicesList/{gateway?}', 'PatternController@getDevices');
-
+    Route::post('/patterns/checkNameUniqueness', 'PatternController@checkNameUniqueness')->name('patterns.checkNameUniqueness');
 });
 
 /*  ==========================  API ROUTES  ====================================    */

@@ -24,8 +24,14 @@
         &nbsp;
     @endif
     @if(isset($routePatterns))
-        <a href="{{ $routePatterns }}" class="btn btn-xs btn-primary" data-toggle="tooltip" title="الگو ها">
-            <i class="fa fa-clock-o"></i> الگو ها
+        <a href="{{ $routePatterns }}" class="btn btn-xs btn-primary" data-toggle="tooltip" title="الگوی مصرف">
+            <i class="fa fa-clock-o"></i> الگوی مصرف
+        </a>
+        &nbsp;
+    @endif
+    @if(isset($routeDetails))
+        <a href="{{ $routeDetails }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="نمایش جزئیات">
+             نمایش جزئیات
         </a>
         &nbsp;
     @endif

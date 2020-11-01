@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['pageTitle' => 'ایجاد الگو'])
+@extends('layouts.admin', ['pageTitle' => 'ایجاد الگوی دستگاه سرمایشی'])
 @section('content')
     <style>
         .time-picker {
@@ -24,15 +24,20 @@
     </div>
     <form class="form-inline">
         <div class="form-group mb-2">
-            <label for="gateway">درگاه: </label>
-            {!! Form::select('gateway', $gateways, $gateway, array('class' => 'form-control', 'onchange' => 'renderDevicesList()', 'placeholder' => 'انتخاب کنید...')) !!}
+            <label for="name">نام الگو: </label>
+            <input type="text" name="name" id="name" class="form-control" />
         </div>
-        <div class="form-group mb-2">
-            <label for="devicesList">دستگاه: </label>
-            <select id="devicesList" name="devicesList" class="form-control">
-                <option value="">انتخاب کنید...</option>
-            </select>
-        </div>
+        {{--<div class="form-group mb-2">--}}
+            {{--<label for="gateway">درگاه: </label>--}}
+            {{--{!! Form::select('gateway', $gateways, $gateway, array('class' => 'form-control', 'onchange' => 'renderDevicesList()', 'placeholder' => 'انتخاب کنید...')) !!}--}}
+        {{--</div>--}}
+        {{--<div class="form-group mb-2">--}}
+            {{--<label for="devicesList">دستگاه: </label>--}}
+            {{--<select id="devicesList" name="devicesList" class="form-control">--}}
+                {{--<option value="">انتخاب کنید...</option>--}}
+            {{--</select>--}}
+        {{--</div>--}}
+
         <button type="button" class="btn btn-success" onclick="save()"><i class="fa fa-save"></i> ذخیره</button>
     </form>
 
@@ -54,10 +59,6 @@
         </table>
     </div>
     <script>
-        $(document).ready(function () {
-            if ($("select[name=gateway]").val() > 0)
-                renderDevicesList("{{$device}}");
-        });
 
         var id=0;
         function add() {
@@ -90,7 +91,7 @@
 
         function modesListChange(id) {
             var selected = $(`select[name=mode-${id}]`);
-            if (selected.val() === "4" || selected.val() === "5") { // enable degree
+            if (selected.val() === "3" || selected.val() === "4") { // enable degree
                 selected.parent().next().children().prop("disabled", false);
             } else { // disable degree
                 selected.parent().next().children().val("");
@@ -100,15 +101,15 @@
 
         function save() {
             var error = false, errorMessage="";
-            var gateway = $("select[name=gateway]");
-            if (!gateway.val()) {
-                gateway.addClass('error');
+            var name = $("#name");
+            if (!name.val()) {
+                name.addClass('error');
                 return;
             } else {
-                gateway.removeClass('error');
+                name.removeClass('error');
             }
 
-            var modes = [3, 4, 5], result = [], count = 0;
+            var modes = [3, 4], result = [], count = 0;
             $("#table-body tr").each(function (index) {
                 count++;
                 $(this).removeClass('error');
@@ -117,7 +118,7 @@
                     start = $(`input[name=start-time-${id}]`).val(),
                     end = $(`input[name=end-time-${id}]`).val(),
                     mode = $(`select[name=mode-${id}]`).val(),
-                    degree = $(`input[name=degree-${id}]`).val();
+                    degree = $(`select[name=degree-${id}]`).val();
 
 
                 if (!start || !end || !mode) {
@@ -134,8 +135,6 @@
 
                 // check if start or end not between other starts and ends
                 for (var z=0; z<result.length; z++) {
-                    console.log(start, result[z].start);
-                    console.log(end, result[z].end);
                     if ((start > result[z].start && start < result[z].end) || (end > result[z].start && end < result[z].end)) {
                         $(this).addClass('error');
                         error = true;
@@ -154,37 +153,36 @@
 
                     return;
                 } else {
-                    swal({
-                        title: "هشدار",
-                        text: "در صورت وجود الگوی مصرف برای این دستگاه ها، الگوی مصرف قبلی کاملا از بین رفته و الگوی جدید جایگزین می شود.\nآیا ادامه می دهید؟",
-                        icon: "warning",
-                        buttons: ["انصراف", "ادامه می دهم"],
-                        dangerMode: false,
-                    }).then((willProceed) => {
-                        if (willProceed) {
-                            $.ajax('/admin/patterns/store', {
-                                method: 'post',
-                                data: {
-                                    _token: "{{csrf_token()}}",
-                                    gateway: gateway.val(),
-                                    device: $("#devicesList").val(),
-                                    data: JSON.stringify(result)
-                                },
-                                success: function (response) {
-                                    if (response.status === 1) {
-                                        $("#alarm-container").css({"display":"flex"});
-                                        $(".alert-dismissible").removeClass('alert-danger');
-                                        $(".alert-dismissible").addClass('alert-success');
-                                        $("#alert-message").text(response.message);
-                                        // window.location.href = "/coolingDevices/id/patterns";
-                                    } else {
-                                        $(".row").css({"visibility":"visible"});
-                                        $(".alert-dismissible").removeClass('alert-success');
-                                        $(".alert-dismissible").addClass('alert-danger');
-                                        $("#alert-message").text(response.message);
-                                    }
-                                }
-                            });
+                    $.ajax('/admin/patterns/store', {
+                        method: 'post',
+                        data: {
+                            _token: "{{csrf_token()}}",
+                            // gateway: gateway.val(),
+                            // device: $("#devicesList").val(),
+                            name: name.val(),
+                            data: JSON.stringify(result)
+                        },
+                        success: function (response) {
+                            if (response.status === 1) {
+                                swal({
+                                    title: "",
+                                    text: response.message,
+                                    type: "success"
+                                }).then(function() {
+                                    window.location.href = "{{route('patterns.index')}}";
+                                });
+                                // $("#alarm-container").css({"display":"flex"});
+                                // $(".alert-dismissible").removeClass('alert-danger');
+                                // $(".alert-dismissible").addClass('alert-success');
+                                // $("#alert-message").text(response.message);
+                                // window.location.href = "/coolingDevices/id/patterns";
+                            } else {
+                                $("#alarm-container").css({"display":"flex"});
+                                $(".row").css({"visibility":"visible"});
+                                $(".alert-dismissible").removeClass('alert-success');
+                                $(".alert-dismissible").addClass('alert-danger');
+                                $("#alert-message").text(response.message);
+                            }
                         }
                     });
                 }
@@ -192,7 +190,7 @@
                 swal("هیچ ردیفی درج نشده است.", "", "warning");
             }
         }
-
+/*
         function renderDevicesList(selectedId=null) {
             var gateway = $("select[name=gateway]").val();
             $.ajax(`/admin/getDevicesList/${gateway}`, {
@@ -213,7 +211,7 @@
                 }
             });
         }
-
+*/
         function clearDropDown() {
             var select = document.getElementById("devicesList");
             for (var i = select.options.length - 1; i >= 0; i--) {

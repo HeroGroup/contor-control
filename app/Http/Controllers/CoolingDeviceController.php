@@ -14,9 +14,10 @@ class CoolingDeviceController extends Controller
 {
     public function index($gateway=0)
     {
-        // dd($gateway);
         $coolingDevices = $gateway > 0 ? CoolingDevice::where('gateway_id', $gateway)->get() : CoolingDevice::all();
-        return view('coolingDevices.index', compact('gateway', 'coolingDevices'));
+        $patterns = Pattern::where('pattern_type', 1)->pluck('name', 'id')->toArray();
+
+        return view('coolingDevices.index', compact('gateway', 'coolingDevices', 'patterns'));
     }
 
     public function create($gateway=0)
@@ -64,9 +65,13 @@ class CoolingDeviceController extends Controller
     public function patterns(CoolingDevice $device)
     {
         // $patterns = CoolingDevicePattern::where('cooling_device_id', $device->id)->get();
-        $patterns = Pattern::where('cooling_device_id', $device->id)->get();
-        $gateway = $device->gateway->id;
-        return view('coolingDevices.patterns', compact('device', 'patterns', 'gateway'));
+        // $patterns = Pattern::where('cooling_device_id', $device->id)->get();
+        // $gateway = $device->gateway->id;
+        $serial_number = $device->serial_number;
+        $cdp = CoolingDevicePattern::where('cooling_device_id', $device->id)->first();
+        $name = $cdp ? $cdp->pattern->name : 'فاقد الگوی مصرف';
+        $rows = $cdp ? $cdp->pattern->rows : [];
+        return view('coolingDevices.patterns', compact('serial_number', 'rows', 'name'));
     }
 
     public function changeStatus($deviceId)
@@ -74,5 +79,40 @@ class CoolingDeviceController extends Controller
         $device = CoolingDevice::find($deviceId);
         $modes = CoolingDeviceModes::pluck('name', 'id')->toArray();
         return view('coolingDevices.changeStatus', compact('device', 'modes'));
+    }
+
+    public function storePattern(Request $request)
+    {
+        try {
+            if ($request->pattern > 0) {
+                CoolingDevicePattern::create([
+                    'cooling_device_id' => $request->device,
+                    'pattern_id' => $request->pattern
+                ]);
+                return $this->success('با موفقیت ذخیره شد.');
+            } else {
+                CoolingDevicePattern::where('cooling_device_id', $request->device)->delete();
+                return $this->success('با موفقیت حذف شد.');
+            }
+        } catch (\Exception $exception) {
+            return $this->fail($exception->getMessage());
+        }
+    }
+
+    public function massStore(Request $request)
+    {
+        if($request->has('devicePatterns') && $request->devicePatterns != null) {
+            $devicePatterns = $request->devicePatterns;
+            CoolingDevicePattern::where('pattern_id', $request->pattern)->delete();
+            if ($devicePatterns)
+                foreach ($devicePatterns as $key => $value) {
+                    CoolingDevicePattern::create([
+                        'cooling_device_id' => $devicePatterns[$key],
+                        'pattern_id' => $request->pattern
+                    ]);
+                }
+        }
+
+        return redirect(route('patterns.show', $request->pattern));
     }
 }

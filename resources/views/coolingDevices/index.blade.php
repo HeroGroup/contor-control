@@ -9,6 +9,7 @@
                     <tr>
                         <th>شماره سریال</th>
                         <th>درگاه</th>
+                        <th>الگوی در حال پیروی</th>
                         <th>آخرین حالت کار</th>
                         <th>درجه</th>
                         <th>تاریخ ایجاد</th>
@@ -21,19 +22,22 @@
                             <td>{{$coolingDevice->serial_number}}</td>
                             <td>{{$coolingDevice->gateway->serial_number}}</td>
                             <td>
+                                {!! Form::select('patterns', $patterns, \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first() ? \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first()->pattern_id : '', array('class' => 'form-control', 'placeholder' => 'انتخاب کنید...', 'id' => $coolingDevice->id)) !!}
+                            </td>
+                            <td>
                                 @if($coolingDevice->mode)
                                     @switch($coolingDevice->mode)
                                         @case(1)
-                                        <div class="label label-default">{{$coolingDevice->modeName->name}}</div>
+                                        <div class="label label-success"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
                                         @break
                                         @case(3)
-                                        <div class="label label-success">{{$coolingDevice->modeName->name}}</div>
+                                        <div class="label label-primary"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
                                         @break
                                         @case(4)
-                                        <div class="label label-primary">{{$coolingDevice->modeName->name}}</div>
+                                        <div class="label label-danger"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
                                         @break
                                         @case(5)
-                                        <div class="label label-danger">{{$coolingDevice->modeName->name}}</div>
+                                        <div class="label label-warning"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
                                         @break
                                     @endswitch
                                 @endif
@@ -48,7 +52,8 @@
                                 {{--@slot('routeHistory'){{route('coolingDevices.history',$coolingDevice->id)}}@endslot--}}
                                 {{--@slot('routePatterns'){{route('coolingDevices.patterns',$coolingDevice->id)}}@endslot--}}
                             {{--@endcomponent--}}
-                            <td><div class="btn-group">
+                            <td>
+                                <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                     عملیات
                                     <span class="caret"></span>
@@ -71,7 +76,7 @@
                                     </li>
                                     <li>
                                         <a href="{{route('coolingDevices.patterns',$coolingDevice->id)}}">
-                                            <span class="text-primary">الگوها</span>
+                                            <span class="text-primary">الگوی مصرف</span>
                                         </a>
                                     </li>
                                     <li class="divider"></li>
@@ -81,7 +86,8 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div></td>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -94,6 +100,20 @@
             setTimeout(function() {
                 window.location.reload();
             }, 20000);
+        });
+
+        $("select[name=patterns]").change(function() {
+            $.ajax("{{route('coolingDevices.patterns.store')}}", {
+                type: "post",
+                data: {
+                    "_token": "{{@csrf_token()}}",
+                    "device": $(this).attr('id'),
+                    "pattern": $(this).val()
+                },
+                success: function (res) {
+                    swal(res.message);
+                }
+            });
         });
     </script>
 @endsection

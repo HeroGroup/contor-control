@@ -1,40 +1,47 @@
-@extends('layouts.admin', ['pageTitle' => 'الگوهای قطع/وصل درگاه ها'])
+@extends('layouts.admin', ['pageTitle' => 'ایجاد الگوی جدید'])
 @section('content')
-    <style>
-        .btn-save {
-            width: 80px;
-            height: 35px;
-        }
-    </style>
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>درگاه</th>
-                <th>حداکثر جریان</th>
-                <th>کارکرد (دقیقه) در حداکثر جریان</th>
-                <th>دقایق قطع</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($gateways as $gateway)
-                <tr>
-                    <td>{{$gateway->serial_number}}</td>
-                    <td>
-                        <input type="number" id="{{$gateway->id}}_max_current" name="{{$gateway->id}}_max_current" class="form-control" value="{{$gateway->patterns->count() > 0 ? $gateway->patterns->first()->max_current : ''}}" />
-                    </td>
-                    <td>
-                        <input type="number" id="{{$gateway->id}}_minutes_after" name="{{$gateway->id}}_minutes_after" class="form-control" value="{{$gateway->patterns->count() > 0 ? $gateway->patterns->first()->minutes_after : ''}}" />
-                    </td>
-                    <td>
-                        <input type="number" id="{{$gateway->id}}_off_minutes" name="{{$gateway->id}}_off_minutes" class="form-control" value="{{$gateway->patterns->count() > 0 ? $gateway->patterns->first()->off_minutes : ''}}" />
-                    </td>
-                    <td>
-                        <button type="button" id="{{$gateway->id}}_save" class="btn btn-success btn-save" onclick="saveRow('{{$gateway->id}}','{{@csrf_token()}}')"><i class="fa fa-save"></i> ذخیره</button>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+    <div class="panel panel-default">
+        <div class="panel-heading">درگاه جدید</div>
+        <div class="panel-body">
+            {{ Form::open(array('url' => route('gateways.patterns.store'), 'method' => 'POST')) }}
+            @csrf
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">نام الگو</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="max_current" class="col-sm-2 control-label">حداکثر جریان (آمپر)</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="max_current" name="max_current" value="{{old('max_current')}}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="minutes_after" class="col-sm-2 control-label">حداکثر زمان (دقیقه)</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="minutes_after" name="minutes_after" value="{{old('minutes_after')}}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="off_minutes" class="col-sm-2 control-label">دقایق قطع</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="off_minutes" name="off_minutes" value="{{old('off_minutes')}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-4 text-left">
+                        <a class="btn btn-default" href="{{route('gateways.patterns.index')}}">انصراف</a>
+                        <button type="submit" class="btn btn-success">ذخیره</button>
+                    </div>
+                </div>
+            </div>
+            {{ Form::close() }}
+        </div>
     </div>
 @endsection
