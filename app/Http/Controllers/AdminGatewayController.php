@@ -54,9 +54,12 @@ class AdminGatewayController extends Controller
 
     public function destroy(Gateway $gateway)
     {
-        // todo checke dependencies
-        // $gateway->delete();
-        return redirect('admin/gateways')->with('message', 'در حال حاضر امکان حذف وجود ندارد')->with('type', 'danger');
+        try {
+            $gateway->delete();
+            return redirect('admin/gateways')->with('message', 'حذف با موفقیت انجام شد.')->with('type', 'success');
+        } catch (\Exception $exception) {
+            return redirect('admin/gateways')->with('message', $exception->getMessage())->with('type', 'danger');
+        }
     }
 
     public function devices(Gateway $gateway)

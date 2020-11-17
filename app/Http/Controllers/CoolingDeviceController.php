@@ -46,13 +46,12 @@ class CoolingDeviceController extends Controller
 
     public function destroy(CoolingDevice $coolingDevice)
     {
-        // try {
-        //     $coolingDevice->delete();
-        //     return redirect(route('coolingDevices.index'));
-        // } catch (\Exception $exception) {
-        //     throw;
-        // }
-        return redirect('/admin/coolingDevices/0')->with('message', 'در حال حاضر امکان حذف وجود ندارد.')->with('type', 'danger');
+         try {
+             $coolingDevice->delete();
+             return redirect(route('coolingDevices.index', 0))->with('message', 'حذف با موفقیت انجام شد.')->with('type', 'success');
+         } catch (\Exception $exception) {
+             return redirect(route('coolingDevices.index', 0))->with('message', 'در حال حاضر امکان حذف وجود ندارد.')->with('type', 'danger');
+         }
     }
 
     public function history($id)
@@ -84,16 +83,16 @@ class CoolingDeviceController extends Controller
     public function storePattern(Request $request)
     {
         try {
+            CoolingDevicePattern::where('cooling_device_id', $request->device)->delete();
+
             if ($request->pattern > 0) {
                 CoolingDevicePattern::create([
                     'cooling_device_id' => $request->device,
                     'pattern_id' => $request->pattern
                 ]);
-                return $this->success('با موفقیت ذخیره شد.');
-            } else {
-                CoolingDevicePattern::where('cooling_device_id', $request->device)->delete();
-                return $this->success('با موفقیت حذف شد.');
             }
+
+            return $this->success('با موفقیت ذخیره شد.');
         } catch (\Exception $exception) {
             return $this->fail($exception->getMessage());
         }

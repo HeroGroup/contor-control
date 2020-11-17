@@ -42,7 +42,7 @@
                         <label>
                             {!! Form::checkbox('devicePatterns['.$device['id'].']', $device['id'], \App\CoolingDevicePattern::where([['cooling_device_id', $device['id']], ['pattern_id', $pattern->id]])->count()) !!}
                         </label>
-                        <span class="text-info" style="font-size: 18px;">{{ $device['serial_number'] }}</span>
+                        <span class="text-info" style="font-size: 18px;">{{ $device['serial_number'] }} - {{ $device['name'] }}</span>
                     </div>
                 @endforeach
                 <button type="submit" class="btn btn-success">ذخیره</button>

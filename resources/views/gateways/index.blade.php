@@ -127,7 +127,11 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="#">
+                                        <form id="destroy-form-{{$gateway->id}}" method="post" action="{{route('gateways.destroy', $gateway)}}" style="display:none">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                        </form>
+                                        <a href="#" onclick='destroy({{$gateway->id}});'>
                                             <i class="fa fa-fw fa-trash text-danger"></i><span class="text-danger">حذف</span>
                                         </a>
                                     </li>
@@ -167,6 +171,22 @@
                     swal(response.message);
                 }
             })
+        }
+
+        function destroy(itemId) {
+            event.preventDefault();
+
+            swal({
+                title: "آیا این ردیف حذف شود؟",
+                text: "توجه داشته باشید که عملیات حذف غیر قابل بازگشت می باشد.",
+                icon: "warning",
+                buttons: ["انصراف", "حذف"],
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    document.getElementById('destroy-form-'+itemId).submit();
+                }
+            });
         }
     </script>
 @endsection

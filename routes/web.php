@@ -5,6 +5,9 @@ Route::get('/', function () { return redirect('/admin/gateways'); })->name('clie
 Route::get('/client/login', function () { return view('client.home'); })->name('client.login');
 
 Route::get('/fill', 'GatewayController@fill');
+Route::get('/randomFillModify', 'HomeController@randomFillModify');
+Route::get('convertHistories', 'HomeController@convertHistories');
+Route::get('getCurrent', 'HomeController@getCurrent');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     //Route::get('/dashboard')
@@ -48,6 +51,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::delete('/patterns/{pattern}', 'PatternController@destroy')->name('patterns.destroy');
     Route::get('/getDevicesList/{gateway?}', 'PatternController@getDevices');
     Route::post('/patterns/checkNameUniqueness', 'PatternController@checkNameUniqueness')->name('patterns.checkNameUniqueness');
+
+
+    Route::resource('groups', 'GroupController');
+    Route::get('groups/{group}/groupGatewayPattern', 'GroupController@groupGatewayPattern')->name('groups.gatewayPattern');
+    Route::post('groups/patterns/store', 'GroupController@storeGatewayGroupPatterns')->name('groups.gatewayPatterns.store');
+    Route::post('groups/patterns/removeSingle', 'GroupController@removeSingleGatewayGroupPattern')->name('groups.gatewayPatterns.removeSingle');
+    Route::post('groups/patterns/updateGroupDevicePattern', 'GroupController@storeDeviceGroupPattern')->name('groups.devicePatterns.update');
 });
 
 /*  ==========================  API ROUTES  ====================================    */

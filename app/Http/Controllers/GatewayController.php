@@ -95,12 +95,18 @@ class GatewayController extends Controller
                 $gateway = Gateway::where('serial_number', 'like', $data[0])->first();
                 $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
                 if ($electricalMeter) {
-                    for ($i = 1; $i < count($data); $i++) {
-                        ElectricalMeterHistory::create([
-                            'electrical_meter_id' => $electricalMeter->id,
-                            'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
-                            'parameter_value' => $data[$i]
-                        ]);
+                    ElectricalMeterHistory::create([
+                        'electrical_meter_id' => $electricalMeter->id,
+                        'parameter_values' => $elm[0],
+                        'current' => $data[9]
+                    ]);
+
+                    //for ($i = 1; $i < count($data); $i++) {
+                        //ElectricalMeterHistory::create([
+                            //'electrical_meter_id' => $electricalMeter->id,
+                            //'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
+                            //'parameter_value' => $data[$i]
+                        //]);
 
                         /*
                         if ($i == 11) { // relay1_status
@@ -121,8 +127,8 @@ class GatewayController extends Controller
                             }
                         }
                         */
+                    //}
 
-                    }
 
                     // $newData = $this->getLatestElectricalMeterConfig($electricalMeter->id);
                     // event(new MeterDataUpdated($newData['data']));
@@ -348,17 +354,26 @@ class GatewayController extends Controller
 
     public function confirmFieldModify(Request $request)
     {
+        $gatewayId=0;
         try {
             logConfirmData($request->getContent());
             foreach ($request->data as $item) {
                 $gatewayData = explode("!", $item);
                 $contorData = explode("&", $gatewayData[0]);
+                $gatewayId = $contorData[0];
                 $gateway = Gateway::where('serial_number', 'like', $contorData[0])->first();
                 if ($gateway) {
-                    ModifyContor::where('gateway_id', $gateway->id)
+                    $modified = ModifyContor::where('gateway_id', $gateway->id)
                         ->whereNotNull('electrical_meter_id')
                         ->where('relay1_status', $contorData[1])
                         ->where('relay2_status', $contorData[2])
+                        ->where('checked', 0)
+                        ->orderBy('id', 'desc')
+                        ->first();
+
+                    ModifyContor::where('gateway_id', $gateway->id)
+                        ->whereNotNull('electrical_meter_id')
+                        ->where('id','<=',$modified->id)
                         ->where('checked', 0)
                         ->update(['checked' => 1]);
 
@@ -373,10 +388,17 @@ class GatewayController extends Controller
                     $coolingData = explode("&", $gatewayData[$i]);
                     $coolingDevice = CoolingDevice::where('serial_number', 'like', $coolingData[0])->first();
                     if ($coolingDevice) {
-                        ModifyContor::where('gateway_id', $gateway->id)
+                        $modified = ModifyContor::where('gateway_id', $gateway->id)
                             ->where('cooling_device_id', $coolingDevice->id)
                             ->where('relay1_status', $coolingData[1])
                             ->where('relay2_status', $coolingData[2])
+                            ->where('checked', 0)
+                            ->orderBy('id','desc')
+                            ->first();
+
+                        ModifyContor::where('gateway_id', $gateway->id)
+                            ->where('cooling_device_id', $coolingDevice->id)
+                            ->where('id', '<=',$modified->id)
                             ->where('checked', 0)
                             ->update(['checked' => 1]);
 
@@ -393,7 +415,9 @@ class GatewayController extends Controller
 
             return $this->success("Data Confirmed Successfully");
         } catch (\Exception $exception) {
-            return $this->fail($exception->getLine() . ': ' . $exception->getMessage());
+            $message = $exception->getLine() . ': ' . $exception->getMessage();
+            logException($gatewayId, $message);
+            return $this->fail($message);
         }
     }
 

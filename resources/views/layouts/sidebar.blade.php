@@ -17,6 +17,9 @@
                 <a href="{{route('patterns.index')}}"><i class="fa fa-fw fa-list-alt"></i> الگو های دستگاه های سرمایشی</a>
             </li>
             <li>
+                <a href="{{route('groups.index')}}"><i class="fa fa-fw fa-list"></i> گروه ها</a>
+            </li>
+            <li>
                 <a href="{{route('users.index')}}"><i class="fa fa-users fa-fw"></i>کاربران</a>
             </li>
         </ul>

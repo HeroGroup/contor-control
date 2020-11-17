@@ -39,7 +39,7 @@ class PatternController extends Controller
         $allocated = CoolingDevicePattern::where('pattern_id', '!=', $pattern->id)->get(['cooling_device_id']);
 
         $devices = CoolingDevice::whereNotIn('id', $allocated)->get();
-        $rows = PatternRow::where('pattern_id', $pattern->id)->get();
+        $rows = PatternRow::where('pattern_id', $pattern->id)->orderBy('id', 'asc')->get();
         return view('patterns.show', compact('rows', 'pattern', 'devices'));
     }
 

@@ -71,11 +71,19 @@ class ElectricalMeterController extends Controller
                         array_push($checked, $maxId);
                         $latest = ElectricalMeterHistory::find($maxId);
                         if($j == 2) { // date
-                            $temp[$j] = substr_replace($latest->parameter_value, '/', 4, 0);
-                            $temp[$j] = substr_replace($temp[$j], '/', 7, 0);
+                            if (strlen($temp[$j]) > 10) {
+                                //
+                            } else {
+                                $temp[$j] = substr_replace($latest->parameter_value, '/', 4, 0);
+                                $temp[$j] = substr_replace($temp[$j], '/', 7, 0);
+                            }
                         } else if($j == 3) { // time
-                            $temp[$j] = substr_replace($latest->parameter_value, ':', 2, 0);
-                            $temp[$j] = substr_replace($temp[$j], ':', 5, 0);
+                            if (strlen($temp[$j]) > 6) {
+                                // do something
+                            } else {
+                                $temp[$j] = substr_replace($latest->parameter_value, ':', 2, 0);
+                                $temp[$j] = substr_replace($temp[$j], ':', 5, 0);
+                            }
                         } else {
                             $temp[$j] = $latest->parameter_value;
                         }
@@ -84,6 +92,8 @@ class ElectricalMeterController extends Controller
                 // $histories[$i] = $temp;
                 array_push($histories, $temp);
             }
+
+            dd($histories);
 
             return view('electricalMeters.history', compact('serialNumber', 'labels', 'histories'));
         } else {
