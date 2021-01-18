@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CoolingDeviceHistory extends Model
 {
-    protected $fillable = ['cooling_device_id', 'mode_id', 'degree'];
+    protected $fillable = ['cooling_device_id', 'mode_id', 'degree', 'room_temperature'];
 
     public function coolingDevice()
     {

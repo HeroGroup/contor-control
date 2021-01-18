@@ -1,0 +1,7 @@
+
+[2020/11/28 06:18]  [Trying to get property 'serial_number' of non-object]
+[2020/11/28 06:19]  [335: Trying to get property 'serial_number' of non-object]
+[2020/11/28 06:25]  [335: Trying to get property 'serial_number' of non-object]
+[2020/11/28 06:30]  [335: Trying to get property 'serial_number' of non-object{"id":1305,"gateway_id":1,"electrical_meter_id":null,"cooling_device_id":5,"relay1_status":4,"relay2_status":30,"checked":0,"created_at":"2020-11-07 06:44:07","updated_at":"2020-11-07 06:44:07","cooling_device":null}]
+[2020/11/28 06:30]  [335: Trying to get property 'serial_number' of non-object]
+[2020/11/28 06:33]  [335: Trying to get property 'serial_number' of non-object]

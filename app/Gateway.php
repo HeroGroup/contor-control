@@ -11,7 +11,9 @@ class Gateway extends Model
     protected $fillable = [
         'gateway_id',
         'serial_number',
-        'send_data_duration_seconds'
+        'send_data_duration_seconds',
+        'gateway_type',
+        'city_id'
     ];
 
     public function electricalMeters()

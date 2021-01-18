@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b322d037-eb4f-44de-9042-e089f8b6c4b5" name="Default" comment="" />
+    <list default="true" id="b322d037-eb4f-44de-9042-e089f8b6c4b5" name="Default" comment="add groups functionality and group patterns&#10;minor bug fixes and improvements">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Permissions/HasPermissionsTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/persian-datepicker.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/persian-date.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/persian-datepicker.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/reports.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/check_connections.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CoolingDevice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CoolingDevice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CoolingDeviceHistory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CoolingDeviceHistory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Gateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Gateway.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminGatewayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminGatewayController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoolingDeviceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoolingDeviceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ElectricalMeterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ElectricalMeterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GatewayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GatewayController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/enums.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/enums.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-03-02/60000001-Post-Data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-03-03/60000001-Post-Data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-09-05/60000001-Exception.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-09-05/60000001-getAMIGatewayConfig.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-09-05/60000001-getElectricityMeterFieldModify.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-09-05/60000002-getElectricityMeterFieldModify.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-09-06/60000001-Exception.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-09-06/60000001-getElectricityMeterFieldModify.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-09-06/60000002-getElectricityMeterFieldModify.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-10-06/60000001-Confirm-Data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logs/2020-11-07/60000001-getAMIGatewayConfig.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coolingDevices/changeStatus.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coolingDevices/changeStatus.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coolingDevices/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coolingDevices/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coolingDevices/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coolingDevices/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coolingDevices/history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coolingDevices/history.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coolingDevices/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coolingDevices/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/gateways/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gateways/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/gateways/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gateways/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/gateways/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gateways/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/groups/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/groups/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,29 +64,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Pattern.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Pattern.php">
+      <file leaf-file-name="ElectricalMeterController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ElectricalMeterController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="1281">
+              <caret line="67" column="24" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GatewayPattern.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/GatewayPattern.php">
+      <file leaf-file-name="AdminGatewayController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminGatewayController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="336">
+              <caret line="53" column="99" selection-start-line="53" selection-start-column="99" selection-end-line="53" selection-end-column="99" />
+              <folding>
+                <element signature="e#40#53#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CoolingDevicePattern.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/CoolingDevicePattern.php">
+      <file leaf-file-name="Gateway.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Gateway.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="294">
+              <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -48,101 +100,109 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>createCoolingDevicePattern</find>
-      <find>getDevicesList</find>
-      <find>/patterns/store</find>
-      <find>gateways/patterns/store</find>
-      <find>getAMIGatewayConfig</find>
-      <find>storeGatewayPattern</find>
-      <find>gateways/patterns/create</find>
-      <find>createGatewayPattern</find>
-      <find>invalid</find>
+      <find>$patterns</find>
+      <find>storeGatewayGroupPatterns</find>
+      <find>col-sm</find>
+      <find>logException</find>
+      <find>serial_number</find>
       <find>logexcep</find>
-      <find>invalid cooling device</find>
-      <find>electricalMeter</find>
-      <find>getLatestElectricalMeterConfig</find>
-      <find>getCoolingDeviceIds</find>
-      <find>store</find>
-      <find>patterns/store</find>
-      <find>with</find>
-      <find>session</find>
-      <find>alert</find>
-      <find>components.alert</find>
-      <find>CoolingDeviceModes</find>
-      <find>updatecoolingdevice</find>
-      <find>confirmFieldModify</find>
-      <find>$modes</find>
+      <find>custom_date_picker</find>
+      <find>getAMIGatewayConfig</find>
+      <find>getElectricityMeterFieldModify</find>
+      <find>paginate</find>
+      <find>histor</find>
       <find>confirm</find>
-      <find>update</find>
-      <find>CoolingDeviceHistory</find>
-      <find>electricalMeters/{id}/history</find>
-      <find>electricalMeters.history</find>
+      <find>getElectricityMeterFieldModify invalid gateway id</find>
+      <find>success</find>
+      <find>روشن</find>
+      <find>gateway</find>
+      <find>z-index</find>
+      <find>ul&gt;</find>
+      <find>BROADCA</find>
+      <find>updatecoolingdevices</find>
+      <find>updatecoolingdevice</find>
+      <find>electrical_meter_histor</find>
+      <find>ElectricalMeterHistory</find>
       <find>history</find>
+      <find>is_active</find>
+      <find>درگاه</find>
+      <find>generallog</find>
+      <find>providers</find>
+      <find>users</find>
+      <find>resetPassword</find>
     </findStrings>
+    <replaceStrings>
+      <replace>col-lg</replace>
+      <replace>کنترلر کنتور</replace>
+    </replaceStrings>
     <dirStrings>
       <dir>C:\Users\nhero\Projects\ContorControlAdmin\database</dir>
       <dir>C:\Users\nhero\Projects\ContorControlAdmin\resources</dir>
     </dirStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/resources/views/groups/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/groups/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReportController.php" />
+        <option value="$PROJECT_DIR$/resources/views/coolingDevices/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/CoolingDeviceHistory.php" />
-        <option value="$PROJECT_DIR$/resources/views/CoolingDevices/history.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Kernel.php" />
-        <option value="$PROJECT_DIR$/app/User.php" />
-        <option value="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/client/home.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
-        <option value="$PROJECT_DIR$/resources/views/electricalMeters/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/electricalMeterTypes/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/CoolingDevices/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/CoolingDevices/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/CoolingDevices/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/patterns/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/gateways/patterns.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/patterns/createGatewayPattern.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/topBar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/coolingDevices/patterns.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/patterns/createCoolingDevicePattern.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/custom.js" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" />
-        <option value="$PROJECT_DIR$/scripts/trigger_patterns.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_10_04_080601_create_cooling_device_patterns_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_09_26_055758_create_gateway_patterns_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_09_16_050006_create_patterns_table.php" />
-        <option value="$PROJECT_DIR$/app/CoolingDevicePattern.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/PatternController.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/edit.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/app/CoolingDevice.php" />
+        <option value="$PROJECT_DIR$/app/Helpers/utils.php" />
+        <option value="$PROJECT_DIR$/landing.html" />
+        <option value="$PROJECT_DIR$/scripts/commitDevicesStatus.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
+        <option value="$PROJECT_DIR$/resources/views/coolingDevices/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/GatewayController.php" />
+        <option value="$PROJECT_DIR$/resources/views/coolingDevices/changeStatus.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/jquery.dataTables.min.css" />
+        <option value="$PROJECT_DIR$/resources/views/gateways/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CoolingDeviceController.php" />
+        <option value="$PROJECT_DIR$/resources/views/gateways/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/gateways/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
-        <option value="$PROJECT_DIR$/app/Pattern.php" />
-        <option value="$PROJECT_DIR$/app/GatewayPattern.php" />
+        <option value="$PROJECT_DIR$/resources/views/coolingDevices/history.blade.php" />
+        <option value="$PROJECT_DIR$/scripts/check_connections.php" />
+        <option value="$PROJECT_DIR$/resources/views/coolingDevices/index.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_16_105126_create_permissions_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_16_105138_create_roles_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_16_105321_create_users_permissions_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_16_105407_create_users_roles_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_16_105452_create_roles_permissions_table.php" />
+        <option value="$PROJECT_DIR$/app/Role.php" />
+        <option value="$PROJECT_DIR$/app/Permission.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/app/Permissions/HasPermissionsTrait.php" />
+        <option value="$PROJECT_DIR$/config/app.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php" />
+        <option value="$PROJECT_DIR$/app/Http/Kernel.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PermissionController.php" />
+        <option value="$PROJECT_DIR$/app/Providers/PermissionsServiceProvider.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/components/links.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/edit.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_18_103001_create_cities_table.php" />
+        <option value="$PROJECT_DIR$/app/City.php" />
+        <option value="$PROJECT_DIR$/app/UserGateway.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_01_18_103230_create_user_gateways_table.php" />
+        <option value="$PROJECT_DIR$/config/enums.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/AdminGatewayController.php" />
+        <option value="$PROJECT_DIR$/app/Gateway.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/views/coolingDevices/changeStatus.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/GatewayController.php" />
-        <option value="$PROJECT_DIR$/app/CoolingDevice.php" />
-        <option value="$PROJECT_DIR$/resources/views/coolingDevices/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/components/links.blade.php" />
-        <option value="$PROJECT_DIR$/app/Gateway.php" />
-        <option value="$PROJECT_DIR$/resources/views/coolingDevices/create.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CoolingDeviceController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/AdminGatewayController.php" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ElectricalMeterController.php" />
-        <option value="$PROJECT_DIR$/resources/views/gateways/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/electricalMeters/history.blade.php" />
       </list>
     </option>
   </component>
@@ -259,15 +319,15 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="width" value="1514" />
+    <option name="height" value="1035" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -275,18 +335,38 @@
               <item name="ContorControlAdmin" type="b2602c69:ProjectViewProjectNode" />
               <item name="ContorControlAdmin" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ContorControlAdmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ContorControlAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ContorControlAdmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ContorControlAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ContorControlAdmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ContorControlAdmin" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/nodejs projects/ventilator" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hamsood" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
@@ -294,14 +374,15 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nhero\Projects\ContorControlAdmin\resources\views\patterns" />
       <recent name="C:\Users\nhero\Projects\ContorControlAdmin\resources\views\client" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nhero\Projects\ContorControlAdmin\scripts" />
       <recent name="C:\Users\nhero\Projects\ContorControlAdmin\resources\views\patterns" />
       <recent name="C:\Users\nhero\Projects\ContorControlAdmin\resources\views\components" />
       <recent name="C:\Users\nhero\Projects\ContorControlAdmin\app\Helpers" />
       <recent name="C:\Users\nhero\Projects\ContorControlAdmin\resources\views\CoolingDevices" />
-      <recent name="C:\Users\nhero\Projects\ContorControlAdmin\resources\views" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -427,12 +508,118 @@
       <workItem from="1601901995576" duration="892000" />
       <workItem from="1601963009823" duration="10535000" />
       <workItem from="1601974673015" duration="7582000" />
-      <workItem from="1602047017924" duration="1950000" />
+      <workItem from="1602047017924" duration="11316000" />
+      <workItem from="1602998022328" duration="609000" />
+      <workItem from="1603174621550" duration="2210000" />
+      <workItem from="1603196131358" duration="462000" />
+      <workItem from="1603257669049" duration="4485000" />
+      <workItem from="1603520095219" duration="203000" />
+      <workItem from="1603689649222" duration="9205000" />
+      <workItem from="1603777005257" duration="335000" />
+      <workItem from="1603777813295" duration="1601000" />
+      <workItem from="1603877810545" duration="1810000" />
+      <workItem from="1603952357726" duration="1815000" />
+      <workItem from="1603954428502" duration="9592000" />
+      <workItem from="1604120812094" duration="29813000" />
+      <workItem from="1604205372928" duration="11982000" />
+      <workItem from="1604295645194" duration="10000" />
+      <workItem from="1604729357481" duration="6586000" />
+      <workItem from="1604811813936" duration="8596000" />
+      <workItem from="1604899781591" duration="12938000" />
+      <workItem from="1604984712696" duration="11521000" />
+      <workItem from="1605343199825" duration="1352000" />
+      <workItem from="1605417576821" duration="7358000" />
+      <workItem from="1605503270444" duration="8414000" />
+      <workItem from="1605591387347" duration="9107000" />
+      <workItem from="1605675895586" duration="16194000" />
+      <workItem from="1605935315818" duration="10152000" />
+      <workItem from="1606021833929" duration="1662000" />
+      <workItem from="1606107964871" duration="6404000" />
+      <workItem from="1606118378094" duration="3249000" />
+      <workItem from="1606293758841" duration="1938000" />
+      <workItem from="1606542915904" duration="9011000" />
+      <workItem from="1606644157306" duration="1823000" />
+      <workItem from="1606799041493" duration="635000" />
+      <workItem from="1607346373500" duration="683000" />
+      <workItem from="1607512597710" duration="2117000" />
+      <workItem from="1607749541789" duration="10694000" />
+      <workItem from="1607926504724" duration="874000" />
+      <workItem from="1607938421704" duration="1993000" />
+      <workItem from="1608010238345" duration="1868000" />
+      <workItem from="1608109843472" duration="1553000" />
+      <workItem from="1608441643898" duration="6569000" />
+      <workItem from="1608539207868" duration="1279000" />
+      <workItem from="1608548979486" duration="63000" />
+      <workItem from="1608960968011" duration="51000" />
+      <workItem from="1608962967062" duration="1936000" />
+      <workItem from="1608985054689" duration="326000" />
+      <workItem from="1609047952908" duration="524000" />
+      <workItem from="1609219334211" duration="712000" />
+      <workItem from="1609223976140" duration="194000" />
+      <workItem from="1609238116983" duration="1205000" />
+      <workItem from="1609582649246" duration="3957000" />
+      <workItem from="1609650361899" duration="3916000" />
+      <workItem from="1609737038450" duration="15640000" />
+      <workItem from="1609828507678" duration="200000" />
+      <workItem from="1609834354013" duration="390000" />
+      <workItem from="1609836307141" duration="790000" />
+      <workItem from="1609915026969" duration="2631000" />
+      <workItem from="1610169057262" duration="10403000" />
+      <workItem from="1610255030323" duration="2455000" />
+      <workItem from="1610344988537" duration="9841000" />
+      <workItem from="1610429766206" duration="2386000" />
+      <workItem from="1610449117480" duration="9000" />
+      <workItem from="1610518396369" duration="5699000" />
+      <workItem from="1610773600689" duration="16535000" />
+      <workItem from="1610946483895" duration="4230000" />
     </task>
+    <task id="LOCAL-00001" summary="rollback patterns models">
+      <created>1602053496918</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602053496918</updated>
+    </task>
+    <task id="LOCAL-00002" summary="minor bug fixes and improvements">
+      <created>1603963351844</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1603963351844</updated>
+    </task>
+    <task id="LOCAL-00003" summary="minor bug fixes and improvements">
+      <created>1603963397228</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603963397228</updated>
+    </task>
+    <task id="LOCAL-00004" summary="minor bug fixes and improvements">
+      <created>1604221098750</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604221098750</updated>
+    </task>
+    <task id="LOCAL-00005" summary="minor bug fixes and improvements">
+      <created>1604228227411</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604228227411</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add groups functionality and group patterns&#10;minor bug fixes and improvements">
+      <created>1605611444544</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605611444544</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="372238000" />
+    <option name="totallyTimeSpent" value="684399000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -445,12 +632,12 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5005208" side_tool="true" weight="0.2996812" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32943678" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49947917" visible="true" weight="0.26992562" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49947917" visible="true" weight="0.25929862" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16458334" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17135416" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -458,6 +645,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="SVN Repositories" order="11" weight="0.32943678" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -501,321 +689,372 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="rollback patterns models" />
+    <MESSAGE value="minor bug fixes and improvements" />
+    <MESSAGE value="add groups functionality and group patterns&#10;minor bug fixes and improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="add groups functionality and group patterns&#10;minor bug fixes and improvements" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="4" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/reports.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="65" column="43" lean-forward="true" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
+        <state relative-caret-position="462">
+          <caret line="22" column="112" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="112" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/topBar.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GroupController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/patterns/createGatewayPattern.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="32" column="158" selection-start-line="32" selection-start-column="158" selection-end-line="32" selection-end-column="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/trigger_patterns.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="94" selection-start-line="17" selection-start-column="94" selection-end-line="17" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_10_04_080601_create_cooling_device_patterns_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="20" column="73" selection-start-line="20" selection-start-column="73" selection-end-line="20" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_09_26_055758_create_gateway_patterns_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_09_16_050006_create_patterns_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/patterns/createGatewayPattern2.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="32" selection-start-line="2" selection-start-column="4" selection-end-line="4" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="13" column="46" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="903">
-          <caret line="43" column="43" selection-start-line="43" selection-start-column="43" selection-end-line="43" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/electricalMeters/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/electricalMeters/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/gateways/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/gateways/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/gateways/patterns.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/components/alert.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ModifyContor.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/patterns.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/patterns/createCoolingDevicePattern.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PatternController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="26" column="68" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/changeStatus.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="84" selection-start-line="3" selection-start-column="84" selection-end-line="3" selection-end-column="84" />
+        <state relative-caret-position="347">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Helpers/utils.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="87" selection-start-line="22" selection-start-column="87" selection-end-line="22" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/CoolingDevice.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/components/links.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="777">
-          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="47" column="118" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/web.config">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminGatewayController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="57" column="92" selection-start-line="57" selection-start-column="92" selection-end-line="57" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="183" selection-start-line="18" selection-start-column="183" selection-end-line="18" selection-end-column="183" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/CoolingDeviceHistory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GatewayController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="136" column="24" selection-start-line="136" selection-start-column="24" selection-end-line="136" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Gateway.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        <state relative-caret-position="76">
+          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ElectricalMeter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+        <state relative-caret-position="231">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
+    <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="20" column="45" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="45" />
+        <state relative-caret-position="-315" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ElectricalMeterController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="86" column="12" selection-start-line="86" selection-start-column="12" selection-end-line="86" selection-end-column="12" />
+        <state relative-caret-position="347">
+          <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/jquery.dataTables.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9723">
+          <caret line="458" column="1" selection-start-line="458" selection-start-column="1" selection-end-line="458" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lang/en/validation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2553" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/gateways/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="157" selection-start-column="157" selection-end-column="157" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/changeStatus.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="56" column="44" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/electricalMeters/history.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/CoolingDevice.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="10" column="49" lean-forward="true" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CoolingDeviceController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="58" column="41" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="41" />
+        <state relative-caret-position="210">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/electricalMeters/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="28" column="115" lean-forward="true" selection-start-line="28" selection-start-column="115" selection-end-line="28" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/gateways/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="89" column="123" selection-start-line="89" selection-start-column="123" selection-end-line="89" selection-end-column="123" />
+        <state relative-caret-position="63">
+          <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/history.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="130" lean-forward="true" selection-start-line="24" selection-start-column="130" selection-end-line="24" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/check_connections.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/electricalMeters/history.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GatewayController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="30" column="35" lean-forward="true" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+        <state relative-caret-position="851">
+          <caret line="168" column="2" selection-start-line="168" selection-start-column="2" selection-end-line="168" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/CoolingDevicePattern.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/gateways/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="357">
+          <caret line="17" column="167" selection-start-line="17" selection-start-column="167" selection-end-line="17" selection-end-column="167" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/GatewayPattern.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/gateways/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="378">
+          <caret line="18" column="164" selection-start-line="18" selection-start-column="164" selection-end-line="18" selection-end-column="164" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Pattern.php">
+    <entry file="file://$PROJECT_DIR$/scripts/trigger_patterns.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="189">
+          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_16_105126_create_permissions_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_16_105407_create_users_roles_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="24" column="51" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_16_105452_create_roles_permissions_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_16_105138_create_roles_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="62" column="61" lean-forward="true" selection-start-line="62" selection-start-column="61" selection-end-line="62" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/coolingDevices/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="15" column="32" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Permission.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="70" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PermissionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="14" column="27" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="176" column="56" selection-start-line="176" selection-start-column="56" selection-end-line="176" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/components/links.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Role.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/City.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/PermissionsServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding>
+            <element signature="e#33#52#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Permissions/HasPermissionsTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="52" column="56" lean-forward="true" selection-start-line="52" selection-start-column="56" selection-end-line="52" selection-end-column="56" />
+          <folding>
+            <element signature="e#35#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="69" selection-start-column="69" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_16_105321_create_users_permissions_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="24" column="57" lean-forward="true" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_18_103230_create_user_gateways_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_01_18_103001_create_cities_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/UserGateway.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/enums.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="54" column="14" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminGatewayController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="53" column="99" selection-start-line="53" selection-start-column="99" selection-end-line="53" selection-end-column="99" />
+          <folding>
+            <element signature="e#40#53#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Gateway.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#53#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ElectricalMeterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1281">
+          <caret line="67" column="24" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="24" />
         </state>
       </provider>
     </entry>

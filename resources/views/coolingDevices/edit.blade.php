@@ -27,6 +27,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="remote_manufacturer" class="col-lg-2 control-label">تولید کننده دستگاه</label>
+                    <div class="col-lg-4">
+                        {{Form::select('remote_manufacturer', config('enums.remote_manufacturers'), $coolingDevice->remote_manufacturers, ['name'=>'remote_manufacturer', 'class' => 'form-control'])}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rf_broadcast_enable" class="col-lg-2 control-label">Broadcast Enabled</label>
+                    <div class="col-lg-4">
+                        {{Form::select('rf_broadcast_enable', config('enums.enabled'), $coolingDevice->rf_broadcast_enable, ['name'=>'rf_broadcast_enable', 'placeholder' => 'انتخاب کنید...', 'class' => 'form-control'])}}
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-4 text-left">
                         <a class="btn btn-default" href="{{route('coolingDevices.index', 0)}}">انصراف</a>
                         <button type="submit" class="btn btn-success">ذخیره</button>

@@ -1,4 +1,5 @@
 <?php
+
 Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () { return redirect('/admin/gateways'); })->name('client.home');
@@ -21,6 +22,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('gateways/patterns/massStore', 'PatternController@massStore')->name('gateways.patterns.massStore');
     Route::delete('gateways/patterns/{pattern}', 'PatternController@destroyGatewayPattern')->name('gateways.patterns.destroy');
     Route::get('gateways/{gateway}/destroySinglePatternRow/{pattern}', 'PatternController@destroySingleGatewayPattern')->name('gateways.patterns.destroySingle');
+    Route::get('gateways/{gateway}/children', 'AdminGatewayController@getChildren')->name('gateways.getChildren');
 
     Route::resource('electricalMeterTypes', 'ElectricalMeterTypeController');
 
@@ -38,10 +40,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('coolingDevices/patterns/store', 'CoolingDeviceController@storePattern')->name('coolingDevices.patterns.store');
     Route::post('coolingDevices/patterns/massStore', 'CoolingDeviceController@massStore')->name('coolingDevices.patterns.massStore');
 
-    Route::resource('users', 'UserController');
-    Route::get('users/{user}/resetPassword', 'UserController@resetPassword')->name('users.resetPassword');
-    Route::get('users/{user}/changePassword','UserController@changePassword')->name('users.changePassword');
-    Route::post('users/updatePassword', 'UserController@updatePassword')->name('users.updatePassword');
+    Route::group(['middleware' => 'role:admin'], function() {
+        Route::resource('users', 'UserController');
+        Route::get('users/{user}/permissions', 'UserController@permissions')->name('users.permissions');
+        Route::get('users/{user}/resetPassword', 'UserController@resetPassword')->name('users.resetPassword');
+        Route::get('users/{user}/changePassword', 'UserController@changePassword')->name('users.changePassword');
+        Route::post('users/updatePassword', 'UserController@updatePassword')->name('users.updatePassword');
+    });
 
     Route::get('/patterns', 'PatternController@index')->name('patterns.index');
     Route::get('/patterns/create', 'PatternController@create')->name('patterns.create');
@@ -58,6 +63,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('groups/patterns/store', 'GroupController@storeGatewayGroupPatterns')->name('groups.gatewayPatterns.store');
     Route::post('groups/patterns/removeSingle', 'GroupController@removeSingleGatewayGroupPattern')->name('groups.gatewayPatterns.removeSingle');
     Route::post('groups/patterns/updateGroupDevicePattern', 'GroupController@storeDeviceGroupPattern')->name('groups.devicePatterns.update');
+
+    Route::get('/reports', 'ReportController@index')->name('reports');
+    Route::post('report', 'ReportController@report')->name('reports.post');
 });
 
 /*  ==========================  API ROUTES  ====================================    */

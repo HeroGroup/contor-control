@@ -20,9 +20,9 @@
                 <tbody>
                 @foreach($histories as $history)
                     <tr>
-                        <td>{{$history->mode->name}}</td>
+                        <td>{{$history->mode ? $history->mode->name : ''}}</td>
                         <td>{{$history->degree}}</td>
-                        <td>{{jdate('Y/m/j - H:i', $history->created_at)}}</td>
+                        <td style="direction:ltr;text-align:right;">{{jdate('Y/m/j - H:i', strtotime($history->created_at))}}</td>
                     </tr>
                 @endforeach
                 </tbody>

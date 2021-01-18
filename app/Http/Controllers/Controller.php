@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function success($message, $data=null, $status=1)
+    public function webServiceResponse($status, $message, $data=null)
     {
         return response()->json([
             'status' => $status,
@@ -20,12 +20,13 @@ class Controller extends BaseController
         ]);
     }
 
-    public function fail($message, $data=null, $status= -1)
+    public function success($message, $data=null)
     {
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            'data' => $data
-        ]);
+        return $this->webServiceResponse(1, $message, $data);
+    }
+
+    public function fail($message, $data=null)
+    {
+        return $this->webServiceResponse(-1, $message, $data);
     }
 }

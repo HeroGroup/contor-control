@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="degree" class="col-sm-2 control-label">درجه</label>
                     <div class="col-sm-4">
-                        {!! Form::select('degree', config('enums.degrees'), $device->degree, array('class' => 'form-control', 'id' => 'degree')) !!}
+                        {!! Form::select('degree', config('enums.degrees'), $device->degree, array('class' => 'form-control', 'id' => 'degree', 'required' => 'required')) !!}
                     </div>
                 </div>
 
@@ -32,12 +32,21 @@
         });
 
         function sendUpdateRequest() {
+            var mode = $("#mode").children("option:selected").val();
+            var temperature = $("#degree").val();
+            if (mode === 3 || mode === 4) {
+                if (! temperature > 0) {
+                    swal("درجه تنظیم نشده است.");
+                    return;
+                }
+            }
+
             $.ajax("{{route('updateCoolingDevice')}}", {
                 type: "post",
                 data: {
                     cooling_device: "{{$device->serial_number}}",
-                    mode: $("#mode").children("option:selected").val(),
-                    temperature: $("#degree").val()
+                    mode: mode,
+                    temperature: temperature
                 },
                 success: function(response) {
                     swal({
@@ -45,7 +54,7 @@
                         text: response.message,
                         type: "success"
                     }).then(function() {
-                        window.location.href = "{{route('coolingDevices.index', 0)}}";
+                        window.history.back();// window.location.href = "{{route('coolingDevices.index', 0)}}";
                     });
                 }
             })

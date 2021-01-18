@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', '˜äÊÑá ÈÇÑ ÓÑãÇíÔí'),
+    'name' => env('APP_NAME', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     /*
     |--------------------------------------------------------------------------
@@ -174,6 +174,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\PermissionsServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
 

@@ -21,5 +21,39 @@ return [
     'group_type' => [
         '1' => 'گروه درگاه',
         '2' => 'گروه دستگاه سرمایشی'
-    ]
+    ],
+    'remote_manufacturers' => [
+        '-1' => 'UNUSED',
+        '0' => 'UNKNOWN',
+        '1' => 'RC5',
+        '2' => 'RC6',
+        '3' => 'NEC',
+        '4' => 'SONY',
+        '5' => 'OGENERAL',
+        '6' => 'PANASONIC',
+        '7' => 'JVC',
+        '8' => 'SAMSUNG',
+        '9' => 'WHYNTER',
+        '10' => 'AIWA_RC_T501',
+        '11' => 'LG',
+        '12' => 'SANYO',
+        '13' => 'MITSUBISHI',
+        '14' => 'DISH',
+        '15' => 'SHARP',
+        '16' => 'DENON',
+        '17' => 'PRONTO',
+        '18' => 'TRUST',
+        '19' => 'TOSHIBA',
+        '20' => 'GREE',
+    ],
+
+    'enabled' => [
+        '0' => 'غیرفعال',
+        '1' => 'فعال',
+    ],
+
+    'gateway_type' => [
+        "1" => "کنترلر کنتور",
+        "2" => "کنترلر بار سرمایشی"
+    ],
 ];

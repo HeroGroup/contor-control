@@ -29,7 +29,7 @@
                             @endforeach
                         </select>
                         <div class="help-block">
-                            دکمه Ctrl را پایین نگه دارید و چند گزینه را انتخاب کنید
+                            دکمه Ctrl را پایین نگه دارید و چند مورد را انتخاب کنید
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             @endforeach
                         </select>
                         <div class="help-block">
-                            دکمه Ctrl را پایین نگه دارید و چند گزینه را انتخاب کنید
+                            دکمه Ctrl را پایین نگه دارید و چند مورد را انتخاب کنید
                         </div>
                     </div>
                 </div>

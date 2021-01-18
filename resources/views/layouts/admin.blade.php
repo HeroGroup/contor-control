@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +16,24 @@
     <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="/css/my.css" rel="stylesheet" type="text/css">
     <link href="/css/jquery.timepicker.css" rel="stylesheet" type="text/css">
+    <link href="/css/persian-datepicker.min.css" rel="stylesheet">
+    <link href="/css/jquery.dataTables.css" rel="stylesheet">
+
+    <style>
+        .pagination > li > a, .pagination > li > span {
+            background-color:black;
+            border-color: darkgray;
+        }
+        .pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover {
+            /*background-color:#222;;*/
+            color: black;
+        }
+        .pagination > li > a:hover {
+            background-color: #222;
+            color:white;
+            border-color: darkgray;
+        }
+    </style>
 
     <script src="/js/jquery-1.11.0.js" type="text/javascript"></script>
 </head>
@@ -65,5 +82,46 @@
     <script src="/js/sb-admin-2.js" type="text/javascript"></script>
     <script src="/js/sweetalert.min.js" type="text/javascript"></script>
     <script src="/js/custom.js" type="text/javascript"></script>
+    <script src="/js/persian-date.min.js"></script>
+    <script src="/js/persian-datepicker.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.custom_date_picker').pDatepicker({
+                initialValue: false,
+                format: 'YYYY/MM/DD',
+                autoClose: true,
+                // minDate: new persianDate()
+            });
+
+            $('.data-table').DataTable({
+                language: {
+                    "decimal":        "",
+                    "emptyTable":     "رکوردی وجود ندارد.",
+                    "info":           "نمایش  _START_ تا _END_ از _TOTAL_ ردیف",
+                    "infoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+                    "infoFiltered":   "(فیلتر شده از مجموع _MAX_ ردیف)",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "نمایش _MENU_ ردیف",
+                    "loadingRecords": "در حال بارگزاری...",
+                    "processing":     "در حال پردازش...",
+                    "search":         "جستجو: ",
+                    "zeroRecords":    "هیچ رکوردی پیدا نشد.",
+                    "paginate": {
+                        "first":      "اولین",
+                        "last":       "آخرین",
+                        "next":       "بعدی",
+                        "previous":   "قبلی"
+                    },
+                    "aria": {
+                        "sortAscending":  ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }
+            });
+        })
+    </script>
 </body>
 </html>

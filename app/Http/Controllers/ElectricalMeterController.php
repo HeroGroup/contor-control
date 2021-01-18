@@ -7,6 +7,7 @@ use App\ElectricalMeterParameter;
 use App\ElectricalMeterType;
 use App\Gateway;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ElectricalMeterController extends Controller
 {
@@ -63,7 +64,8 @@ class ElectricalMeterController extends Controller
             for($i=0; $i<14; $i++) {
                 $temp = [];
                 for ($j = 1; $j <= 12; $j++) {
-                    $maxId = ElectricalMeterHistory::where('electrical_meter_id', $id)
+                    $maxId = DB::table('electrical_meter_histories')
+                        ->where('electrical_meter_id', $id)
                         ->where('electrical_meter_parameter_id', $j)// relay1_status
                         ->whereNotIn('id', $checked)
                         ->max('id');
@@ -71,19 +73,25 @@ class ElectricalMeterController extends Controller
                         array_push($checked, $maxId);
                         $latest = ElectricalMeterHistory::find($maxId);
                         if($j == 2) { // date
-                            if (strlen($temp[$j]) > 10) {
-                                //
+                            if (strlen($latest->parameter_value) > 8) {
+                                $temp[$j] = substr($latest->parameter_value,0,8);
+                                $temp[$j] = substr_replace($temp[$j], '/', 4, 0);
                             } else {
                                 $temp[$j] = substr_replace($latest->parameter_value, '/', 4, 0);
-                                $temp[$j] = substr_replace($temp[$j], '/', 7, 0);
                             }
+
+                            $temp[$j] = substr_replace($temp[$j], '/', 7, 0);
+
                         } else if($j == 3) { // time
-                            if (strlen($temp[$j]) > 6) {
-                                // do something
+                            if (strlen($latest->parameter_value) > 6) {
+                                $temp[$j] = substr($latest->parameter_value,8,4);
+                                $temp[$j] = substr_replace($temp[$j], ':', 2, 0);
                             } else {
                                 $temp[$j] = substr_replace($latest->parameter_value, ':', 2, 0);
-                                $temp[$j] = substr_replace($temp[$j], ':', 5, 0);
                             }
+
+                            // $temp[$j] = substr_replace($temp[$j], ':', 5, 0);
+
                         } else {
                             $temp[$j] = $latest->parameter_value;
                         }
@@ -92,8 +100,6 @@ class ElectricalMeterController extends Controller
                 // $histories[$i] = $temp;
                 array_push($histories, $temp);
             }
-
-            dd($histories);
 
             return view('electricalMeters.history', compact('serialNumber', 'labels', 'histories'));
         } else {

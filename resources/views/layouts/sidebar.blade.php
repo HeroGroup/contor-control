@@ -2,26 +2,42 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a href="{{route('gateways.index')}}"><i class="fa fa-fw fa-list" style="transform: rotateY(180deg)"></i> لیست درگاه ها</a>
+                <a href="{{route('gateways.index')}}">
+                    {{--<i class="fa fa-fw fa-list" style="transform: rotateY(180deg)"></i>--}}
+                    کنترلر کنتور</a>
             </li>
             <li>
-                <a href="{{route('gateways.patterns.index')}}"><i class="fa fa-fw fa-list-alt"></i> الگوهای درگاه ها</a>
-            </li>
-            {{--<li>--}}
-                {{--<a href="{{route('electricalMeterTypes.index')}}"><i class="fa fa-laptop fa-fw"></i> سازندگان دستگاه</a>--}}
-            {{--</li>--}}
-            <li>
-                <a href="{{route('coolingDevices.index', 0)}}"><i class="fa fa-fw fa-list" style="transform: rotateY(180deg)"></i> دستگاه ها (Cooling Devices)</a>
+                <a href="{{route('gateways.patterns.index')}}">
+                    {{--<i class="fa fa-fw fa-list-alt"></i>--}}
+                    الگوی کنترلر کنتور</a>
             </li>
             <li>
-                <a href="{{route('patterns.index')}}"><i class="fa fa-fw fa-list-alt"></i> الگو های دستگاه های سرمایشی</a>
+                <a href="{{route('coolingDevices.index', 0)}}">
+                    {{--<i class="fa fa-fw fa-list" style="transform: rotateY(180deg)"></i>--}}
+                    کنترلر اسپلیت</a>
             </li>
             <li>
-                <a href="{{route('groups.index')}}"><i class="fa fa-fw fa-list"></i> گروه ها</a>
+                <a href="{{route('patterns.index')}}">
+                    {{--<i class="fa fa-fw fa-list-alt"></i>--}}
+                    الگوی کنترلر اسپلیت</a>
             </li>
             <li>
-                <a href="{{route('users.index')}}"><i class="fa fa-users fa-fw"></i>کاربران</a>
+                <a href="{{route('groups.index')}}">
+                    {{--<i class="fa fa-fw fa-list"></i>--}}
+                    گروه ها</a>
             </li>
+            <li>
+                <a href="{{route('reports')}}">
+                    {{--<i class="fa fa-fw fa-list"></i>--}}
+                    گزارشات</a>
+            </li>
+            @role('admin')
+                <li>
+                    <a href="{{route('users.index')}}">
+                        {{--<i class="fa fa-users fa-fw"></i>--}}
+                        کاربران</a>
+                </li>
+            @endrole
         </ul>
     </div>
 </div>

@@ -1,0 +1,2 @@
+
+[2020/11/28 06:17]  [{"send_data_duration":60,"meter_serial_number":"12939959","meter_model":"TFC5","controller_list":["60000001&61000001&61000002","60000002&61000003&61000004"]}]

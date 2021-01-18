@@ -14,7 +14,7 @@ class CoolingDeviceController extends Controller
 {
     public function index($gateway=0)
     {
-        $coolingDevices = $gateway > 0 ? CoolingDevice::where('gateway_id', $gateway)->get() : CoolingDevice::all();
+        $coolingDevices = $gateway > 0 ? CoolingDevice::where('gateway_id', $gateway)->orderBy('serial_number', 'asc')->get() : CoolingDevice::orderBy('serial_number', 'asc')->get();
         $patterns = Pattern::where('pattern_type', 1)->pluck('name', 'id')->toArray();
 
         return view('coolingDevices.index', compact('gateway', 'coolingDevices', 'patterns'));
@@ -57,7 +57,7 @@ class CoolingDeviceController extends Controller
     public function history($id)
     {
         $device = CoolingDevice::find($id);
-        $histories = CoolingDeviceHistory::where('cooling_device_id', $id)->orderBy('id', 'desc')->get();
+        $histories = CoolingDeviceHistory::where('cooling_device_id', $id)->orderBy('id', 'desc')->paginate(15);
         return view('coolingDevices.history', compact('device', 'histories'));
     }
 

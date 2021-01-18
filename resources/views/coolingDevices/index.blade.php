@@ -1,19 +1,24 @@
-@extends('layouts.admin', ['pageTitle' => "دستگاه ها (Cooling Devices)", 'newButton' => true, 'newButtonUrl' => "$gateway/create", 'newButtonText' => 'ایجاد دستگاه'])
+@extends('layouts.admin', ['pageTitle' => "کنترلرهای اسپلیت", 'newButton' => true, 'newButtonUrl' => "$gateway/create", 'newButtonText' => 'ایجاد دستگاه'])
 @section('content')
+    <style>
+        .paginate_button .current {
+            color: black !important;
+        }
+    </style>
     <div class="panel panel-default">
         <div class="panel-heading">دستگاه ها @if($gateway>0) <span>ی درگاه {{\App\Gateway::find($gateway)->serial_number}}</span> @endif</div>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered data-table">
                     <thead>
                     <tr>
                         <th>شماره سریال</th>
                         <th>عنوان</th>
                         <th>درگاه</th>
                         <th>الگوی در حال پیروی</th>
-                        <th>آخرین حالت کار</th>
+                        <th>وضعیت</th>
                         <th>درجه</th>
-                        {{--<th>تاریخ ایجاد</th>--}}
+                        <th>دمای اتاق</th>
                         <th>عملیات</th>
                     </tr>
                     </thead>
@@ -27,33 +32,33 @@
                                 {!! Form::select('patterns', $patterns, \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first() ? \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first()->pattern_id : '', array('class' => 'form-control', 'placeholder' => 'انتخاب کنید...', 'id' => $coolingDevice->id)) !!}
                             </td>
                             <td>
-                                @if($coolingDevice->mode)
-                                    @switch($coolingDevice->mode)
-                                        @case(1)
-                                        <div class="label label-success"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
-                                        @break
-                                        @case(3)
-                                        <div class="label label-primary"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
-                                        @break
-                                        @case(4)
-                                        <div class="label label-danger"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
-                                        @break
-                                        @case(5)
-                                        <div class="label label-warning"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
-                                        @break
-                                    @endswitch
+                                @if($coolingDevice->is_active)
+                                    @if($coolingDevice->mode)
+                                        @switch($coolingDevice->mode)
+                                            @case(1)
+                                            <div class="label label-success"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
+                                            @break
+                                            @case(3)
+                                            <div class="label label-primary"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
+                                            @break
+                                            @case(4)
+                                            <div class="label label-danger"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
+                                            @break
+                                            @case(5)
+                                            <div class="label label-warning"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
+                                            @break
+                                        @endswitch
+                                    @endif
+                                @else
+                                    @if($coolingDevice->mode == 99)
+                                        <div class="label label-info" style="background-color:#a366a3;"><span style="color:black;">{{$coolingDevice->modeName->name}}</span></div>
+                                    @else
+                                        <div class="label label-default">غیرفعال</div>
+                                    @endif
                                 @endif
                             </td>
-                            <td>{{$coolingDevice->degree}}</td>
-                            {{--<td>{{jdate('H:i - Y/m/j', strtotime($coolingDevice->created_at))}}</td>--}}
-                            {{--@component('components.links')--}}
-                                {{--@slot('routeChangeStatus'){{route('coolingDevices.changeStatus',$coolingDevice->id)}}@endslot--}}
-                                {{--@slot('routeEdit'){{route('coolingDevices.edit',$coolingDevice->id)}}@endslot--}}
-                                {{--@slot('itemId'){{$coolingDevice->id}}@endslot--}}
-                                {{--@slot('routeDelete'){{route('coolingDevices.destroy',$coolingDevice->id)}}@endslot--}}
-                                {{--@slot('routeHistory'){{route('coolingDevices.history',$coolingDevice->id)}}@endslot--}}
-                                {{--@slot('routePatterns'){{route('coolingDevices.patterns',$coolingDevice->id)}}@endslot--}}
-                            {{--@endcomponent--}}
+                            <td>{{$coolingDevice->is_active ? $coolingDevice->degree : '-'}}</td>
+                            <td style="direction: ltr; text-align: right;">{{$coolingDevice->is_active ? ($coolingDevice->room_temperature != (-46) ? $coolingDevice->room_temperature : 'سنسور فعال نیست') : '-'}}</td>
                             <td>
                                 <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -99,15 +104,10 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                window.location.reload();
-            }, 20000);
-        });
-
         $("select[name=patterns]").change(function() {
             $.ajax("{{route('coolingDevices.patterns.store')}}", {
                 type: "post",

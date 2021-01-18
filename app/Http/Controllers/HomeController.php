@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\ElectricalMeterHistory;
 use App\ModifyContor;
 use Illuminate\Http\Request;

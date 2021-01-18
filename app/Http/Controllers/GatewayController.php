@@ -11,9 +11,9 @@ use App\ElectricalMeterType;
 use App\Events\MeterDataUpdated;
 use App\Gateway;
 use App\ModifyContor;
-use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
-require_once app_path('Helpers/utils.php');
+use Illuminate\Support\Facades\DB;
+
 
 class GatewayController extends Controller
 {
@@ -95,18 +95,18 @@ class GatewayController extends Controller
                 $gateway = Gateway::where('serial_number', 'like', $data[0])->first();
                 $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
                 if ($electricalMeter) {
-                    ElectricalMeterHistory::create([
+                    DB::table('e_m_h_test')->insert([
                         'electrical_meter_id' => $electricalMeter->id,
                         'parameter_values' => $elm[0],
                         'current' => $data[9]
                     ]);
 
-                    //for ($i = 1; $i < count($data); $i++) {
-                        //ElectricalMeterHistory::create([
-                            //'electrical_meter_id' => $electricalMeter->id,
-                            //'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
-                            //'parameter_value' => $data[$i]
-                        //]);
+                    for ($i = 1; $i < count($data); $i++) {
+                        ElectricalMeterHistory::create([
+                            'electrical_meter_id' => $electricalMeter->id,
+                            'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
+                            'parameter_value' => $data[$i]
+                        ]);
 
                         /*
                         if ($i == 11) { // relay1_status
@@ -127,7 +127,7 @@ class GatewayController extends Controller
                             }
                         }
                         */
-                    //}
+                    }
 
 
                     // $newData = $this->getLatestElectricalMeterConfig($electricalMeter->id);
@@ -143,8 +143,10 @@ class GatewayController extends Controller
                         CoolingDeviceHistory::create([
                             'cooling_device_id' => $coolingDevice->id,
                             'mode_id' => $data[1],
-                            'degree' => $data[2]
+                            'degree' => $data[2],
+                            'room_temperature' => $data[3]
                         ]);
+                        $coolingDevice->update(['room_temperature' => $data[3]]);
                         /*
                         ModifyContor::where('cooling_device_id', $coolingDevice->id)
                             ->where('gateway_id', $gateway->id)
@@ -163,6 +165,7 @@ class GatewayController extends Controller
 
             return $this->success('data posted successfully');
         } catch (\Exception $exception) {
+            logException("General", $exception->getLine().': '.$exception->getMessage());
             return $this->fail($exception->getLine().': '.$exception->getMessage());
         }
     }
@@ -174,6 +177,8 @@ class GatewayController extends Controller
             if ($gateway) {
                 $data = [
                     "send_data_duration" => $gateway->send_data_duration_seconds,
+                    "meter_serial_number" => $gateway->electricalMeters->first()->serial_number,
+                    "meter_model" => $gateway->electricalMeters->first()->type->manufacturer.$gateway->electricalMeters->first()->type->model,
                     "controller_list" => $gateway->getCoolingDeviceIds()
                 ];
 
@@ -192,9 +197,6 @@ class GatewayController extends Controller
 
     public function getLatestElectricalMeterConfig($gatewayId)
     {
-        // 32304692
-        // $sql = "SELECT id, parameter_title FROM electrical_meter_parameters;";
-
         $values = [
             1 => 'serial_number',
             2 => 'date',
@@ -287,6 +289,10 @@ class GatewayController extends Controller
         if ($coolingDevice) {
             $gatewayId = $coolingDevice->gateway_id;
 
+            if ($request->mode == 3 || $request->mode == 4)
+                if (! $request->temperature > 0)
+                    return $this->fail("درجه تنظیم نشده است.");
+
             ModifyContor::create([
                 'gateway_id' => $gatewayId,
                 'cooling_device_id' => $coolingDevice->id,
@@ -330,7 +336,7 @@ class GatewayController extends Controller
                     foreach ($coolingModified as $item) {
                         $maxId = ModifyContor::where('cooling_device_id', $item->cooling_device_id)->where('checked', 0)->max('id');
                         $contor = ModifyContor::find($maxId);
-                        $resultItem .= "!" . $contor->coolingDevice->serial_number . "&" . $contor->relay1_status . "&" . $contor->relay2_status;
+                        $resultItem .= "!" . $contor->coolingDevice->serial_number . "&" . $contor->relay1_status . "&" . $contor->relay2_status . "&" . $contor->coolingDevice->remote_manufacturer . "&" . $contor->coolingDevice->rf_broadcast_enable;
                     }
 
                     if ($gateWayModified || $coolingModified->count() > 0)
@@ -346,7 +352,7 @@ class GatewayController extends Controller
                 return $this->fail('invalid gateway');
             }
         } catch (\Exception $exception) {
-            $message = $exception->getMessage();
+            $message = $exception->getLine().': '.$exception->getMessage();
             logException($gatewayId, $message);
             return $this->fail($message);
         }
@@ -363,7 +369,7 @@ class GatewayController extends Controller
                 $gatewayId = $contorData[0];
                 $gateway = Gateway::where('serial_number', 'like', $contorData[0])->first();
                 if ($gateway) {
-                    $modified = ModifyContor::where('gateway_id', $gateway->id)
+                    $gatewayModified = ModifyContor::where('gateway_id', $gateway->id)
                         ->whereNotNull('electrical_meter_id')
                         ->where('relay1_status', $contorData[1])
                         ->where('relay2_status', $contorData[2])
@@ -371,11 +377,13 @@ class GatewayController extends Controller
                         ->orderBy('id', 'desc')
                         ->first();
 
-                    ModifyContor::where('gateway_id', $gateway->id)
-                        ->whereNotNull('electrical_meter_id')
-                        ->where('id','<=',$modified->id)
-                        ->where('checked', 0)
-                        ->update(['checked' => 1]);
+                    if ($gatewayModified) {
+                        ModifyContor::where('gateway_id', $gateway->id)
+                            ->whereNotNull('electrical_meter_id')
+                            ->where('id','<=',$gatewayModified->id)
+                            ->where('checked', 0)
+                            ->update(['checked' => 1]);
+                    }
 
                     $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
                     if ($electricalMeter)
@@ -388,7 +396,7 @@ class GatewayController extends Controller
                     $coolingData = explode("&", $gatewayData[$i]);
                     $coolingDevice = CoolingDevice::where('serial_number', 'like', $coolingData[0])->first();
                     if ($coolingDevice) {
-                        $modified = ModifyContor::where('gateway_id', $gateway->id)
+                        $deviceModified = ModifyContor::where('gateway_id', $gateway->id)
                             ->where('cooling_device_id', $coolingDevice->id)
                             ->where('relay1_status', $coolingData[1])
                             ->where('relay2_status', $coolingData[2])
@@ -396,18 +404,21 @@ class GatewayController extends Controller
                             ->orderBy('id','desc')
                             ->first();
 
-                        ModifyContor::where('gateway_id', $gateway->id)
-                            ->where('cooling_device_id', $coolingDevice->id)
-                            ->where('id', '<=',$modified->id)
-                            ->where('checked', 0)
-                            ->update(['checked' => 1]);
+                        if ($deviceModified) {
+                            ModifyContor::where('gateway_id', $gateway->id)
+                                ->where('cooling_device_id', $coolingDevice->id)
+                                ->where('id', '<=',$deviceModified->id)
+                                ->where('checked', 0)
+                                ->update(['checked' => 1]);
+                        }
 
-                        $coolingDevice->update(['mode' => $coolingData[1], 'degree' => $coolingData[2]]);
+                        $coolingDevice->update(['mode' => $coolingData[1], 'degree' => $coolingData[2], 'room_temperature' => $coolingData[5]]);
 
                         CoolingDeviceHistory::create([
                             'cooling_device_id' => $coolingDevice->id,
                             'mode_id' => $coolingData[1],
-                            'degree' => $coolingData[2]
+                            'degree' => $coolingData[2],
+                            'room_temperature' => $coolingData[5]
                         ]);
                     }
                 }
