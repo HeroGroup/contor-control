@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\ElectricalMeter;
-use App\ElectricalMeterHistory;
 use App\ElectricalMeterParameter;
 use App\ElectricalMeterType;
 use App\Gateway;
@@ -71,7 +70,7 @@ class ElectricalMeterController extends Controller
                         ->max('id');
                     if ($maxId) {
                         array_push($checked, $maxId);
-                        $latest = ElectricalMeterHistory::find($maxId);
+                        $latest = DB::table('electrical_meter_histories')->find($maxId);
                         if($j == 2) { // date
                             if (strlen($latest->parameter_value) > 8) {
                                 $temp[$j] = substr($latest->parameter_value,0,8);

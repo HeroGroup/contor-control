@@ -75,4 +75,9 @@ class Gateway extends Model
     {
         return $this->hasMany(GatewayPattern::class);
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

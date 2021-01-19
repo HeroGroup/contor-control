@@ -5,9 +5,46 @@ use App\Permission;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PermissionController extends Controller
 {
+    public function index()
+    {
+        $roles = Role::all();
+        $permissions = Permission::all();
+
+        return view('permissions.index', compact('roles', 'permissions'));
+    }
+
+    public function storeRole(Request $request)
+    {
+        Role::create($request->all());
+        return redirect(route('permissions.index'));
+    }
+
+    public function storePermission(Request $request)
+    {
+        Permission::create($request->all());
+        return redirect(route('permissions.index'));
+    }
+
+    public function updateRolePermissions(Request $request)
+    {
+        // dd($request);
+        if (count($request->permissions) > 0) {
+            DB::table('roles_permissions')->where('role_id', $request->role_id)->delete();
+
+            foreach ($request->permissions as $key=>$value) {
+                DB::table('roles_permissions')->insert([
+                    'role_id' => $request->role_id,
+                    'permission_id' => $key
+                ]);
+            }
+        }
+
+        return redirect(route('permissions.index'));
+    }
 
     public function Permission()
     {

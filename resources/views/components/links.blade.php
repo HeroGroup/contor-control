@@ -5,6 +5,12 @@
         </a>
         &nbsp;
     @endif
+    @if(isset($routePermissions))
+        <a href="{{ $routePermissions }}" class="btn btn-xs btn-success" data-toggle="tooltip" title="مجوزها">
+            مجوزها
+        </a>
+        &nbsp;
+    @endif
     @if(isset($routeEdit))
         <a href="{{ $routeEdit }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="ویرایش">
             <i class="fa fa-pencil"></i> ویرایش

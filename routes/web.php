@@ -42,10 +42,23 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::group(['middleware' => 'role:admin'], function() {
         Route::resource('users', 'UserController');
-        Route::get('users/{user}/permissions', 'UserController@permissions')->name('users.permissions');
         Route::get('users/{user}/resetPassword', 'UserController@resetPassword')->name('users.resetPassword');
         Route::get('users/{user}/changePassword', 'UserController@changePassword')->name('users.changePassword');
         Route::post('users/updatePassword', 'UserController@updatePassword')->name('users.updatePassword');
+
+        Route::get('permissions', 'PermissionController@index')->name('permissions.index');
+
+        Route::post('roles', 'PermissionController@storeRole')->name('roles.store');
+        Route::delete('roles/{role}', 'PermissionController@destroyRole')->name('roles.destroy');
+
+        Route::post('permissions', 'PermissionController@storePermission')->name('permission.store');
+        Route::delete('permissions/{permission}', 'PermissionController@destroyPermission')->name('permission.destroy');
+
+        // updateRolePermissions
+        Route::post('rolePermissions', 'PermissionController@updateRolePermissions')->name('roles.updateRolePermissions');
+
+        Route::post('gateways/assignUser', 'UserController@assignUserGateway')->name('gateways.assignUser');
+        Route::post('gateways/revokeUser', 'UserController@revokeUserGateway')->name('gateways.revokeUser');
     });
 
     Route::get('/patterns', 'PatternController@index')->name('patterns.index');

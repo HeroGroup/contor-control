@@ -41,6 +41,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="gateway_type" class="col-sm-2 control-label">نوع کنترلر</label>
+                    <div class="col-sm-4">
+                        {!! Form::select('gateway_type', config('enums.gateway_type'), $gateway->gateway_type, array('class' => 'form-control', 'id' => 'gateway_type', 'placeholder' => 'نوع کنترلر را انتخاب کنید...')) !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="city_id" class="col-sm-2 control-label">شهر</label>
+                    <div class="col-sm-4">
+                        {!! Form::select('city_id', $cities, $gateway->city_id, array('class' => 'form-control', 'id' => 'city_id', 'placeholder' => 'شهر کنترلر انتخاب کنید...')) !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-4 text-left">
                         <a class="btn btn-default" href="{{route('gateways.index')}}">انصراف</a>
                         <button type="submit" class="btn btn-success">ذخیره</button>

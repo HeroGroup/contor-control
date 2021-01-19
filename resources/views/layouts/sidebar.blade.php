@@ -37,6 +37,10 @@
                         {{--<i class="fa fa-users fa-fw"></i>--}}
                         کاربران</a>
                 </li>
+                <li>
+                    <a href="{{route('permissions.index')}}">
+                        نقش ها و مجوزها</a>
+                </li>
             @endrole
         </ul>
     </div>
