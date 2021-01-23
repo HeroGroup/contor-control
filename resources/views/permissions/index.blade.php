@@ -62,7 +62,6 @@
                             <thead>
                             <tr>
                                 <th>نقش</th>
-                                <th>محوزها</th>
                                 <th>عملیات</th>
                             </tr>
                             </thead>
@@ -72,6 +71,13 @@
                                     <td>{{$role->name}}</td>
                                     <td>
                                         <button class="btn btn-info btn-xs open-modal" data-target="#modal-{{$role->id}}">مجوز ها</button>
+                                        <button class="btn btn-success btn-xs open-modal" data-target="#edit-role-modal-{{$role->id}}">
+                                            <i class="fa fa-pencil"></i> ویرایش
+                                        </button>
+                                        <button onclick='destroy("{{$role->id}}", "role");' class="btn btn-xs btn-danger" data-toggle="tooltip" title="حذف">
+                                            <i class="fa fa-trash-o"></i> حذف
+                                        </button>
+
                                         <div id="modal-{{$role->id}}" class="modal">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -84,21 +90,44 @@
                                                     <div class="modal-body">
                                                         @foreach($permissions as $key => $permission)
                                                             <div class="col-sm-4" style="color:#222;">
-                                                                <input type="checkbox" name="permissions[{{$permission->id}}]" @if(\Illuminate\Support\Facades\DB::table('roles_permissions')->where('role_id',$role->id)->where('permission_id',$permission->id)->count()>0) checked @endif /> {{$permission->name}}
+                                                                <label class="custom-checkbox"> {{$permission->name}}
+                                                                    <input type="checkbox" name="permissions[{{$permission->id}}]" @if(\Illuminate\Support\Facades\DB::table('roles_permissions')->where('role_id',$role->id)->where('permission_id',$permission->id)->count()>0) checked @endif>
+                                                                    <span class="checkmark"></span>
+                                                                </label>
                                                             </div>
                                                         @endforeach
                                                     </div>
-                                                    <div class="modal-footer" style="text-align: center;">
+                                                    <div class="modal-footer">
                                                         <button type="submit" class="btn btn-success" style="width:100px;">ثبت</button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
+
+                                        <div id="edit-role-modal-{{$role->id}}" class="modal">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4>ویرایش {{$role->name}}</h4>
+                                                    <span class="close">&times;</span>
+                                                </div>
+                                                <form method="post" action="{{route('roles.update', $role->id)}}">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <div class="modal-body">
+                                                        <input type="text" name="name" value="{{$role->name}}" class="form-control" placeholder="عنوان نقش" />
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success" style="width:100px;">ثبت</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <form id="destroy-role-form-{{$role->id}}" method="post" action="{{route('roles.destroy',$role->id)}}" style="display:none">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                        </form>
                                     </td>
-                                    @component('components.links')
-                                        @slot('itemId'){{$role->id}}@endslot
-                                        @slot('routeDelete'){{route('roles.destroy',$role->id)}}@endslot
-                                    @endcomponent
                                 </tr>
 
                             @endforeach
@@ -126,10 +155,38 @@
                             @foreach($permissions as $permission)
                                 <tr>
                                     <td>{{$permission->name}}</td>
-                                    @component('components.links')
-                                        @slot('itemId'){{$permission->id}}@endslot
-                                        @slot('routeDelete'){{route('permission.destroy',$permission->id)}}@endslot
-                                    @endcomponent
+                                    <td>
+                                        <button class="btn btn-success btn-xs open-modal" data-target="#edit-permission-modal-{{$permission->id}}">
+                                            <i class="fa fa-pencil"></i> ویرایش
+                                        </button>
+                                        <button onclick='destroy("{{$permission->id}}", "permission");' class="btn btn-xs btn-danger" data-toggle="tooltip" title="حذف">
+                                            <i class="fa fa-trash-o"></i> حذف
+                                        </button>
+
+                                        <div id="edit-permission-modal-{{$permission->id}}" class="modal">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4>ویرایش {{$permission->name}}</h4>
+                                                    <span class="close">&times;</span>
+                                                </div>
+                                                <form method="post" action="{{route('permissions.update', $permission->id)}}">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <div class="modal-body">
+                                                        <input type="text" name="name" value="{{$permission->name}}" class="form-control" placeholder="عنوان مجوز" />
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success" style="width:100px;">ثبت</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <form id="destroy-permission-form-{{$permission->id}}" method="post" action="{{route('permissions.destroy',$permission->id)}}" style="display:none">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -166,7 +223,7 @@
                 <h4>مجوز جدید</h4>
                 <span class="close">&times;</span>
             </div>
-            <form method="post" action="{{route('permission.store')}}">
+            <form method="post" action="{{route('permissions.store')}}">
                 @csrf
                 <div class="modal-body">
                     <input type="text" name="name" class="form-control" placeholder="عنوان مجوز"/>
@@ -181,6 +238,25 @@
     </div>
 
     <script>
+        function destroy(itemId, type) {
+            event.preventDefault();
+
+            swal({
+                title: "آیا این ردیف حذف شود؟",
+                text: "توجه داشته باشید که عملیات حذف غیر قابل بازگشت می باشد.",
+                icon: "warning",
+                buttons: ["انصراف", "حذف"],
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    if (type === 'role')
+                        document.getElementById('destroy-role-form-'+itemId).submit();
+                    else
+                        document.getElementById('destroy-permission-form-'+itemId).submit();
+                }
+            });
+        }
+
         $(".open-modal").on('click', function() {
             var modal = $(this).attr('data-target')
             $(modal).css({"display":"block"});

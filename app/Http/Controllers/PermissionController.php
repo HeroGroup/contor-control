@@ -23,9 +23,35 @@ class PermissionController extends Controller
         return redirect(route('permissions.index'));
     }
 
+    public function updateRole(Request $request, Role $role)
+    {
+        $role->update($request->all());
+        return redirect(route('permissions.index'));
+    }
+
+    public function destroyRole(Request $request, Role $role)
+    {
+        DB::table('roles_permissions')->where('role_id',$role->id)->delete();
+        $role->delete();
+        return redirect(route('permissions.index'));
+    }
+
     public function storePermission(Request $request)
     {
         Permission::create($request->all());
+        return redirect(route('permissions.index'));
+    }
+
+    public function updatePermission(Request $request, Permission $permission)
+    {
+        $permission->update($request->all());
+        return redirect(route('permissions.index'));
+    }
+
+    public function destroyPermission(Request $request, Permission $permission)
+    {
+        DB::table('roles_permissions')->where('permission_id',$permission->id)->delete();
+        $permission->delete();
         return redirect(route('permissions.index'));
     }
 

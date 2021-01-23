@@ -39,10 +39,15 @@
                 <input type="hidden" name="pattern" value="{{$pattern->id}}" />
                 @foreach($devices as $device)
                     <div>
-                        <label>
-                            {!! Form::checkbox('devicePatterns['.$device['id'].']', $device['id'], \App\CoolingDevicePattern::where([['cooling_device_id', $device['id']], ['pattern_id', $pattern->id]])->count()) !!}
+                        {{--<label>--}}
+                            {{--{!! Form::checkbox('devicePatterns['.$device['id'].']', $device['id'], \App\CoolingDevicePattern::where([['cooling_device_id', $device['id']], ['pattern_id', $pattern->id]])->count()) !!}--}}
+                        {{--</label>--}}
+                        {{--<span class="text-info" style="font-size: 18px;">{{ $device['serial_number'] }} - {{ $device['name'] }}</span>--}}
+
+                        <label class="custom-checkbox"> {{ $device['serial_number'] }} - {{ $device['name'] }}
+                            <input type="checkbox" name="devicePatterns[{{$device['id']}}]" value="{{$device['id']}}" @if(\App\CoolingDevicePattern::where([['cooling_device_id', $device['id']], ['pattern_id', $pattern->id]])->count()) checked @endif>
+                            <span class="checkmark"></span>
                         </label>
-                        <span class="text-info" style="font-size: 18px;">{{ $device['serial_number'] }} - {{ $device['name'] }}</span>
                     </div>
                 @endforeach
                 <button type="submit" class="btn btn-success">ذخیره</button>

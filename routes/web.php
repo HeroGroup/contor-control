@@ -49,10 +49,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('permissions', 'PermissionController@index')->name('permissions.index');
 
         Route::post('roles', 'PermissionController@storeRole')->name('roles.store');
+        Route::put('roles/{role}', 'PermissionController@updateRole')->name('roles.update');
         Route::delete('roles/{role}', 'PermissionController@destroyRole')->name('roles.destroy');
 
-        Route::post('permissions', 'PermissionController@storePermission')->name('permission.store');
-        Route::delete('permissions/{permission}', 'PermissionController@destroyPermission')->name('permission.destroy');
+        Route::post('permissions', 'PermissionController@storePermission')->name('permissions.store');
+        Route::put('permissions/{permission}', 'PermissionController@updatePermission')->name('permissions.update');
+        Route::delete('permissions/{permission}', 'PermissionController@destroyPermission')->name('permissions.destroy');
 
         // updateRolePermissions
         Route::post('rolePermissions', 'PermissionController@updateRolePermissions')->name('roles.updateRolePermissions');

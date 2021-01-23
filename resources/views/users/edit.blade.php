@@ -50,7 +50,10 @@
                 <input type="hidden" name="user_id" value="{{$user->id}}">
                 @foreach($roles as $key => $role)
                     <div class="col-sm-4">
-                        <input type="checkbox" name="roles[{{$key}}]" @if($user->hasRole($role)) checked @endif /> {{$role}}
+                        <label class="custom-checkbox"> {{$role}}
+                            <input type="checkbox" name="roles[{{$key}}]" @if($user->hasRole($role)) checked @endif>
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
                 @endforeach
                 <br>
@@ -67,7 +70,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">دسترسی کنترلرها</div>
             <div class="panel-body">
-                <table class="table" style="background-color: #c1c1c1; border-radius: 5px;">
+                <table class="table data-table" style="background-color: #c1c1c1; border-radius: 5px;">
                     <thead>
                     <tr>
                         <th></th>

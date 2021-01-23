@@ -26,11 +26,11 @@
                     {{--<i class="fa fa-fw fa-list"></i>--}}
                     گروه ها</a>
             </li>
-            <li>
-                <a href="{{route('reports')}}">
+            {{--<li>--}}
+                {{--<a href="{{route('reports')}}">--}}
                     {{--<i class="fa fa-fw fa-list"></i>--}}
-                    گزارشات</a>
-            </li>
+                    {{--گزارشات</a>--}}
+            {{--</li>--}}
             @role('admin')
                 <li>
                     <a href="{{route('users.index')}}">
