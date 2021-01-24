@@ -14,7 +14,6 @@ use App\ModifyContor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class GatewayController extends Controller
 {
     protected $electricalMeterParametersMap = [ /*array_index=>parameters_table_id*/
@@ -95,18 +94,18 @@ class GatewayController extends Controller
                 $gateway = Gateway::where('serial_number', 'like', $data[0])->first();
                 $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
                 if ($electricalMeter) {
-                    DB::table('e_m_h_test')->insert([
+                    ElectricalMeterHistory::create([
                         'electrical_meter_id' => $electricalMeter->id,
                         'parameter_values' => $elm[0],
                         'current' => $data[9]
                     ]);
 
-                    for ($i = 1; $i < count($data); $i++) {
-                        ElectricalMeterHistory::create([
-                            'electrical_meter_id' => $electricalMeter->id,
-                            'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
-                            'parameter_value' => $data[$i]
-                        ]);
+                    // for ($i = 1; $i < count($data); $i++) {
+                        // ElectricalMeterHistory::create([
+                            // 'electrical_meter_id' => $electricalMeter->id,
+                            // 'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
+                            // 'parameter_value' => $data[$i]
+                        // ]);
 
                         /*
                         if ($i == 11) { // relay1_status
@@ -127,7 +126,7 @@ class GatewayController extends Controller
                             }
                         }
                         */
-                    }
+                    // }
 
 
                     // $newData = $this->getLatestElectricalMeterConfig($electricalMeter->id);
@@ -198,28 +197,30 @@ class GatewayController extends Controller
     public function getLatestElectricalMeterConfig($gatewayId)
     {
         $values = [
-            1 => 'serial_number',
-            2 => 'date',
-            3 => 'time',
-            4 => 'active_import_energy_tariff_1',
-            5 => 'active_import_energy_tariff_2',
-            6 => 'active_import_energy_tariff_3',
-            7 => 'active_import_energy_tariff_4',
-            8 => 'total_active_import_energy',
-            9 => 'voltage',
-            10 => 'current',
-            11 => 'relay1_status',
-            12 => 'relay2_status',
+            1 => 'serial_number', // 66777788889999
+            2 => 'date', // 1399100716375
+            3 => 'time', // 1399100716375
+            4 => 'active_import_energy_tariff_1', // 00000.15
+            5 => 'active_import_energy_tariff_2', // 00000.00
+            6 => 'active_import_energy_tariff_3', // 00000.00
+            7 => 'active_import_energy_tariff_4', // 00000.00
+            8 => 'total_active_import_energy', // 00.000
+            9 => 'voltage', // 225.95
+            10 => 'current', // 000.00
+            11 => 'relay1_status', // 0
+            12 => 'relay2_status', // 0
         ];
         try {
             $gateway = Gateway::where('serial_number','like',$gatewayId)->first();
             $electricalMeterId = ElectricalMeter::where('gateway_id',$gateway->id)->first()->id;
+
             $result = [];
             for ($i=1; $i<=10; $i++) {
                 $maxId = ElectricalMeterHistory::where('electrical_meter_id', $electricalMeterId)
                     ->where('electrical_meter_parameter_id', $i) // relay1_status
                     ->max('id');
                 if ($maxId) {
+
                     $latest = ElectricalMeterHistory::find($maxId);
                     $result[$values[$i]] = $latest->parameter_value;
                 } else {

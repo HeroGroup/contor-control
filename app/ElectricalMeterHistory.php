@@ -8,19 +8,23 @@ class ElectricalMeterHistory extends Model
 {
     protected $fillable = [
         'electrical_meter_id',
-        'electrical_meter_parameter_id',
-        'parameter_value'
+        // 'electrical_meter_parameter_id',
+        // 'parameter_value',
+        'parameter_values',
+        'current',
     ];
+
+    protected $table = "e_m_h_test";
 
     public function electricalMeter()
     {
         return $this->belongsTo(ElectricalMeter::class);
     }
-
+/*
     public function electricalMeterParameter()
     {
         return $this->belongsTo(ElectricalMeterParameter::class);
     }
-
+*/
 }
 

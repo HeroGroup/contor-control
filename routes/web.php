@@ -93,5 +93,9 @@ Route::group(['prefix' => 'api'], function() {
     Route::post('/updateCoolingDevice', 'GatewayController@updateCoolingDevice')->name('updateCoolingDevice');
     Route::get('/getElectricityMeterFieldModify/{gateway}', 'GatewayController@getElectricityMeterFieldModify')->name('getElectricityMeterFieldModify');
     Route::post('postElectricityMeterFieldModifyConfirm', 'GatewayController@confirmFieldModify')->name('confirmFieldModify');
+
+    Route::group(['prefix' => 'v2'], function() {
+        Route::get('/getLatestElectricalMeterConfig/{gatewayId}', 'Api\V2Controller@getLatestElectricalMeterConfig')->name('v2.getLatestElectricalMeterConfig');
+    });
 });
 /*  ============================================================================    */

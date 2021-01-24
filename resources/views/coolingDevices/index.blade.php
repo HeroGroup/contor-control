@@ -1,10 +1,6 @@
 @extends('layouts.admin', ['pageTitle' => "کنترلرهای اسپلیت", 'newButton' => true, 'newButtonUrl' => "$gateway/create", 'newButtonText' => 'ایجاد دستگاه'])
 @section('content')
-    <style>
-        .paginate_button .current {
-            color: black !important;
-        }
-    </style>
+
     <div class="panel panel-default">
         <div class="panel-heading">دستگاه ها @if($gateway>0) <span>ی درگاه {{\App\Gateway::find($gateway)->serial_number}}</span> @endif</div>
         <div class="panel-body">

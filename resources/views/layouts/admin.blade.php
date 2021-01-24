@@ -33,6 +33,12 @@
             color:white;
             border-color: darkgray;
         }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a > .current {
+            color:black !important;
+        }
     </style>
 
     <script src="/js/jquery-1.11.0.js" type="text/javascript"></script>
@@ -121,6 +127,8 @@
                     }
                 }
             });
+
+            $('.current').css({"color":"black !important"});
         })
     </script>
 </body>

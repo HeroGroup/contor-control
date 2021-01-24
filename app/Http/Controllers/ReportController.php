@@ -31,7 +31,7 @@ class ReportController extends Controller
                 $electrticalMeter = ElectricalMeter::where('gateway_id', $request->parameters['device'])->first();
                 if ($electrticalMeter)
                     $id = $electrticalMeter->id;
-                $history = ElectricalMeterHistory::where('electrical_meter_id', $id)->whereBetween('created_at', $from, $to)->get();
+                $history = [];//ElectricalMeterHistory::where('electrical_meter_id', $id)->whereBetween('created_at', $from, $to)->get();
                 dd($history);
                 break;
             case "hourly_demand":
