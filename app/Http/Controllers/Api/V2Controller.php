@@ -13,19 +13,20 @@ class V2Controller extends Controller
     public function getLatestElectricalMeterConfig($gatewayId)
     {
         $values = [
-            0 => 'serial_number',
-            1 => 'date',
-            2 => 'time',
-            3 => 'active_import_energy_tariff_1',
-            4 => 'active_import_energy_tariff_2',
-            5 => 'active_import_energy_tariff_3',
-            6 => 'active_import_energy_tariff_4',
-            7 => 'total_active_import_energy',
-            8 => 'voltage',
-            9 => 'current',
-            10 => 'relay1_status',
-            11 => 'relay2_status',
+            1 => 'serial_number',
+            2 => 'date',
+            3 => 'time',
+            4 => 'active_import_energy_tariff_1',
+            5 => 'active_import_energy_tariff_2',
+            6 => 'active_import_energy_tariff_3',
+            7 => 'active_import_energy_tariff_4',
+            8 => 'total_active_import_energy',
+            9 => 'voltage',
+            10 => 'current',
+            11 => 'relay1_status',
+            12 => 'relay2_status',
         ];
+
         try {
             $gateway = Gateway::where('serial_number','like',$gatewayId)->first();
             $electricalMeterId = ElectricalMeter::where('gateway_id',$gateway->id)->first()->id;

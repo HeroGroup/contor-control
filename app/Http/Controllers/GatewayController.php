@@ -97,7 +97,7 @@ class GatewayController extends Controller
                     ElectricalMeterHistory::create([
                         'electrical_meter_id' => $electricalMeter->id,
                         'parameter_values' => $elm[0],
-                        'current' => $data[9]
+                        'current' => $data[10]
                     ]);
 
                     // for ($i = 1; $i < count($data); $i++) {
@@ -213,21 +213,22 @@ class GatewayController extends Controller
         try {
             $gateway = Gateway::where('serial_number','like',$gatewayId)->first();
             $electricalMeterId = ElectricalMeter::where('gateway_id',$gateway->id)->first()->id;
-
             $result = [];
-            for ($i=1; $i<=10; $i++) {
-                $maxId = ElectricalMeterHistory::where('electrical_meter_id', $electricalMeterId)
-                    ->where('electrical_meter_parameter_id', $i) // relay1_status
-                    ->max('id');
-                if ($maxId) {
+            $maxId = ElectricalMeterHistory::where('electrical_meter_id', $electricalMeterId)->max('id');
+            if ($maxId) {
+                $latest = ElectricalMeterHistory::find($maxId);
+                $parameters = explode('&', $latest->parameter_values);
 
-                    $latest = ElectricalMeterHistory::find($maxId);
-                    $result[$values[$i]] = $latest->parameter_value;
-                } else {
-                    // return $this->fail('invalid electrical meter');
+                for ($i=1; $i<=10; $i++) {
+                    $result[$values[$i]] = $parameters[$i];
                 }
             }
-            $result["relay1_status"] = strval(ElectricalMeter::find($electricalMeterId)->relay1_status);
+
+            // get ralays staus from main table
+            $device = ElectricalMeter::find($electricalMeterId);
+            $result["relay1_status"] = strval($device->relay1_status);
+            $result["relay2_status"] = strval($device->relay2_status);
+
             return $this->success('data retrieved successfully', $result);
         } catch (\Exception $exception) {
             return $this->fail($exception->getMessage());

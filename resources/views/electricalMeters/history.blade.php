@@ -15,33 +15,33 @@
                 @if($histories->count() > 0)
                     @foreach($histories as $history)
                         <tr>
-                            <?php $items = explode('&', $history->parameter_values); ?>
-                            @for($i=0; $i<12; $i++)
-                                @if($i == 1)
-                                    @if(strlen($items[$i]) > 8)
-                                        <?php $temp = substr_replace(substr($items[$i],0,8), '/', 4, 0) ?>
-                                    @else
-                                        <?php $temp = substr_replace($items[$i], '/', 4, 0) ?>
-                                    @endif
-                                    <td>{{substr_replace($temp, '/', 7, 0)}}</td>
-                                @elseif($i == 2)
-                                    @if(strlen($items[$i]) > 6)
-                                        <td>{{substr_replace(substr($items[$i],8,4), ':', 2, 0)}}</td>
-                                    @else
-                                        <td>{{substr_replace($items[$i], ':', 2, 0)}}</td>
-                                    @endif
-                                @elseif($i>=10)
-                                    <td>
-                                        @if($items[$i] == 1)
-                                            <div class="label label-success">روشن</div>
-                                        @else
-                                            <div class="label label-default">خاموش</div>
-                                        @endif
-                                    </td>
-                                @else
-                                    <td>{{$items[$i]}}</td>
-                                @endif
-                            @endfor
+                            <?php
+                            $items = explode('&', $history->parameter_values);
+                            for($i=1; $i<=12; $i++) {
+                                if($i == 2) {
+                                    if(strlen($items[$i]) > 8) {
+                                        $temp = substr_replace(substr($items[$i],0,8), '/', 4, 0);
+                                    } else {
+                                        $temp = substr_replace($items[$i], '/', 4, 0);
+                                    }
+                                    echo "<td>".substr_replace($temp, '/', 7, 0)."</td>";
+                                } else if($i == 3) {
+                                    if(strlen($items[$i]) > 6) {
+                                        echo "<td>".substr_replace(substr($items[$i],8,4), ':', 2, 0)."</td>";
+                                    } else {
+                                        echo "<td>".substr_replace($items[$i], ':', 2, 0)."</td>";
+                                    }
+                                } else if($i > 10) {
+                                    if($items[$i] == 1) {
+                                        echo "<td><div class='label label-success'>روشن</div></td>";
+                                    } else {
+                                        echo "<td><div class='label label-default'>خاموش</div></td>";
+                                    }
+                                } else {
+                                    echo "<td>".$items[$i]."</td>";
+                                }
+                            }
+                            ?>
                         </tr>
                     @endforeach
                 @else

@@ -7,8 +7,8 @@ Route::get('/client/login', function () { return view('client.home'); })->name('
 
 Route::get('/fill', 'GatewayController@fill');
 Route::get('/randomFillModify', 'HomeController@randomFillModify');
-Route::get('convertHistories', 'HomeController@convertHistories');
-Route::get('getCurrent', 'HomeController@getCurrent');
+// Route::get('convertHistories', 'HomeController@convertHistories');
+// Route::get('getCurrent', 'HomeController@getCurrent');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     //Route::get('/dashboard')
