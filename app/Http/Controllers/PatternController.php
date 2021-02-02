@@ -207,4 +207,5 @@ class PatternController extends Controller
     {
         //
     }
+
 }

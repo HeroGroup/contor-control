@@ -13,12 +13,12 @@ class PatternRow extends Model
 
     public function pattern()
     {
-        return $this->belongsTo(Pattern::class);
+        return $this->belongsTo(Pattern::class, 'pattern_id', 'id');
     }
 
     public function mode()
     {
-        return $this->belongsTo(CoolingDeviceModes::class);
+        return $this->belongsTo(CoolingDeviceModes::class, 'mode_id', 'id');
     }
 
 }

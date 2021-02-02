@@ -5,15 +5,28 @@ function makeDirectory($path) {
         mkdir($path, 0777, true);
 }
 
-function logIncomingData($content) {
+function logIncomingData($content, $userAgent=null) {
     $body = json_decode($content);
-    $gatewayNumber = $body->gateway_id;
-    $today = date('Y-m-d');
-    makeDirectory("logs/$today");
-    $myFile = fopen("logs/$today/$gatewayNumber-Post-Data.txt", "a") or die("Unable to open file!");
-    $date = PHP_EOL.'['.date('Y/m/j H:i').'] ';
-    fwrite($myFile, $date.'[request body='.$content.']');
-    fclose($myFile);
+
+    if ($body) {
+        $today = date('Y-m-d');
+        makeDirectory("logs/$today");
+        if (isset($body->gateway_id)) {
+            $gatewayNumber = $body->gateway_id;
+            $myFile = fopen("logs/$today/$gatewayNumber-Post-Data.txt", "a") or die("Unable to open file!");
+            $date = PHP_EOL . '[' . date('Y/m/j H:i') . '] ';
+            // fwrite($myFile, $date.'[][request body='.$content.']');
+            fwrite($myFile, "$date [$userAgent] [request body = $content]");
+            fclose($myFile);
+            return true;
+        } else {
+            logException("General", $content);
+            return false;
+        }
+    } else {
+        logException("General", $content);
+        return false;
+    }
 }
 
 function logConfirmData($content) {

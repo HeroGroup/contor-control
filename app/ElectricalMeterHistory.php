@@ -14,7 +14,7 @@ class ElectricalMeterHistory extends Model
         'current',
     ];
 
-    protected $table = "e_m_h_test";
+    protected $table = "electrical_meter_histories";
 
     public function electricalMeter()
     {

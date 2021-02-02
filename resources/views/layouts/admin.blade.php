@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        {{$pageTitle}}
+                        @if(isset($icon)) <i class="fa fa-fw {{$icon}}" style="color:#33bb00;"></i> @endif {{$pageTitle}}
                         @if(isset($newButton) && $newButton)
                             <a class="pull-left btn btn-primary" href="{{$newButtonUrl}}">
                                 <i class="fa fa-fw fa-plus"></i> {{$newButtonText}}

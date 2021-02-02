@@ -72,6 +72,22 @@ class PermissionController extends Controller
         return redirect(route('permissions.index'));
     }
 
+    public function updateUserRoles(Request $request)
+    {
+        if (count($request->roles) > 0) {
+            DB::table('users_roles')->where('user_id', $request->user_id)->delete();
+
+            foreach ($request->roles as $key=>$value) {
+                DB::table('users_roles')->insert([
+                    'user_id' => $request->user_id,
+                    'role_id' => $key
+                ]);
+            }
+        }
+
+        return redirect(route('users.edit', $request->user_id));
+    }
+
     public function Permission()
     {
         $dev_permission = Permission::where('slug','create-tasks')->first();

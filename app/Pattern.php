@@ -12,6 +12,16 @@ class Pattern extends Model
 
     public function rows()
     {
-        return $this->hasMany(PatternRow::class, 'pattern_id', 'id');
+        return $this->hasMany(PatternRow::class);
+    }
+
+    public function gatewayPatterns()
+    {
+        return $this->hasMany(GatewayPattern::class);
+    }
+
+    public function coolingDevicePatterns()
+    {
+        return $this->hasMany(CoolingDevicePattern::class);
     }
 }

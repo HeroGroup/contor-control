@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class AdminGatewayController extends Controller
 {
-    public function index()
+    public function index($type=1)
     {
-        $gateways = Gateway::whereNull('gateway_id')->orderBy('serial_number', 'asc')->paginate(15);
-        return view('gateways.index', compact('gateways'));
+        $gateways = Gateway::whereNull('gateway_id')->orderBy('serial_number', 'asc')->where('gateway_type',$type)->paginate(15);
+        return view('gateways.index', compact('gateways','type'));
     }
 
     public function create()

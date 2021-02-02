@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['pageTitle' => $user->name, 'newButton' => false])
+@extends('layouts.admin', ['pageTitle' => $user->name, 'icon' => 'fa-user', 'newButton' => false])
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">تغییر رمز عبور</div>

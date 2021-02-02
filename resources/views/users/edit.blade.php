@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['pageTitle' => 'مشخصات کاربر و سطوح دسترسی', 'newButton' => false])
+@extends('layouts.admin', ['pageTitle' => 'مشخصات کاربر و سطوح دسترسی', 'icon' => 'fa-user', 'newButton' => false])
 @section('content')
     <div class="row">
     <div class="col-lg-6">
@@ -45,7 +45,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">سطوح دسترسی</div>
             <div class="panel-body">
-            <form method="post" action="#">
+            <form method="post" action="{{route('roles.updateUserRoles')}}">
                 @csrf
                 <input type="hidden" name="user_id" value="{{$user->id}}">
                 @foreach($roles as $key => $role)

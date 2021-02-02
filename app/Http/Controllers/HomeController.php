@@ -11,6 +11,11 @@ class HomeController extends Controller
         // $this->middleware('auth');
     }
 
+    public function ir()
+    {
+        return $this->success('succeeded', config('enums.AC_IR_CODES.TRUST'));
+    }
+
     public function index()
     {
         return view('home');

@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['pageTitle' => 'کاربران', 'newButton' => true, 'newButtonUrl' => 'users/create', 'newButtonText' => 'ایجاد کاربر'])
+@extends('layouts.admin', ['pageTitle' => 'کاربران', 'icon' => 'fa-users', 'newButton' => true, 'newButtonUrl' => 'users/create', 'newButtonText' => 'ایجاد کاربر'])
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">کاربران</div>

@@ -54,7 +54,7 @@
                                 @endif
                             </td>
                             <td>{{$coolingDevice->is_active ? $coolingDevice->degree : '-'}}</td>
-                            <td style="direction: ltr; text-align: right;">{{$coolingDevice->is_active ? ($coolingDevice->room_temperature != (-46) ? $coolingDevice->room_temperature : 'سنسور فعال نیست') : '-'}}</td>
+                            <td style="direction: ltr; text-align: right;">{{$coolingDevice->is_active ? (!in_array($coolingDevice->room_temperature, ["-46","-99"]) ? $coolingDevice->room_temperature : 'سنسور فعال نیست') : '-'}}</td>
                             <td>
                                 <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">

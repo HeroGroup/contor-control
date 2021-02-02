@@ -55,7 +55,7 @@ class ElectricalMeterController extends Controller
         $electricalMeter = ElectricalMeter::find($id);
         $serialNumber = $electricalMeter->gateway->serial_number;
         $labels = ElectricalMeterParameter::pluck('parameter_label', 'id')->toArray();
-        $histories = DB::table('e_m_h_test')->where('electrical_meter_id', $id)->orderBy('id','desc')->take(100)->get();
+        $histories = DB::table('electrical_meter_histories')->where('electrical_meter_id', $id)->orderBy('id','desc')->take(100)->get();
 
         if ($histories->count() > 0) {
             return view('electricalMeters.history', compact('serialNumber', 'labels', 'histories'));

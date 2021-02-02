@@ -14,7 +14,7 @@ try {
         while($gateway = $gateways->fetch_assoc()) {
             $gatewayId = $gateway["id"];
             $sendDuration = $gateway["send_data_duration_seconds"];
-            if ($gatewayHistories = $conn->query("SELECT MAX(e_m_h_test.created_at) as last_data FROM e_m_h_test,electrical_meters WHERE e_m_h_test.electrical_meter_id = electrical_meters.id AND electrical_meters.gateway_id=$gatewayId")) {
+            if ($gatewayHistories = $conn->query("SELECT MAX(electrical_meter_histories.created_at) as last_data FROM electrical_meter_histories,electrical_meters WHERE electrical_meter_histories.electrical_meter_id = electrical_meters.id AND electrical_meters.gateway_id=$gatewayId")) {
                 $gatewayHistory = $gatewayHistories->fetch_assoc();
                 $gateway_last_update = $gatewayHistory["last_data"];
                 $gatewayDiff = time() - strtotime($gateway_last_update) - $timezone;

@@ -85,7 +85,9 @@ class GatewayController extends Controller
     public function postElectricityMeterData(Request $request)
     {
         try {
-            logIncomingData($request->getContent());
+            $log = logIncomingData($request->getContent(), $request->header('User-Agent'));
+            if (!$log)
+                return $this->fail("invalid or empty data");
 
             // $result = [];
             foreach ($request->data as $datum) {
@@ -139,13 +141,14 @@ class GatewayController extends Controller
                     $data = explode("&", $elm[$j]);
                     $coolingDevice = CoolingDevice::where('serial_number', 'like', $data[0])->first();
                     if ($coolingDevice) {
+                        $roomTemperature = isset($data[3]) ? $data[3] : "-99";
                         CoolingDeviceHistory::create([
                             'cooling_device_id' => $coolingDevice->id,
                             'mode_id' => $data[1],
                             'degree' => $data[2],
-                            'room_temperature' => $data[3]
+                            'room_temperature' => $roomTemperature
                         ]);
-                        $coolingDevice->update(['room_temperature' => $data[3]]);
+                        $coolingDevice->update(['room_temperature' => $roomTemperature]);
                         /*
                         ModifyContor::where('cooling_device_id', $coolingDevice->id)
                             ->where('gateway_id', $gateway->id)

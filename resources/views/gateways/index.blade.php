@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['pageTitle' => 'کنترلرهای کنتور', 'newButton' => true, 'newButtonUrl' => 'gateways/create', 'newButtonText' => 'ایجاد کنترلر کنتور'])
+@extends('layouts.admin', ['pageTitle' => 'لیست کنترلرها', 'newButton' => true, 'newButtonUrl' => "/admin/gateways/create", 'newButtonText' => 'ایجاد کنترلر'])
 @section('content')
     <style>
         @media only screen and (max-width: 767px) {
@@ -92,6 +92,12 @@
     <div class="panel panel-default">
         <div class="panel-heading">کنترلرهای کنتور</div>
         <div class="panel-body">
+            <ul class="nav nav-pills">
+                <li @if($type==1) class="active" @endif><a href="/admin/gateways/1">کنترلر کنتور</a></li>
+                <li @if($type==2) class="active" @endif><a href="/admin/gateways/2">کنترلر بار سرمایشی</a></li>
+                <li @if($type==3) class="active" @endif><a href="/admin/gateways/3">کنترلر پمپ</a></li>
+            </ul>
+            <hr />
             <div class="row" id="main-headers">
                 <div class="col-sm-2">شناسه دستگاه</div>
                 <div class="col-sm-2">شماره سریال کنتور</div>

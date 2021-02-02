@@ -1,19 +1,22 @@
 <?php
 
 Auth::routes(['register' => false]);
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', function () { return redirect('/admin/gateways'); })->name('client.home');
-Route::get('/client/login', function () { return view('client.home'); })->name('client.login');
 
-Route::get('/fill', 'GatewayController@fill');
-Route::get('/randomFillModify', 'HomeController@randomFillModify');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () { return redirect('/admin/dashboard'); })->name('client.home');
+Route::get('/client/login', function () { return view('client.home'); })->name('client.login');
+Route::get('/ir', 'HomeController@ir');
+
+// Route::get('/fill', 'GatewayController@fill');
+// Route::get('/randomFillModify', 'HomeController@randomFillModify');
 // Route::get('convertHistories', 'HomeController@convertHistories');
 // Route::get('getCurrent', 'HomeController@getCurrent');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    //Route::get('/dashboard')
-    Route::get('/', function() { return redirect('/admin/gateways'); });
-    Route::resource('gateways', 'AdminGatewayController');
+    Route::get('/', function() { return redirect('/admin/dashboard'); });
+    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::resource('gateways', 'AdminGatewayController')->except(['index','show']);
+    Route::get('gateways/{type?}', 'AdminGatewayController@index')->name('gateways.index');
     Route::get('gateways/{gateway}/coolingDevices', 'AdminGatewayController@devices')->name('gateways.devices');
     Route::get('gateways/patterns/index', 'PatternController@gatewayPatternsIndex')->name('gateways.patterns.index');
     Route::get('gateways/{gateway}/patterns', 'AdminGatewayController@patterns')->name('gateways.patterns');
@@ -58,6 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
         // updateRolePermissions
         Route::post('rolePermissions', 'PermissionController@updateRolePermissions')->name('roles.updateRolePermissions');
+        Route::post('userRoles', 'PermissionController@updateUserRoles')->name('roles.updateUserRoles');
 
         Route::post('gateways/assignUser', 'UserController@assignUserGateway')->name('gateways.assignUser');
         Route::post('gateways/revokeUser', 'UserController@revokeUserGateway')->name('gateways.revokeUser');
@@ -72,6 +76,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/getDevicesList/{gateway?}', 'PatternController@getDevices');
     Route::post('/patterns/checkNameUniqueness', 'PatternController@checkNameUniqueness')->name('patterns.checkNameUniqueness');
 
+    Route::resource('pumpPatterns', 'PumpPatternController');
+    Route::post('pumpPatterns/massStore')->name('pumpsPatterns.massStore');
 
     Route::resource('groups', 'GroupController');
     Route::get('groups/{group}/groupGatewayPattern', 'GroupController@groupGatewayPattern')->name('groups.gatewayPattern');
