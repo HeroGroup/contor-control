@@ -15,7 +15,7 @@
             }
         }
 
-        .col-sm-2 {
+        .col-sm-1,.col-sm-2 {
             text-align: center;
             border-left: 1px solid gray;
         }
@@ -100,8 +100,9 @@
             <hr />
             <div class="row" id="main-headers">
                 <div class="col-sm-2">شناسه دستگاه</div>
+                <div class="col-sm-1">شهر</div>
                 <div class="col-sm-2">شماره سریال کنتور</div>
-                <div class="col-sm-2">وضعیت ارتباطی</div>
+                <div class="col-sm-1">ارتباط</div>
                 <div class="col-sm-2">وضعیت رله 1</div>
                 <div class="col-sm-2">وضعیت رله 2</div>
                 <div class="col-sm-2">عملیات</div>
@@ -115,10 +116,11 @@
                         &nbsp;
                         <a href="{{route('gateways.devices',$gateway->id)}}">{{$gateway->serial_number}}</a>
                     </div>
+                    <div class="col-sm-1">{{$gateway->city_id ? $gateway->city->name : '-'}}</div>
                     <div class="col-sm-2">
                         {{$gateway->electricalMeters->first() ? $gateway->electricalMeters->first()->serial_number : ''}}
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         @if($gateway->electricalMeters->first()->is_active)
                             <div class="label label-success">فعال</div>
                         @else
@@ -197,7 +199,7 @@
                 $(this).addClass("triangle-down");
                 var id = $(this).prev().val();
 if (!$(`#${id}-children`).html()) {
-                $.ajax(`gateways/${id}/children`, {
+                $.ajax(`/admin/gateways/${id}/children`, {
                     type: "get",
                     success: function (response) {
                         var data = response.data;

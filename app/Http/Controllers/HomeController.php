@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CoolingDeviceType;
 use App\ModifyContor;
 
 class HomeController extends Controller
@@ -9,6 +10,20 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+    }
+
+    public function fillDeviceTypes()
+    {
+        foreach(config('enums.remote_manufacturers') as $key => $item) {
+            if($key > 0) {
+                CoolingDeviceType::create([
+                    'manufacturer' => $item,
+                    'model' => $item
+                ]);
+            }
+        }
+
+        return $this->success("inserted successfully");
     }
 
     public function ir()
@@ -47,6 +62,20 @@ class HomeController extends Controller
             return $this->success("1000 rows inserted successfully");
         } catch (\Exception $exception) {
             return $this->fail($exception->getMessage());
+        }
+    }
+
+    public function redirectUserToProperPage()
+    {
+        $user = auth()->user();
+        if ($user) {
+            if ($user->hasRole('installer')) {
+                return redirect('/newGatewayTypeB');
+            } else {
+                return redirect('/admin');
+            }
+        } else {
+            return redirect('/login');
         }
     }
 /*
