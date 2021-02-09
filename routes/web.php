@@ -5,10 +5,8 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () { return redirect('/redirectUserToProperPage'); })->name('client.home');
 Route::get('/client/login', function () { return view('client.home'); })->name('client.login');
-Route::get('/ir', 'HomeController@ir');
-Route::get('/fillDeviceTypes', 'HomeController@fillDeviceTypes');
 Route::get('/redirectUserToProperPage', 'HomeController@redirectUserToProperPage');
-Route::get('/mqtt', 'InstallerController@mqtt');\
+Route::get('/mqtt', 'InstallerController@mqtt');
 
 // Route::get('/fill', 'GatewayController@fill');
 // Route::get('/randomFillModify', 'HomeController@randomFillModify');
@@ -16,12 +14,9 @@ Route::get('/mqtt', 'InstallerController@mqtt');\
 // Route::get('getCurrent', 'HomeController@getCurrent');
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'admin'], function () {
-        Route::get('/', function () {
-            return redirect('/admin/dashboard');
-        });
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
+        Route::get('/', 'HomeController@dashboard');
+        Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+
         Route::resource('gateways', 'AdminGatewayController')->except(['index', 'show']);
         Route::get('gateways/{type?}', 'AdminGatewayController@index')->name('gateways.index');
         Route::get('gateways/{gateway}/coolingDevices', 'AdminGatewayController@devices')->name('gateways.devices');
@@ -39,6 +34,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('electricalMeters', 'ElectricalMeterController');
         Route::get('electricalMeters/{id}/history', 'ElectricalMeterController@history')->name('electricalMeters.history');
 
+        Route::resource('/coolingDeviceTypes', 'CoolingDeviceTypeController');
         Route::resource('coolingDevices', 'CoolingDeviceController')->except(['index', 'create', 'show']); // store, edit, update, destroy
         Route::get('coolingDevices/{gateway}', 'CoolingDeviceController@index')->name('coolingDevices.index');
         Route::get('coolingDevices/{gateway}/create', 'CoolingDeviceController@create')->name('coolingDevices.create');
@@ -94,6 +90,9 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('/reports', 'ReportController@index')->name('reports');
         Route::post('report', 'ReportController@report')->name('reports.post');
+        Route::get('/codes', 'CodeController@index')->name('codes.index');
+        Route::get('/getCodes/{coolingDeviceTypeId}', 'CodeController@getCodes')->name('codes.getCodes');
+        Route::post('/codes', 'CodeController@store')->name('codes.store');
     });
 
     Route::group(['middleware' => 'role:installer'], function () {

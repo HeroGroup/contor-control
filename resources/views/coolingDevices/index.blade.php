@@ -23,7 +23,7 @@
                         <tr>
                             <td>{{$coolingDevice->serial_number}}</td>
                             <td>{{$coolingDevice->name}}</td>
-                            <td>{{$coolingDevice->gateway->serial_number}}</td>
+                            <td>{{$coolingDevice->gateway->serial_number}} {{$coolingDevice->gateway->city_id ? '- '.$coolingDevice->gateway->city->name : ''}}</td>
                             <td>
                                 {!! Form::select('patterns', $patterns, \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first() ? \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first()->pattern_id : '', array('class' => 'form-control', 'placeholder' => 'انتخاب کنید...', 'id' => $coolingDevice->id)) !!}
                             </td>

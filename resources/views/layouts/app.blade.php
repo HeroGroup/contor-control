@@ -10,6 +10,20 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="/css/my.css" rel="stylesheet" type="text/css">
     <style>
+        .ccard {
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            padding: 10px 25px;
+            margin-bottom:10px;
+            width:200px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .ccard:hover {
+            background-color: #ddd;
+        }
+
         .bb {
             border-left: 1px solid lightgray;
         }
@@ -46,7 +60,7 @@
                         @else
                             @if(auth()->user())
                                 <li class="bb">
-                                    <a class="dropdown-item" href="/editProfile">{{ Auth::user()->name }}</a>
+                                    <a class="dropdown-item" href="/editProfile">پروفایل {{ Auth::user()->name }}</a>
                                 </li>
                             @endif
                             @role('installer')

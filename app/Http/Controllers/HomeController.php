@@ -2,33 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\CoolingDevice;
 use App\CoolingDeviceType;
+use App\Gateway;
 use App\ModifyContor;
+use App\User;
+use App\UserGateway;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function __construct()
     {
         // $this->middleware('auth');
-    }
-
-    public function fillDeviceTypes()
-    {
-        foreach(config('enums.remote_manufacturers') as $key => $item) {
-            if($key > 0) {
-                CoolingDeviceType::create([
-                    'manufacturer' => $item,
-                    'model' => $item
-                ]);
-            }
-        }
-
-        return $this->success("inserted successfully");
-    }
-
-    public function ir()
-    {
-        return $this->success('succeeded', config('enums.AC_IR_CODES.TRUST'));
     }
 
     public function index()
@@ -38,7 +24,12 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        //
+        $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
+        $typeAGateways = Gateway::whereIn('id', $userGateways)->where('gateway_type', 1)->count();
+        $splitControllers = Gateway::whereIn('id', $userGateways)->where('gateway_type', 2)->count();
+        $pumpGateways = Gateway::whereIn('id', $userGateways)->where('gateway_type', 3)->count();
+        $totalSplits = CoolingDevice::whereIn('gateway_id', $userGateways)->count();
+        return view('dashboard', compact('typeAGateways', 'splitControllers', 'pumpGateways', 'totalSplits'));
     }
 
     public function randomFillModify()
@@ -70,9 +61,9 @@ class HomeController extends Controller
         $user = auth()->user();
         if ($user) {
             if ($user->hasRole('installer')) {
-                return redirect('/newGatewayTypeB');
+                return redirect('/home');
             } else {
-                return redirect('/admin');
+                return redirect('/admin/dashboard');
             }
         } else {
             return redirect('/login');

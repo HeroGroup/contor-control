@@ -1,13 +1,13 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
-            @role('admin')
+
             <li>
                 <a href="{{route('dashboard')}}">
                     <i class="fa fa-home fa-fw"></i>
                     خانه</a>
             </li>
-            @endrole
+
             <li>
                 <a href="{{route('gateways.index')}}">
                     {{--<i class="fa fa-fw fa-list" style="transform: rotateY(180deg)"></i>--}}
@@ -48,6 +48,14 @@
                     {{--<i class="fa fa-fw fa-list"></i>--}}
                     {{--گزارشات</a>--}}
             {{--</li>--}}
+            @role('split_codes')
+            <li>
+                <a href="{{route('coolingDeviceTypes.index')}}">لیست انواع اسپلیت</a>
+            </li>
+            <li>
+                <a href="{{route('codes.index')}}">کدهای اسپلیت</a>
+            </li>
+            @endrole
             @role('admin')
             <li>
                 <a href="#"><i class="fa fa-users fa-fw"></i> کاربران و سطوح دسترسی<span class="fa arrow"></span></a>

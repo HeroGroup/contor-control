@@ -16,6 +16,9 @@
             .card-icon {
                 font-size: 5em;
             }
+            .huge {
+                 font-size: 32px;
+            }
         }
     </style>
     <div class="row">
@@ -24,11 +27,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-5">
-                            <i class="fa fa-comments card-icon"></i>
+                            <i class="fa fa-desktop card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">26</div>
-                            <div>New Comments!</div>
+                            <div class="huge">{{$typeAGateways}} کنترلر کنتور</div>
                         </div>
                     </div>
                 </div>
@@ -39,26 +41,25 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-5">
-                            <i class="fa fa-tasks card-icon"></i>
+                            <i class="fa fa-tablet card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">12</div>
-                            <div>New Tasks!</div>
+                            <div class="huge">{{$splitControllers}} کنترلر اسپلیت</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-6">
             <div class="panel panel-yellow">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-5">
-                            <i class="fa fa-shopping-cart card-icon"></i>
+                            <i class="fa fa-tint card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">124</div>
-                            <div>New Orders!</div>
+                            <div class="huge">{{$pumpGateways}} کنترلر پمپ</div>
                         </div>
                     </div>
                 </div>
@@ -69,11 +70,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-5">
-                            <i class="fa fa-support card-icon"></i>
+                            <i class="fa fa-ther card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">13</div>
-                            <div>Support Tickets!</div>
+                            <div class="huge">{{$totalSplits}} اسپلیت</div>
                         </div>
                     </div>
                 </div>

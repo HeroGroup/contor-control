@@ -8,6 +8,7 @@ use App\ElectricalMeterType;
 use App\Gateway;
 use App\GatewayPattern;
 use App\Pattern;
+use App\UserGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,8 @@ class AdminGatewayController extends Controller
 {
     public function index($type=1)
     {
-        $gateways = Gateway::whereNull('gateway_id')->orderBy('serial_number', 'asc')->where('gateway_type',$type)->paginate(15);
+        $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
+        $gateways = Gateway::whereIn('id', $userGateways)->whereNull('gateway_id')->orderBy('serial_number', 'asc')->where('gateway_type',$type)->paginate(20);
         return view('gateways.index', compact('gateways','type'));
     }
 
@@ -92,7 +94,8 @@ class AdminGatewayController extends Controller
     public function getChildren($gateway)
     {
         try {
-            $children = Gateway::where('gateway_id', $gateway)->with('parentGateway')->with('electricalMeters')->orderBy('serial_number', 'asc')->get();
+            $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
+            $children = Gateway::whereIn('id', $userGateways)->where('gateway_id', $gateway)->with('parentGateway')->with('electricalMeters')->orderBy('serial_number', 'asc')->get();
             return $this->success('data retrieved successfully', $children);
         } catch (\Exception $exception) {
             return $this->fail($exception->getMessage());
