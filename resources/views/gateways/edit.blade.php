@@ -41,6 +41,27 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="customer_name" class="col-sm-2 control-label">نام مشترک</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{$gateway->electricalMeters->first()->customer_name}}" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="parvande" class="col-sm-2 control-label">شماره پرونده</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="parvande" name="parvande" value="{{$gateway->electricalMeters->first()->parvande}}" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="shenase_moshtarak" class="col-sm-2 control-label">شناسه مشترک</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shenase_moshtarak" name="shenase_moshtarak" value="{{$gateway->electricalMeters->first()->shenase_moshtarak}}" />
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="gateway_type" class="col-sm-2 control-label">نوع کنترلر</label>
                     <div class="col-sm-4">
                         {!! Form::select('gateway_type', config('enums.gateway_type'), $gateway->gateway_type, array('class' => 'form-control', 'id' => 'gateway_type', 'placeholder' => 'نوع کنترلر را انتخاب کنید...')) !!}

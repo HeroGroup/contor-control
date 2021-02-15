@@ -37,6 +37,10 @@
             height:auto;
         }
 
+        .modal-footer {
+            border:none;
+        }
+
         .close {
             float: right;
             font-size: 28px;

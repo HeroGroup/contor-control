@@ -30,7 +30,8 @@
                             <i class="fa fa-desktop card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$typeAGateways}} کنترلر کنتور</div>
+                            <div class="huge">{{$typeAGateways}} / {{$typeAGateways}} آنلاین</div>
+                            <h3>کنترلر کنتور</h3>
                         </div>
                     </div>
                 </div>
@@ -44,7 +45,8 @@
                             <i class="fa fa-tablet card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$splitControllers}} کنترلر اسپلیت</div>
+                            <div class="huge">{{$splitControllers}} / {{$splitControllers}} آنلاین</div>
+                            <h3>کنترلر اسپلیت</h3>
                         </div>
                     </div>
                 </div>
@@ -59,7 +61,8 @@
                             <i class="fa fa-tint card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$pumpGateways}} کنترلر پمپ</div>
+                            <div class="huge">{{$pumpGateways}} / {{$pumpGateways}} آنلاین</div>
+                            <h3>کنترلر پمپ</h3>
                         </div>
                     </div>
                 </div>
@@ -73,7 +76,8 @@
                             <i class="fa fa-ther card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$totalSplits}} اسپلیت</div>
+                            <div class="huge">{{$totalSplits}} / {{$totalSplits}} آنلاین</div>
+                             <h3>اسپلیت</h3>
                         </div>
                     </div>
                 </div>

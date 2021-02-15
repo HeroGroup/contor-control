@@ -6,7 +6,8 @@
                 <div class="card">
                     <div class="card-header">درگاه تایپ A جدید</div>
                     <div class="card-body">
-                        <form method="post" action="#">
+                        <form method="post" action="/newGatewayTypeA">
+                            @csrf
                             <div class="form-group row">
                                 <label for="parent_gateway" class="col-sm-4 col-form-label">شماره سریال کنترلر اصلی</label>
                                 <div class="col-sm-8">
@@ -19,7 +20,7 @@
                                     <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}"  />
                                 </div>
                             </div>
-                            <hr />
+
                             <div class="form-group row">
                                 <div class="col-sm-12" style="text-align: center;">
                                     <button type="submit" class="btn btn-success" style="width:150px;">ثبت</button>

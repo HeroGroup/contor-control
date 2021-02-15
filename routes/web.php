@@ -46,10 +46,11 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('coolingDevices/patterns/store', 'CoolingDeviceController@storePattern')->name('coolingDevices.patterns.store');
         Route::post('coolingDevices/patterns/massStore', 'CoolingDeviceController@massStore')->name('coolingDevices.patterns.massStore');
 
+        Route::get('users/{user}/changePassword', 'UserController@changePassword')->name('users.changePassword');
         Route::group(['middleware' => 'role:admin'], function () {
             Route::resource('users', 'UserController');
             Route::get('users/{user}/resetPassword', 'UserController@resetPassword')->name('users.resetPassword');
-            Route::get('users/{user}/changePassword', 'UserController@changePassword')->name('users.changePassword');
+
             Route::post('users/updatePassword', 'UserController@updatePassword')->name('users.updatePassword');
 
             Route::get('permissions', 'PermissionController@index')->name('permissions.index');
@@ -89,7 +90,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('groups/patterns/updateGroupDevicePattern', 'GroupController@storeDeviceGroupPattern')->name('groups.devicePatterns.update');
 
         Route::get('/reports', 'ReportController@index')->name('reports');
-        Route::post('report', 'ReportController@report')->name('reports.post');
+        Route::post('/report', 'ReportController@report')->name('reports.post');
+
         Route::get('/codes', 'CodeController@index')->name('codes.index');
         Route::get('/getCodes/{coolingDeviceTypeId}', 'CodeController@getCodes')->name('codes.getCodes');
         Route::post('/codes', 'CodeController@store')->name('codes.store');
@@ -98,8 +100,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'role:installer'], function () {
 
         Route::get('/newGatewayTypeB', 'InstallerController@newGatewayTypeB');
+        Route::post('/newGatewayTypeB', 'InstallerController@storeGatewayTypeB');
         Route::get('/newGatewayTypeA', 'InstallerController@newGatewayTypeA');
+        Route::post('/newGatewayTypeA', 'InstallerController@storeGatewayTypeA');
         Route::get('/newSplit', 'InstallerController@newSplit');
+        Route::post('/newSplit', 'InstallerController@storeSplit');
     });
     Route::get('/editProfile', 'InstallerController@editProfile');
 });

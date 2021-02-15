@@ -66,8 +66,12 @@ class UserController extends Controller
 
     public function changePassword($userId)
     {
-        $user = User::find($userId);
-        return view('users.changePassword', compact('user'));
+        if ($userId == auth()->id() || auth()->user()->hasRole('admin')) {
+            $user = User::find($userId);
+            return view('users.changePassword', compact('user'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function updatePassword(Request $request)

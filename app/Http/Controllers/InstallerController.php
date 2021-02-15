@@ -15,9 +15,11 @@ class InstallerController extends Controller
         return view('installer.newGatewayTypeB', compact('provinces', 'cities'));
     }
 
-    public function createGatewayTypeB(Request $request)
+    public function storeGatewayTypeB(Request $request)
     {
-        //
+        $result = "12345678";
+        $resultLabel = "شماره سریال کنترلر جدید";
+        return view('installer.result', compact('result', 'resultLabel'));
     }
 
     public function newGatewayTypeA()
@@ -25,9 +27,11 @@ class InstallerController extends Controller
         return view('installer.newGatewayTypeA');
     }
 
-    public function createGatewayTypeA(Request $request)
+    public function storeGatewayTypeA(Request $request)
     {
-        //
+        $result = "12345678";
+        $resultLabel = "شماره سریال کنترلر جدید";
+        return view('installer.result', compact('result', 'resultLabel'));
     }
 
     public function newSplit()
@@ -35,9 +39,11 @@ class InstallerController extends Controller
         return view('installer.newSplit');
     }
 
-    public function createSplit(Request $request)
+    public function storeSplit(Request $request)
     {
-        //
+        $result = "12345678";
+        $resultLabel = "شماره سریال اسپلیت جدید";
+        return view('installer.result', compact('result', 'resultLabel'));
     }
 
     public function editProfile()

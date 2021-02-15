@@ -99,7 +99,7 @@
             </ul>
             <hr />
             <div class="row" id="main-headers">
-                <div class="col-sm-2">شناسه دستگاه</div>
+                <div class="col-sm-2">شماره پرونده</div>
                 <div class="col-sm-1">شهر</div>
                 <div class="col-sm-2">شماره سریال کنتور</div>
                 <div class="col-sm-1">ارتباط</div>
@@ -114,7 +114,7 @@
                         <input type="hidden" name="id" value="{{$gateway->id}}" />
                         <div class="triangle triangle-left" data-toggle="collapse" data-target="#{{$gateway->id}}-children"></div>
                         &nbsp;
-                        <a href="{{route('gateways.devices',$gateway->id)}}">{{$gateway->serial_number}}</a>
+                        <a href="{{route('gateways.devices',$gateway->id)}}">{{$gateway->electricalMeters->first()->parvande ? $gateway->electricalMeters->first()->parvande : $gateway->serial_number}}</a>
                     </div>
                     <div class="col-sm-1">{{$gateway->city_id ? $gateway->city->name : '-'}}</div>
                     <div class="col-sm-2">
@@ -204,11 +204,10 @@ if (!$(`#${id}-children`).html()) {
                     success: function (response) {
                         var data = response.data;
                         if (data.length > 0) {
-                            var result = `<table class="table table-bordered" style="margin-top:10px;"><thead><tr><th>شناسه دستگاه</th><th>درگاه اصلی</th><th>شماره سریال کنتور</th><th>وضعیت ارتباطی</th><th>وضعیت رله 1</th>
+                            var result = `<table class="table table-bordered" style="margin-top:10px;"><thead><tr><th>شماره پرونده</th><th>درگاه اصلی</th><th>شماره سریال کنتور</th><th>وضعیت ارتباطی</th><th>وضعیت رله 1</th>
 <th>وضعیت رله 2</th><th>عملیات</th></tr></thead><tbody>`;
 
                             for (var i = 0; i < data.length; i++) {
-                                console.log(data[i]);
                                 var active = data[i].electrical_meters[0].is_active === 1 ? "<div class='label label-success'>فعال</div>" : "<div class='label label-default'>غیرفعال</div>";
                                 var relay1Checked = data[i].electrical_meters[0].relay1_status === 1 ? "checked" : "";
                                 var relay1 = `<span style='font-size:12px;'> روشن </span>
@@ -265,7 +264,7 @@ if (!$(`#${id}-children`).html()) {
                             </ul>
                         </div>`;
                                 result += "<tr>" +
-                                    `<td><a href="gateways/${data[i].id}/coolingDevices">` + data[i].serial_number + "</a></td>" +
+                                    `<td><a href="gateways/${data[i].id}/coolingDevices">` + (data[i].electrical_meters[0].parvande ? data[i].electrical_meters[0].parvande : data[i].serial_number) + "</a></td>" +
                                     "<td>" + data[i].parent_gateway.serial_number + "</td>" +
                                     "<td>" + data[i].electrical_meters[0].serial_number + "</td>" +
                                     "<td>" + active + "</td>" +

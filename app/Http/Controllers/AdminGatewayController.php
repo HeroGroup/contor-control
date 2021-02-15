@@ -39,6 +39,9 @@ class AdminGatewayController extends Controller
             'unique_id' => strval(intval(ElectricalMeter::max('unique_id'))+1),
             'serial_number' => $request->meter_serial_number, // strval(intval(ElectricalMeter::max('serial_number'))+1),
             'electrical_meter_type_id' => $request->model,
+            'customer_name' => $request->customer_name,
+            'shenase_moshtarak' => $request->shenase_moshtarak,
+            'parvande' => $request->parvande,
             'phase' => 1,
             'relay1_status' => 0,
             'relay2_status' => 0,
@@ -63,6 +66,9 @@ class AdminGatewayController extends Controller
         $electricalMeter->update([
             'serial_number' => $request->meter_serial_number,
             'electrical_meter_type_id' => $request->model ? $request->model : null,
+            'customer_name' => $request->customer_name,
+            'shenase_moshtarak' => $request->shenase_moshtarak,
+            'parvande' => $request->parvande,
         ]);
 
         return redirect('admin/gateways')->with('message', 'درگاه با موفقیت بروزرسانی شد')->with('type', 'success');
