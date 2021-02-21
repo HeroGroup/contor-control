@@ -95,6 +95,10 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/codes', 'CodeController@index')->name('codes.index');
         Route::get('/getCodes/{coolingDeviceTypeId}', 'CodeController@getCodes')->name('codes.getCodes');
         Route::post('/codes', 'CodeController@store')->name('codes.store');
+
+        Route::group(['prefix' => 'exports'], function() {
+            Route::get('gateways/{type}', 'AdminGatewayController@export');
+        });
     });
 
     Route::group(['middleware' => 'role:installer'], function () {

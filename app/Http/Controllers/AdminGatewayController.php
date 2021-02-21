@@ -5,20 +5,45 @@ namespace App\Http\Controllers;
 use App\City;
 use App\ElectricalMeter;
 use App\ElectricalMeterType;
+use App\Exports\ControllersExport;
 use App\Gateway;
 use App\GatewayPattern;
 use App\Pattern;
 use App\UserGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminGatewayController extends Controller
 {
     public function index($type=1)
     {
         $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
-        $gateways = Gateway::whereIn('id', $userGateways)->whereNull('gateway_id')->orderBy('serial_number', 'asc')->where('gateway_type',$type)->paginate(20);
+        $gateways = Gateway::whereIn('id', $userGateways)->where('gateway_type',$type)->orderBy('serial_number', 'asc')->get();
         return view('gateways.index', compact('gateways','type'));
+    }
+
+    public function export($type=1)
+    {
+        $reportName = "";
+        switch ($type) {
+            case 1:
+                $reportName = 'لیست کنترلر کنتور.xlsx';
+                break;
+
+            case 2:
+                $reportName = 'لیست کنترلر بار سرمایشی.xlsx';
+                break;
+
+            case 3:
+                $reportName = 'لیست کنترلر پمپ.xlsx';
+                break;
+
+            default:
+                break;
+        }
+
+        return Excel::download(new ControllersExport($type), $reportName);
     }
 
     public function create()
@@ -40,6 +65,7 @@ class AdminGatewayController extends Controller
             'serial_number' => $request->meter_serial_number, // strval(intval(ElectricalMeter::max('serial_number'))+1),
             'electrical_meter_type_id' => $request->model,
             'customer_name' => $request->customer_name,
+            'customer_address' => $request->customer_address,
             'shenase_moshtarak' => $request->shenase_moshtarak,
             'parvande' => $request->parvande,
             'phase' => 1,
@@ -67,6 +93,7 @@ class AdminGatewayController extends Controller
             'serial_number' => $request->meter_serial_number,
             'electrical_meter_type_id' => $request->model ? $request->model : null,
             'customer_name' => $request->customer_name,
+            'customer_address' => $request->customer_address,
             'shenase_moshtarak' => $request->shenase_moshtarak,
             'parvande' => $request->parvande,
         ]);
@@ -97,11 +124,25 @@ class AdminGatewayController extends Controller
         return view('gateways.patterns', compact('gateway', 'gatewayPatterns','patterns'));
     }
 
+    /*
+    |----------------------------------------------------------------------------------
+    | I'm going to have mixed feelings.
+    | I Love my wife, and I also have feelings for RN ...
+    | I'm not sure if she has feelings for me too.
+    | but I'm able to gain her attention.
+    | she's really sexy ... I want "No Strings Attached"
+    |----------------------------------------------------------------------------------
+    */
+
     public function getChildren($gateway)
     {
         try {
-            $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
-            $children = Gateway::whereIn('id', $userGateways)->where('gateway_id', $gateway)->with('parentGateway')->with('electricalMeters')->orderBy('serial_number', 'asc')->get();
+            $userGateways = UserGateway::where('user_id',auth()->id())->where('gateway_id', $gateway)->count();
+
+            $children = [];
+            if ($userGateways > 0)
+                $children = Gateway::where('gateway_id', $gateway)->with('parentGateway')->with('electricalMeters')->orderBy('serial_number', 'asc')->get();
+
             return $this->success('data retrieved successfully', $children);
         } catch (\Exception $exception) {
             return $this->fail($exception->getMessage());

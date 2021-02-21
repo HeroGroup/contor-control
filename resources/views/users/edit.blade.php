@@ -96,7 +96,7 @@
                                 @if(\Illuminate\Support\Facades\DB::table('user_gateways')->where('user_id', $user->id)->where('gateway_id', $gateway->id)->count() > 0)
                                     انتساب داده شده
                                 @else
-                                    آزاد
+                                    فاقد مجوز
                                 @endif
                             </td>
                             <td class="text-left">

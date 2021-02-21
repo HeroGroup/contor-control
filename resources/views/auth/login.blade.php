@@ -41,8 +41,9 @@
 
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" style="width: 100px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary" style="width:100%;">
                                     ورود
                                 </button>
                             </div>

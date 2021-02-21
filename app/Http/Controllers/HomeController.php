@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CoolingDevice;
 use App\CoolingDeviceType;
+use App\ElectricalMeter;
 use App\Gateway;
 use App\ModifyContor;
 use App\User;
@@ -25,11 +26,21 @@ class HomeController extends Controller
     public function dashboard()
     {
         $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
-        $typeAGateways = Gateway::whereIn('id', $userGateways)->where('gateway_type', 1)->count();
-        $splitControllers = Gateway::whereIn('id', $userGateways)->where('gateway_type', 2)->count();
-        $pumpGateways = Gateway::whereIn('id', $userGateways)->where('gateway_type', 3)->count();
+        $activeElectricalMeters = ElectricalMeter::where('is_active',1)->select('gateway_id')->get();
+
+        $typeAGateways = DB::table('gateways')->whereIn('id', $userGateways)->where('gateway_type', 1)->count();
+        $activeTypeAGateways = DB::table('gateways')->whereIn('id', $userGateways)->where('gateway_type', 1)->whereIn('id', $activeElectricalMeters)->count();
+
+        $splitControllers = DB::table('gateways')->whereIn('id', $userGateways)->where('gateway_type', 2)->count();
+        $activeSplitControllers = DB::table('gateways')->whereIn('id', $userGateways)->where('gateway_type', 2)->whereIn('id', $activeElectricalMeters)->count();
+
+        $pumpGateways = DB::table('gateways')->whereIn('id', $userGateways)->where('gateway_type', 3)->count();
+        $activePumpGateways = DB::table('gateways')->whereIn('id', $userGateways)->where('gateway_type', 3)->whereIn('id', $activeElectricalMeters)->count();
+
         $totalSplits = CoolingDevice::whereIn('gateway_id', $userGateways)->count();
-        return view('dashboard', compact('typeAGateways', 'splitControllers', 'pumpGateways', 'totalSplits'));
+        $activeTotalSplits = CoolingDevice::whereIn('gateway_id', $userGateways)->where('is_active',1)->count();
+
+        return view('dashboard', compact('typeAGateways', 'activeTypeAGateways', 'splitControllers', 'activeSplitControllers', 'pumpGateways', 'activePumpGateways', 'totalSplits', 'activeTotalSplits'));
     }
 
     public function randomFillModify()

@@ -57,7 +57,7 @@ class CoolingDeviceController extends Controller
     public function history($id)
     {
         $device = CoolingDevice::find($id);
-        $histories = CoolingDeviceHistory::where('cooling_device_id', $id)->orderBy('id', 'desc')->paginate(15);
+        $histories = CoolingDeviceHistory::where('cooling_device_id', $id)->orderBy('id', 'desc')->take(300)->get();
         return view('coolingDevices.history', compact('device', 'histories'));
     }
 

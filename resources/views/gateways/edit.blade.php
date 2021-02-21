@@ -48,6 +48,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="customer_address" class="col-sm-2 control-label">نام مشترک</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="customer_address" name="customer_address" value="{{$gateway->electricalMeters->first()->customer_address}}" />
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="parvande" class="col-sm-2 control-label">شماره پرونده</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="parvande" name="parvande" value="{{$gateway->electricalMeters->first()->parvande}}" />

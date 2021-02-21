@@ -11,6 +11,9 @@
             .card-icon {
                 font-size: 12em;
             }
+            .online {
+                font-size: 18px;
+            }
         }
         @media (max-width: 767px) {
             .card-icon {
@@ -18,6 +21,9 @@
             }
             .huge {
                  font-size: 32px;
+            }
+            .online {
+                font-size: 18px;
             }
         }
     </style>
@@ -30,7 +36,7 @@
                             <i class="fa fa-desktop card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$typeAGateways}} / {{$typeAGateways}} آنلاین</div>
+                            <div class="huge">{{$typeAGateways}} / {{$activeTypeAGateways}} <span class="online"> آنلاین</span></div>
                             <h3>کنترلر کنتور</h3>
                         </div>
                     </div>
@@ -45,7 +51,7 @@
                             <i class="fa fa-tablet card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$splitControllers}} / {{$splitControllers}} آنلاین</div>
+                            <div class="huge">{{$splitControllers}} / {{$activeSplitControllers}} <span class="online"> آنلاین</span></div>
                             <h3>کنترلر اسپلیت</h3>
                         </div>
                     </div>
@@ -61,7 +67,7 @@
                             <i class="fa fa-tint card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$pumpGateways}} / {{$pumpGateways}} آنلاین</div>
+                            <div class="huge">{{$pumpGateways}} / {{$activePumpGateways}} <span class="online"> آنلاین</span></div>
                             <h3>کنترلر پمپ</h3>
                         </div>
                     </div>
@@ -76,7 +82,7 @@
                             <i class="fa fa-ther card-icon"></i>
                         </div>
                         <div class="col-xs-7 text-right card-text">
-                            <div class="huge">{{$totalSplits}} / {{$totalSplits}} آنلاین</div>
+                            <div class="huge">{{$totalSplits}} / {{$activeTotalSplits}} <span class="online"> آنلاین</span></div>
                              <h3>اسپلیت</h3>
                         </div>
                     </div>

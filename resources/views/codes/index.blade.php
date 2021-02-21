@@ -44,28 +44,22 @@
                     `<table class="table table-bordered">
                     <thead>
                         <th>درجه</th>
-                        <th>COOL - NORMAL</th>
                         <th>COOL - OFF</th>
                         <th>COOL - ON</th>
-                        <th>WARM - NORMAL</th>
                         <th>WARM - OFF</th>
                         <th>WARM - ON</th>
-                        <th>FAN - NORMAL</th>
                         <th>FAN - OFF</th>
                         <th>FAN - ON</th>
                     </thead>
                 <tbody>`;
-                for (var i = 16; i <= 30; i++) {
+                for (var i = 16; i <= 32; i++) {
                     child +=
                         `<tr>
                         <td>DEGREE${i}</td>
-                        <td><input type='text' name='cool_normal[${i}]' id='cool_normal_${i}' class='form-control' /></td>
                         <td><input type='text' name='cool_off[${i}]' id='cool_off_${i}' class='form-control' /></td>
                         <td><input type='text' name='cool_on[${i}]' id='cool_on_${i}' class='form-control' /></td>
-                        <td><input type='text' name='warm_normal[${i}]' id='warm_normal_${i}' class='form-control' /></td>
                         <td><input type='text' name='warm_off[${i}]' id='warm_off_${i}' class='form-control' /></td>
                         <td><input type='text' name='warm_on[${i}]' id='warm_on_${i}' class='form-control' /></td>
-                        <td><input type='text' name='fan_normal[${i}]' id='fan_normal_${i}' class='form-control' /></td>
                         <td><input type='text' name='fan_off[${i}]' id='fan_off_${i}' class='form-control' /></td>
                         <td><input type='text' name='fan_on[${i}]' id='fan_on_${i}' class='form-control' /></td>
                     </tr>`;
@@ -77,13 +71,10 @@
                     child +=
                         `<tr>
                         <td>${fan[j]}</td>
-                        <td><input type='text' name='cool_normal[${fan[j]}]' id='cool_normal_${fan[j]}' class='form-control' /></td>
                         <td><input type='text' name='cool_off[${fan[j]}]' id='cool_off_${fan[j]}' class='form-control' /></td>
                         <td><input type='text' name='cool_on[${fan[j]}]' id='cool_on_${fan[j]}' class='form-control' /></td>
-                        <td><input type='text' name='warm_normal[${fan[j]}]' id='warm_normal_${fan[j]}' class='form-control' /></td>
                         <td><input type='text' name='warm_off[${fan[j]}]' id='warm_off_${fan[j]}' class='form-control' /></td>
                         <td><input type='text' name='warm_on[${fan[j]}]' id='warm_on_${fan[j]}' class='form-control' /></td>
-                        <td><input type='text' name='fan_normal[${fan[j]}]' id='fan_normal_${fan[j]}' class='form-control' /></td>
                         <td><input type='text' name='fan_off[${fan[j]}]' id='fan_off_${fan[j]}' class='form-control' /></td>
                         <td><input type='text' name='fan_on[${fan[j]}]' id='fan_on_${fan[j]}' class='form-control' /></td>
                     </tr>`;
