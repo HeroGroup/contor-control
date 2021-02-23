@@ -98,6 +98,7 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::group(['prefix' => 'exports'], function() {
             Route::get('gateways/{type}', 'AdminGatewayController@export');
+            Route::get('coolingDevices', 'CoolingDeviceController@export');
         });
     });
 

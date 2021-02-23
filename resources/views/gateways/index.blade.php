@@ -62,7 +62,7 @@
                 <li @if($type==3) class="active" @endif><a href="/admin/gateways/3">کنترلر پمپ</a></li>
             </ul>
             <hr />
-            <div class="table-responsive">
+            <div class="container-fluid table-responsive">
                 <table class="table table-hover table-bordered data-table">
                     <thead>
                         <tr>

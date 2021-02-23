@@ -1,10 +1,12 @@
 @extends('layouts.admin', ['pageTitle' => "کنترلرهای اسپلیت", 'newButton' => true, 'newButtonUrl' => "$gateway/create", 'newButtonText' => 'ایجاد دستگاه'])
 @section('content')
-
+    <div style="margin-bottom:10px;text-align:left;">
+        <a href="/admin/exports/coolingDevices" class="btn btn-success"><i class="fa fa-fw fa-file-excel-o"></i> خروجی اکسل</a>
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">دستگاه ها @if($gateway>0) <span>ی درگاه {{\App\Gateway::find($gateway)->serial_number}}</span> @endif</div>
         <div class="panel-body">
-            <div class="table-responsive">
+            <div class="container-fluid table-responsive">
                 <table class="table table-bordered data-table">
                     <thead>
                     <tr>

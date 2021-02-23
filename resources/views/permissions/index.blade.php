@@ -61,7 +61,7 @@
                     <button data-target="#new-role-modal" class="btn btn-primary btn-xs open-modal" style="float: left"><i class="fa fa-fw fa-plus"></i> نقش جدید</button>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive">
+                    <div class="container-fluid table-responsive">
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
@@ -147,7 +147,7 @@
                     <button data-target="#new-permission-modal"  class="btn btn-primary btn-xs open-modal" style="float: left"><i class="fa fa-fw fa-plus"></i> مجوز جدید</button>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive">
+                    <div class="container-fluid table-responsive">
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>

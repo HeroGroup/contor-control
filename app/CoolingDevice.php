@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CoolingDevice extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['gateway_id', 'serial_number', 'remote_manufacturer', 'rf_broadcast_enable', 'name', 'mode', 'degree', 'room_temperature', 'is_active'];
+    protected $fillable = [
+        'gateway_id',
+        'serial_number',
+        'remote_manufacturer',
+        'rf_broadcast_enable',
+        'name',
+        'mode',
+        'degree',
+        'room_temperature',
+        'is_active'
+    ];
 
     public function gateway()
     {

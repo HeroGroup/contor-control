@@ -6,9 +6,11 @@ use App\CoolingDevice;
 use App\CoolingDeviceHistory;
 use App\CoolingDeviceModes;
 use App\CoolingDevicePattern;
+use App\Exports\SplitsExport;
 use App\Gateway;
 use App\Pattern;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CoolingDeviceController extends Controller
 {
@@ -18,6 +20,11 @@ class CoolingDeviceController extends Controller
         $patterns = Pattern::where('pattern_type', 1)->pluck('name', 'id')->toArray();
 
         return view('coolingDevices.index', compact('gateway', 'coolingDevices', 'patterns'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new SplitsExport(), 'لیست اسپلیت ها.xlsx');
     }
 
     public function create($gateway=0)
