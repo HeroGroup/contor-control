@@ -9,31 +9,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="/css/my.css" rel="stylesheet" type="text/css">
-    <style>
-        .ccard {
-            border: 1px solid lightgray;
-            border-radius: 5px;
-            padding: 10px 25px;
-            margin-bottom:10px;
-            width:200px;
-            text-align: center;
-            background-color: #f9f9f9;
-        }
-
-        .ccard:hover {
-            background-color: #ddd;
-        }
-
-        .bb {
-            border-left: 1px solid lightgray;
-        }
-        @media (max-width:766px) {
-            .bb {
-                border-bottom: 1px solid lightgray;
-                border-left:none;
-            }
-        }
-    </style>
 </head>
 <body dir="rtl" style="background-image: url('/images/Login_body.jpg'); background-repeat: repeat;">
     <div id="app">

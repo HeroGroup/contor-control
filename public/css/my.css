@@ -99,3 +99,49 @@ td {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+.messages {
+    padding-right:0;
+    list-style-type:none;
+    text-align:left;
+}
+.message-item {
+    background-color: #f9d6d5;
+    transition: background-color 300ms linear;
+    padding: 5px 10px;
+    direction: ltr;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-bottom:7px;
+    position: relative;
+}
+.message-time {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.ccard {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px 25px;
+    margin-bottom:10px;
+    width:200px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.ccard:hover {
+    background-color: #ddd;
+}
+
+.bb {
+    border-left: 1px solid lightgray;
+}
+
+@media (max-width:766px) {
+    .bb {
+        border-bottom: 1px solid lightgray;
+        border-left:none;
+    }
+}

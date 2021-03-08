@@ -1,7 +1,5 @@
 @extends('layouts.admin', ['pageTitle' => 'گزارشات', 'newButton' => false])
 @section('content')
-    <script src="/js/selectize.min.js"></script>
-    <link rel="stylesheet" href="/css/selectize.bootstrap3.min.css" />
     <style>
         .parameters {
             display: none;
@@ -165,12 +163,6 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('select').selectize({
-                sortField: 'text'
-            });
-        });
-
         var reportRequired = $("#report-required");
 
         $("input[name=report_type]").change(function() {
