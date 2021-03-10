@@ -69,6 +69,7 @@
                             <th>پرونده</th>
                             <th>شهر</th>
                             <th>سریال کنتور</th>
+                            <th>نام مشترک / شناسه</th>
                             <th>ارتباط</th>
                             <th>آخرین حضور</th>
                             <th>رله 1</th>
@@ -87,6 +88,9 @@
                                 </td>
                                 <td>
                                     {{$gateway->electricalMeters->first() ? $gateway->electricalMeters->first()->serial_number : ''}}
+                                </td>
+                                <td>
+                                    {{$gateway->electricalMeters->first() ? $gateway->electricalMeters->first()->customer_name . ' ' . $gateway->electricalMeters->first()->shenase_moshtarak : ''}}
                                 </td>
                                 <td>
                                     @if($gateway->electricalMeters->first()->is_active)

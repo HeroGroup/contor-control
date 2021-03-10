@@ -30,4 +30,9 @@ class ElectricalMeter extends Model
     {
         return $this->belongsTo(ElectricalMeterType::class, 'electrical_meter_type_id', 'id');
     }
+
+    public function histories()
+    {
+        return $this->hasMany(ElectricalMeterHistory::class);
+    }
 }

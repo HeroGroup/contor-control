@@ -40,23 +40,23 @@ class SplitsExport implements FromCollection, WithHeadings, WithColumnFormatting
     public function collection()
     {
         return DB::table('cooling_devices')
-            ->select(DB::raw("
-            '',
-            cooling_devices.serial_number,
-            CONCAT(electrical_meters.customer_name,' ',electrical_meters.shenase_moshtarak),
-            '',
-            '',
-            electrical_meters.customer_address,
-            '',
-            cities.name,
-            electrical_meters.parvande,
-            '',
-            '',
-            ''
-            "))
             ->join('gateways', 'gateways.id', '=', 'cooling_devices.gateway_id')
             ->join('cities', 'cities.id', '=', 'gateways.city_id')
             ->join('electrical_meters', 'electrical_meters.gateway_id', '=', 'gateways.id')
+            ->select(DB::raw("
+            'ردیف',
+            cooling_devices.serial_number,
+            CONCAT(electrical_meters.customer_name,' ',electrical_meters.shenase_moshtarak) AS MOSHAKHASAT_MOSHTARAK,
+            cooling_devices.updated_at,
+            'شماره سیم کارت',
+            electrical_meters.customer_address,
+            'مدیریت',
+            cities.name,
+            electrical_meters.parvande,
+            'مشخصات کولر',
+            'آمپر مصرفی کولر',
+            'تعداد فاز کولر'
+            "))
             ->get();
     }
 }

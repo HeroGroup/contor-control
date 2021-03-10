@@ -53,12 +53,11 @@ class ElectricalMeterController extends Controller
     public function history($id)
     {
         $electricalMeter = ElectricalMeter::find($id);
-        $serialNumber = $electricalMeter->gateway->serial_number;
-        $labels = ElectricalMeterParameter::pluck('parameter_label', 'id')->toArray();
-        $histories = DB::table('electrical_meter_histories')->where('electrical_meter_id', $id)->orderBy('id','desc')->take(100)->get();
+        $labels = ElectricalMeterParameter::select('parameter_label', 'parameter_unit')->get();
+        $histories = DB::table('electrical_meter_histories')->where('electrical_meter_id', $id)->where('current','>','0')->orderBy('id','desc')->take(100)->get();
 
         if ($histories->count() > 0) {
-            return view('electricalMeters.history', compact('serialNumber', 'labels', 'histories'));
+            return view('electricalMeters.history', compact('electricalMeter', 'labels', 'histories'));
         } else {
             return redirect()->back()->with('message', 'تاریخچه وجود ندارد')->with('type','danger');
         }

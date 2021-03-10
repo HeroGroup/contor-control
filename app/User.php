@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Permissions\HasPermissionsTrait;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -13,7 +14,7 @@ class User extends Authenticatable
     use HasPermissionsTrait;
 
     protected $fillable = [
-        'name', 'email', 'mobile', 'password',
+        'name', 'email', 'mobile', 'password'
     ];
 
     protected $hidden = [
