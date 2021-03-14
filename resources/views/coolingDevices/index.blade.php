@@ -56,7 +56,7 @@
                                     @endif
                                 @endif
                             </td>
-                            <td>{{jdate('H:i - Y/m/j', strtotime($coolingDevice->updated_at))}}</td>
+                            <td>{{$coolingDevice->last_online}}</td>
                             <td>{{$coolingDevice->is_active ? $coolingDevice->degree : '-'}}</td>
                             <td style="direction: ltr; text-align: right;">{{$coolingDevice->is_active ? (!in_array($coolingDevice->room_temperature, ["-46","-99"]) ? $coolingDevice->room_temperature : 'سنسور فعال نیست') : '-'}}</td>
                             <td>

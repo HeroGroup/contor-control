@@ -24,8 +24,8 @@ class SplitsExport implements FromCollection, WithHeadings, WithColumnFormatting
             'ناحیه',
             'پرونده',
             'مشخصات کولر',
-            'آمپر مصرفی کولر',
-            'تعداد فاز کولر'
+            'تعداد فاز کولر',
+            'آمپر مصرفی کولر'
         ];
     }
 
@@ -39,23 +39,25 @@ class SplitsExport implements FromCollection, WithHeadings, WithColumnFormatting
 
     public function collection()
     {
+        DB::statement("SET @rownum=0;");
         return DB::table('cooling_devices')
             ->join('gateways', 'gateways.id', '=', 'cooling_devices.gateway_id')
             ->join('cities', 'cities.id', '=', 'gateways.city_id')
             ->join('electrical_meters', 'electrical_meters.gateway_id', '=', 'gateways.id')
+            ->leftJoin('cooling_device_types', 'cooling_device_types.id', '=', 'cooling_devices.remote_manufacturer')
             ->select(DB::raw("
-            'ردیف',
+            @rownum:=@rownum+1 as rownum,
             cooling_devices.serial_number,
             CONCAT(electrical_meters.customer_name,' ',electrical_meters.shenase_moshtarak) AS MOSHAKHASAT_MOSHTARAK,
-            cooling_devices.updated_at,
-            'شماره سیم کارت',
+            cooling_devices.last_online,
+            gateways.sim_card_number,
             electrical_meters.customer_address,
-            'مدیریت',
+            gateways.modiriat,
             cities.name,
             electrical_meters.parvande,
-            'مشخصات کولر',
-            'آمپر مصرفی کولر',
-            'تعداد فاز کولر'
+            CONCAT(cooling_device_types.manufacturer, ' - ', cooling_device_types.model),
+            cooling_device_types.number_of_phases,
+            ''
             "))
             ->get();
     }

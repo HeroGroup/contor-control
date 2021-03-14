@@ -12,6 +12,7 @@ class ElectricalMeterHistory extends Model
         // 'parameter_value',
         'parameter_values',
         'current',
+        'fixed_time'
     ];
 
     protected $table = "electrical_meter_histories";

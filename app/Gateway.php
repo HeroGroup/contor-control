@@ -13,7 +13,9 @@ class Gateway extends Model
         'serial_number',
         'send_data_duration_seconds',
         'gateway_type',
-        'city_id'
+        'city_id',
+        'modiriat',
+        'sim_card_number',
     ];
 
     public function electricalMeters()

@@ -18,7 +18,8 @@ class ElectricalMeter extends Model
         'phase',
         'relay1_status',
         'relay2_status',
-        'is_active'
+        'is_active',
+        'last_online'
     ];
 
     public function gateway()

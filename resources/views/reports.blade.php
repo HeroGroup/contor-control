@@ -17,11 +17,11 @@
                     <div class="form-group">
                         <div class="col-sm-2">
                             <label for="shenase_moshtarak">شناسه مشترک</label>
-                            <input type="text" name="shenase_moshtarak" id="shenase_moshtarak" value="{{isset($shenase_moshtarak) ? $shenase_moshtarak : ""}}" class="form-control" />
+                            {!! Form::select('shenase_moshtarak', $listShenase, isset($shenase_moshtarak) ? $shenase_moshtarak : "", array('class' => 'form-control', 'id' => 'shenase_moshtarak', 'placeholder' => 'انتخاب کنید...')) !!}
                         </div>
                         <div class="col-sm-2">
                             <label for="parvande">شماره پرونده</label>
-                            <input type="text" name="parvande" id="parvande" value="{{isset($parvande) ? $parvande : ""}}" class="form-control" />
+                            {!! Form::select('parvande', $listParvande, isset($parvande) ? $parvande : "", array('class' => 'form-control', 'id' => 'parvande', 'placeholder' => 'انتخاب کنید...')) !!}
                         </div>
                         <div class="col-sm-2">
                             <label for="electrical_meter_id">سریال کنتور</label>
@@ -45,6 +45,10 @@
                             <label for="report_type" >نوع گزارش</label>
                             <select name="report_type" id="report_type">
                                 <option value="1">پروفیل بار مصرفی</option>
+                                <option value="2" disabled>فرامین ارسال شده</option>
+                                <option value="3" disabled>انرژی مصرفی روزانه</option>
+                                <option value="4" disabled>انرژی مصرفی ساعتی</option>
+                                <option value="5" disabled>رخدادها</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
@@ -100,16 +104,16 @@
                                     <th>ساعت</th>
                                     <th>سریال کنتور</th>
                                     <th>پرونده</th>
-                                    <th>توان مصرفی</th>
-                                    <th>جریان فاز 1</th>
-                                    <th>جریان فاز 2</th>
-                                    <th>جریان فاز 3</th>
-                                    <th>ولتاژ فاز 1</th>
-                                    <th>ولتاژ فاز 2</th>
-                                    <th>ولتاژ فاز 3</th>
-                                    <th>انرژی تعرفه 1</th>
-                                    <th>انرژی تعرفه 2</th>
-                                    <th>انرژی تعرفه 3</th>
+                                    <th>توان مصرفی (kWh)</th>
+                                    <th>جریان فاز 1 (A)</th>
+                                    <th>جریان فاز 2 (A)</th>
+                                    <th>جریان فاز 3 (A)</th>
+                                    <th>ولتاژ فاز 1 (V)</th>
+                                    <th>ولتاژ فاز 2 (V)</th>
+                                    <th>ولتاژ فاز 3 (V)</th>
+                                    <th>انرژی تعرفه 1 (kWh)</th>
+                                    <th>انرژی تعرفه 2 (kWh)</th>
+                                    <th>انرژی تعرفه 3 (kWh)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -122,16 +126,22 @@
                                             <td>{{$i}}</td>
                                             <td>
                                                 <?php
-                                                if(strlen($items[2]) > 8)
+                                                if($resultItem->created_at) {
+                                                    echo jdate('Y/m/j', strtotime($resultItem->created_at));
+                                                } else if(strlen($items[2]) > 8) {
                                                     $temp = substr_replace(substr($items[2],0,8), '/', 4, 0);
-                                                else
+                                                    echo strlen($temp > 2) ? substr_replace($temp, '/', 7, 0) : "";
+                                                } else {
                                                     $temp = substr_replace($items[2], '/', 4, 0);
+                                                    echo strlen($temp > 2) ? substr_replace($temp, '/', 7, 0) : "";
+                                                }
                                                 ?>
-                                                {{ strlen($temp > 2) ? substr_replace($temp, '/', 7, 0) : "" }}
                                             </td>
                                             <td>
                                                 <?php
-                                                if(strlen($items[3]) > 6)
+                                                if($resultItem->fixed_time)
+                                                    echo $resultItem->fixed_time;
+                                                else if(strlen($items[3]) > 6)
                                                     echo substr_replace(substr($items[3],8,4), ':', 2, 0);
                                                 else
                                                     echo substr_replace($items[3], ':', 2, 0);
@@ -139,16 +149,16 @@
                                             </td>
                                             <td>{{$items[1]}}</td>
                                             <td></td>
-                                            <td>{{$items[4]}}</td>
-                                            <td>{{$items[10]}}</td>
+                                            <td>{{doubleval($items[4])}}</td>
+                                            <td>{{doubleval($items[10])}}</td>
                                             <td></td>
                                             <td></td>
-                                            <td>{{$items[9]}}</td>
+                                            <td>{{doubleval($items[9])}}</td>
                                             <td></td>
                                             <td></td>
-                                            <td>{{$items[5]}}</td>
-                                            <td>{{$items[6]}}</td>
-                                            <td>{{$items[7]}}</td>
+                                            <td>{{doubleval($items[5])}}</td>
+                                            <td>{{doubleval($items[6])}}</td>
+                                            <td>{{doubleval($items[7])}}</td>
                                         </tr>
                                         <?php $i++; ?>
                                     @endif

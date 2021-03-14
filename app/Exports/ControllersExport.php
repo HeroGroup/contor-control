@@ -7,24 +7,15 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ControllersExport implements FromCollection, WithHeadings, WithColumnFormatting, WithStyles, ShouldAutoSize
+class ControllersExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize
 {
     protected $type;
 
     public function __construct($type)
     {
         $this->type = $type;
-    }
-
-    public function styles(Worksheet $sheet)
-    {
-        return [
-            1 => ['font' => ['bold' => true]], // bold headings
-        ];
     }
 
     public function headings(): array
@@ -38,10 +29,7 @@ class ControllersExport implements FromCollection, WithHeadings, WithColumnForma
             'آدرس مشترک',
             'مدیریت',
             'ناحیه',
-            'پرونده',
-            'مشخصات کولر',
-            'آمپر مصرفی کولر',
-            'تعداد فاز کولر'
+            'پرونده'
         ];
     }
 
@@ -55,24 +43,23 @@ class ControllersExport implements FromCollection, WithHeadings, WithColumnForma
 
     public function collection()
     {
+        DB::statement("SET @rownum=0;");
         return DB::table('gateways')
             ->select(DB::raw("
-            '',
-            electrical_meters.serial_number,
-            CONCAT(electrical_meters.customer_name,' ',electrical_meters.shenase_moshtarak),
-            '',
-            '',
-            electrical_meters.customer_address,
-            '',
-            cities.name,
-            electrical_meters.parvande,
-            '',
-            '',
-            ''
+            @rownum:=@rownum+1 as rownum,
+            electrical_meters.serial_number as SN,
+            CONCAT(electrical_meters.customer_name,' ',electrical_meters.shenase_moshtarak) AS MOSHAKHASAT,
+            electrical_meters.last_online AS LASTONLINE,
+            gateways.sim_card_number AS SCN,
+            electrical_meters.customer_address AS CU,
+            gateways.modiriat AS GMD,
+            cities.name AS CN,
+            electrical_meters.parvande AS EMP
             "))
             ->join('cities', 'cities.id', '=', 'gateways.city_id')
             ->join('electrical_meters', 'electrical_meters.gateway_id', '=', 'gateways.id')
             ->where('gateways.gateway_type', $this->type)
             ->get();
+
     }
 }

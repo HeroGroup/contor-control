@@ -19,21 +19,27 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="number_of_phases" class="col-sm-2 control-label">تعداد فاز کولر</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="number_of_phases" name="number_of_phases" value="{{$coolingDeviceType->number_of_phases}}" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="warm_current" class="col-sm-2 control-label">جریان فاز گرمادهی</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="warm_current" name="warm_current" value="{{$coolingDeviceType->warm_current}}" required />
+                        <input type="text" class="form-control" id="warm_current" name="warm_current" value="{{$coolingDeviceType->warm_current}}" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="cool_current" class="col-sm-2 control-label">جریان فاز سرمادهی</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="cool_current" name="cool_current" value="{{$coolingDeviceType->cool_current}}" required />
+                        <input type="text" class="form-control" id="cool_current" name="cool_current" value="{{$coolingDeviceType->cool_current}}" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="fan_current" class="col-sm-2 control-label">جریان فاز فن</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="fan_current" name="fan_current" value="{{$coolingDeviceType->fan_current}}" required />
+                        <input type="text" class="form-control" id="fan_current" name="fan_current" value="{{$coolingDeviceType->fan_current}}" />
                     </div>
                 </div>
 

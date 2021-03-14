@@ -17,7 +17,8 @@ class CoolingDevice extends Model
         'mode',
         'degree',
         'room_temperature',
-        'is_active'
+        'is_active',
+        'last_online'
     ];
 
     public function gateway()

@@ -82,6 +82,21 @@ class GatewayController extends Controller
         return $this->success('data inserted successfully');
     }
 
+    public function fixedMinute()
+    {
+        $minute = date('i');
+        if ($minute < 15)
+            $minute = "00";
+        else if ($minute < 30)
+            $minute = "15";
+        else if ($minute < 45)
+            $minute = "30";
+        else
+            $minute = "45";
+
+        return $minute;
+    }
+
     public function postElectricityMeterData(Request $request)
     {
         try {
@@ -96,38 +111,47 @@ class GatewayController extends Controller
                 $gateway = Gateway::where('serial_number', 'like', $data[0])->first();
                 $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
                 if ($electricalMeter) {
+                    $hour = date('H');
+                    $minute  = $this->fixedMinute();
                     ElectricalMeterHistory::create([
                         'electrical_meter_id' => $electricalMeter->id,
                         'parameter_values' => $elm[0],
-                        'current' => $data[10]
+                        'current' => $data[10],
+                        'fixed_time' => $hour . ":" . $minute
+                    ]);
+
+                    $electricalMeter->update([
+                        'relay1_status' => $data[11],
+                        'relay2_status' => $data[12],
+                        'last_online' => jdate('H:i - Y/m/j')
                     ]);
 
                     // for ($i = 1; $i < count($data); $i++) {
-                        // ElectricalMeterHistory::create([
-                            // 'electrical_meter_id' => $electricalMeter->id,
-                            // 'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
-                            // 'parameter_value' => $data[$i]
-                        // ]);
+                    // ElectricalMeterHistory::create([
+                    // 'electrical_meter_id' => $electricalMeter->id,
+                    // 'electrical_meter_parameter_id' => $this->electricalMeterParametersMap[$i],
+                    // 'parameter_value' => $data[$i]
+                    // ]);
 
-                        /*
-                        if ($i == 11) { // relay1_status
-                            // if there has been a modification, check result and modify checked
-                            $maxId = ModifyContor::where('electrical_meter_id', $electricalMeter->id)->where('checked', 0)->max('id');
-                            $lastModify = ModifyContor::find($maxId);
-                            if ($lastModify) {
-                                if ($lastModify->relay1_status == $data[$i]) {
-                                    // change was successfully implemented
-                                    ModifyContor::where('electrical_meter_id', $electricalMeter->id)
-                                        ->where('checked', 0)
-                                        ->update(['checked' => 1]);
+                    /*
+                    if ($i == 11) { // relay1_status
+                        // if there has been a modification, check result and modify checked
+                        $maxId = ModifyContor::where('electrical_meter_id', $electricalMeter->id)->where('checked', 0)->max('id');
+                        $lastModify = ModifyContor::find($maxId);
+                        if ($lastModify) {
+                            if ($lastModify->relay1_status == $data[$i]) {
+                                // change was successfully implemented
+                                ModifyContor::where('electrical_meter_id', $electricalMeter->id)
+                                    ->where('checked', 0)
+                                    ->update(['checked' => 1]);
 
-                                    ElectricalMeter::find($electricalMeter->id)->update(['relay1_status' => $data[$i]]);
-                                } else {
-                                    // was not able to change relay1 status // pass
-                                }
+                                ElectricalMeter::find($electricalMeter->id)->update(['relay1_status' => $data[$i]]);
+                            } else {
+                                // was not able to change relay1 status // pass
                             }
                         }
-                        */
+                    }
+                    */
                     // }
 
 
@@ -148,7 +172,10 @@ class GatewayController extends Controller
                             'degree' => $data[2],
                             'room_temperature' => $roomTemperature
                         ]);
-                        $coolingDevice->update(['room_temperature' => $roomTemperature]);
+                        $coolingDevice->update([
+                            'room_temperature' => $roomTemperature,
+                            'last_online' => jdate('H:i - Y/m/j')
+                        ]);
                         /*
                         ModifyContor::where('cooling_device_id', $coolingDevice->id)
                             ->where('gateway_id', $gateway->id)

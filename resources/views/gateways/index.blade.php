@@ -58,7 +58,7 @@
             <a href="/admin/exports/gateways/{{$type}}" class="btn btn-success" style="float:left;"><i class="fa fa-fw fa-file-excel-o"></i> خروجی اکسل</a>
             <ul class="nav nav-pills">
                 <li @if($type==1) class="active" @endif><a href="/admin/gateways/1">کنترلر کنتور</a></li>
-                <li @if($type==2) class="active" @endif><a href="/admin/gateways/2">کنترلر بار سرمایشی</a></li>
+                <li @if($type==2) class="active" @endif><a href="/admin/gateways/2">کنترلر اسپلیت</a></li>
                 <li @if($type==3) class="active" @endif><a href="/admin/gateways/3">کنترلر پمپ</a></li>
             </ul>
             <hr />
@@ -66,6 +66,8 @@
                 <table class="table table-hover table-bordered data-table">
                     <thead>
                         <tr>
+                            <th>سریال</th>
+                            <th>سریال والد</th>
                             <th>پرونده</th>
                             <th>شهر</th>
                             <th>سریال کنتور</th>
@@ -80,6 +82,8 @@
                     <tbody>
                         @foreach($gateways as $gateway)
                             <tr>
+                                <td>{{$gateway->serial_number}}</td>
+                                <td>{{$gateway->gateway_id ? $gateway->parentGateway->serial_number : 'ندارد'}}</td>
                                 <td>
                                     <a href="{{route('gateways.devices',$gateway->id)}}">{{$gateway->electricalMeters->first()->parvande ? $gateway->electricalMeters->first()->parvande : $gateway->serial_number}}</a>
                                 </td>
@@ -99,7 +103,7 @@
                                         <div class="label label-default">غیرفعال</div>
                                     @endif
                                 </td>
-                                <td></td>
+                                <td>{{$gateway->electricalMeters->first() ? $gateway->electricalMeters->first()->last_online : '-'}}</td>
                                 <td>
                                     <span style="font-size:12px;"> وصل </span>
                                     <label class="switch">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\ElectricalMeter;
+use App\ElectricalMeterHistory;
 use App\ElectricalMeterType;
 use App\Exports\ControllersExport;
 use App\Gateway;

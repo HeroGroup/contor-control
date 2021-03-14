@@ -14,30 +14,48 @@ class ReportController extends Controller
     {
         $electricalMeters = ElectricalMeter::pluck('serial_number', 'id')->toArray();
         $gateways = Gateway::pluck('serial_number', 'id')->toArray();
-        return view('reports', compact('electricalMeters', 'gateways'));
+        $listParvande = ElectricalMeter::whereNotNull('parvande')->pluck('parvande', 'id')->toArray();
+        $listShenase = ElectricalMeter::whereNotNull('shenase_moshtarak')->pluck('shenase_moshtarak', 'id')->toArray();
+        return view('reports', compact('electricalMeters', 'gateways', 'listParvande', 'listShenase'));
     }
 
     public function report(Request $request)
     {
-        $from = explode('/', $request->date_from);
-        $to = explode('/', $request->date_to);
-        $fromDate = $request->date_from ? str_replace(" ","", jalali_to_gregorian($from[0],$from[1],$from[2],' - ')) : "";
-        $toDate = $request->date_to ? str_replace(" ","", jalali_to_gregorian($to[0],$to[1],$to[2],' - ')) : "";
-        $electricalMeters = ElectricalMeter::pluck('serial_number', 'id')->toArray();
-        $gateways = Gateway::pluck('serial_number', 'id')->toArray();
-        $shenase_moshtarak = $request->shenase_moshtarak;
-        $parvande = $request->parvande;
-        $electrical_meter_id = $request->electrical_meter_id;
-        $gateway_id = $request->gateway_id;
-        $date_from = $request->date_from;
-        $date_to = $request->date_to;
+        if($request->report_type == 1) {
+            $from = explode('/', $request->date_from);
+            $to = explode('/', $request->date_to);
+            $fromDate = $request->date_from ? str_replace(" ", "", jalali_to_gregorian($from[0], $from[1], $from[2], ' - ')) : "";
+            $toDate = $request->date_to ? str_replace(" ", "", jalali_to_gregorian($to[0], $to[1], $to[2], ' - ')) : "";
+            $electricalMeters = ElectricalMeter::pluck('serial_number', 'id')->toArray();
+            $gateways = Gateway::pluck('serial_number', 'id')->toArray();
+            $listParvande = ElectricalMeter::whereNotNull('parvande')->pluck('parvande', 'id')->toArray();
+            $listShenase = ElectricalMeter::whereNotNull('shenase_moshtarak')->pluck('shenase_moshtarak', 'id')->toArray();
+            $shenase_moshtarak = $request->shenase_moshtarak;
+            $parvande = $request->parvande;
+            $electrical_meter_id = $request->electrical_meter_id;
+            $gateway_id = $request->gateway_id;
+            $date_from = $request->date_from;
+            $date_to = $request->date_to;
 
-        $result = DB::table('electrical_meter_histories')
-            ->where('electrical_meter_id', $request->electrical_meter_id)
-            ->whereBetween('created_at',[$fromDate,$toDate])
-            ->get();
+            $input = 0;
+            if($request->has('shenase_moshtarak') && $request->shenase_moshtarak > 0)
+                $input = $request->shenase_moshtarak;
+            else if($request->has('parvande') && $request->parvande > 0)
+                $input = $request->parvande;
+            else if($request->has('electrical_meter_id') && $request->electrical_meter_id > 0)
+                $input = $request->electrical_meter_id;
+            else if($request->has('gateway_id'))
+                $input = ElectricalMeter::where('gateway_id',$request->gateway_id)->first()->id;
 
-        return view('reports', compact('electricalMeters', 'gateways', 'shenase_moshtarak', 'parvande', 'electrical_meter_id', 'gateway_id', 'result', 'date_from', 'date_to'));
+            $result = DB::table('electrical_meter_histories')
+                ->where('electrical_meter_id', $input)
+                ->whereBetween('created_at', [$fromDate, $toDate])
+                ->get();
+
+            return view('reports', compact('electricalMeters', 'gateways', 'listShenase', 'listParvande', 'shenase_moshtarak', 'parvande', 'electrical_meter_id', 'gateway_id', 'result', 'date_from', 'date_to'));
+        } else {
+            return redirect(route('reports'));
+        }
     }
 
     public function reportOld(Request $request)

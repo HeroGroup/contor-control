@@ -53,14 +53,19 @@
                                 $items = explode('&', $history->parameter_values);
                                 for($i=1; $i<=12; $i++) {
                                     if($i == 2) { // date
-                                        if(strlen($items[$i]) > 8) {
+                                        if($history->created_at) {
+                                            echo "<td>" . jdate('Y/m/j', strtotime($history->created_at)) . "</td>";
+                                        } else if(strlen($items[$i]) > 8) {
                                             $temp = substr_replace(substr($items[$i],0,8), '/', 4, 0);
+                                            echo "<td>".substr_replace($temp, '/', 7, 0)."</td>";
                                         } else {
                                             $temp = substr_replace($items[$i], '/', 4, 0);
+                                            echo "<td>".substr_replace($temp, '/', 7, 0)."</td>";
                                         }
-                                        echo "<td>".substr_replace($temp, '/', 7, 0)."</td>";
                                     } else if($i == 3) { // time
-                                        if(strlen($items[$i]) > 6) {
+                                        if($history->fixed_time) {
+                                            echo "<td>$history->fixed_time</td>";
+                                        } else if(strlen($items[$i]) > 6) {
                                             echo "<td>".substr_replace(substr($items[$i],8,4), ':', 2, 0)."</td>";
                                         } else {
                                             echo "<td>".substr_replace($items[$i], ':', 2, 0)."</td>";

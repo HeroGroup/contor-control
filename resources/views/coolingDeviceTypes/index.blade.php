@@ -9,6 +9,10 @@
                     <tr>
                         <th>کارخانه سازنده</th>
                         <th>مدل</th>
+                        <th>تعداد فاز کولر</th>
+                        <th>جریان گرمادهی</th>
+                        <th>جریان سرمادهی</th>
+                        <th>جریان فن</th>
                         <th>عملیات</th>
                     </tr>
                     </thead>
@@ -17,6 +21,10 @@
                         <tr>
                             <td>{{$coolingDeviceType->manufacturer}}</td>
                             <td>{{$coolingDeviceType->model}}</td>
+                            <td>{{$coolingDeviceType->number_of_phases}}</td>
+                            <td>{{$coolingDeviceType->warm_current}}</td>
+                            <td>{{$coolingDeviceType->cool_current}}</td>
+                            <td>{{$coolingDeviceType->fan_current}}</td>
                             @component('components.links')
                                 @slot('routeEdit'){{route('coolingDeviceTypes.edit',$coolingDeviceType->id)}}@endslot
                                 @slot('itemId'){{$coolingDeviceType->id}}@endslot
