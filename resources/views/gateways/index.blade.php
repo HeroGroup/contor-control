@@ -63,11 +63,9 @@
             </ul>
             <hr />
             <div class="container-fluid table-responsive">
-                <table class="table table-hover table-bordered data-table">
+                <table id="table-data" class="table table-hover table-bordered data-table">
                     <thead>
                         <tr>
-                            <th>سریال</th>
-                            <th>سریال والد</th>
                             <th>پرونده</th>
                             <th>شهر</th>
                             <th>سریال کنتور</th>
@@ -82,8 +80,6 @@
                     <tbody>
                         @foreach($gateways as $gateway)
                             <tr>
-                                <td>{{$gateway->serial_number}}</td>
-                                <td>{{$gateway->gateway_id ? $gateway->parentGateway->serial_number : 'ندارد'}}</td>
                                 <td>
                                     <a href="{{route('gateways.devices',$gateway->id)}}">{{$gateway->electricalMeters->first()->parvande ? $gateway->electricalMeters->first()->parvande : $gateway->serial_number}}</a>
                                 </td>

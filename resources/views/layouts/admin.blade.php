@@ -136,7 +136,7 @@
             $('select:not(select[name=DataTables_Table_0_length])').selectize({
                 sortField: 'text'
             });
-        })
+        });
     </script>
 </body>
 </html>
