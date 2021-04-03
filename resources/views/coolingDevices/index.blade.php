@@ -133,7 +133,7 @@
                 dangerMode: true,
             }).then((willDelete) => {
                 if (willDelete) {
-                    document.getElementById('destroy-form-'+itemId).submit();
+                    document.getElementById('destroy-form-' + itemId).submit();
                 }
             });
         }

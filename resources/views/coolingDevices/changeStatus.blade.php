@@ -54,19 +54,24 @@
                         text: response.message,
                         type: "success"
                     }).then(function() {
-                        window.history.back();// window.location.href = "{{route('coolingDevices.index', 0)}}";
+                        window.history.back(); // window.location.href = "{{route('coolingDevices.index', 0)}}";
                     });
                 }
             })
         }
 
         function modesListChange() {
-            var selected = $("#mode").val(), degree = $("#degree");
+            var selected = $("#mode").val(), degree = $("#degree"), degreeSelectize = $("#degree").selectize(), selectize;
             if (selected === "3" || selected === "4") { // enable degree
-                degree.prop("disabled", false);
+                degree.prop("disabled",false);
+                selectize = degreeSelectize[0].selectize;
+                selectize.enable();
             } else { // disable degree
                 degree.val("");
-                degree.prop("disabled", true);
+                degree.prop("disabled",true);
+                selectize = degreeSelectize[0].selectize;
+                selectize.setValue("");
+                selectize.disable();
             }
         }
     </script>

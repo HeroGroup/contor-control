@@ -83,7 +83,7 @@ class CoolingDeviceController extends Controller
     public function changeStatus($deviceId)
     {
         $device = CoolingDevice::find($deviceId);
-        $modes = CoolingDeviceModes::pluck('name', 'id')->toArray();
+        $modes = CoolingDeviceModes::where('id','<',10)->pluck('name', 'id')->toArray();
         return view('coolingDevices.changeStatus', compact('device', 'modes'));
     }
 
