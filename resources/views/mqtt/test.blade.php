@@ -16,7 +16,7 @@
 
             client.connect({
                 timeout: 1200,
-                userName: "7nlbcTUtpbZP7bnEHvuwfiVBQ8AJ4xK1KU2MBM5QLSuJTHdq0vK6DwxjuVQogpdP",
+                userName:"7nlbcTUtpbZP7bnEHvuwfiVBQ8AJ4xK1KU2MBM5QLSuJTHdq0vK6DwxjuVQogpdP",
                 password:"7nlbcTUtpbZP7bnEHvuwfiVBQ8AJ4xK1KU2MBM5QLSuJTHdq0vK6DwxjuVQogpdP",
                 useSSL: false,
                 keepAliveInterval: 86400, // for one day
@@ -36,7 +36,7 @@
 
             client.connect({
                 timeout: 1200,
-                userName: "7nlbcTUtpbZP7bnEHvuwfiVBQ8AJ4xK1KU2MBM5QLSuJTHdq0vK6DwxjuVQogpdP",
+                userName:"7nlbcTUtpbZP7bnEHvuwfiVBQ8AJ4xK1KU2MBM5QLSuJTHdq0vK6DwxjuVQogpdP",
                 password:"7nlbcTUtpbZP7bnEHvuwfiVBQ8AJ4xK1KU2MBM5QLSuJTHdq0vK6DwxjuVQogpdP",
                 useSSL: false,
                 onSuccess:onConnect
@@ -49,15 +49,16 @@
         }
 
         function addMessageToList(message) {
-            var today = new Date();
-            var hours = today.getHours();
-            var minutes = today.getMinutes()
-            var time = (hours.length<2 ? '0'.hours : hours) + ":" + (minutes.length < 2 ? '0'.minutes : minutes);
+            var today = new Date(),
+				hours = today.getHours(),
+				minutes = today.getMinutes(),
+				seconds = today.getSeconds(),
+				time = (hours.length<2 ? '0'.hours : hours) + ":" + (minutes.length < 2 ? '0'.minutes : minutes) + ":" + (seconds.length < 2 ? '0'.seconds : seconds);
 
-            var node = document.createElement("LI");
-            var textNode = document.createTextNode(message);
-            var span = document.createElement("SPAN");
-            span.classList.add("message-time");
+            var node = document.createElement("LI"),
+				textNode = document.createTextNode(message),
+				span = document.createElement("SPAN");
+			span.classList.add("message-time");
 
             var timeText = document.createTextNode(time);
 
@@ -65,13 +66,13 @@
             node.appendChild(textNode);
             node.appendChild(span);
 
-            node.classList.add("message-item");
+			node.classList.add("message-item");
             // node.style.backgroundColor = "#f9d6d5";
             // node.style.transition = "background-color 300ms linear";
             // node.style.padding = "5px 10px";
             // node.style.direction = "ltr";
 
-            setTimeout(function() {
+			setTimeout(function() {
                 node.style.backgroundColor = "white";
             }, 2000);
 
@@ -98,7 +99,7 @@
         }
     </script>
 
-    <div class="container">
+	<div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

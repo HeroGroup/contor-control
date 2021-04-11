@@ -61,7 +61,7 @@
         }
 
         function modesListChange() {
-            var selected = $("#mode").val(), degree = $("#degree"), degreeSelectize = $("#degree").selectize(), selectize;
+            var selected = $("#mode").val(), degree = $("#degree"), degreeSelectize = $("#degree").selectize({sortField: 'text'}), selectize;
             if (selected === "3" || selected === "4") { // enable degree
                 degree.prop("disabled",false);
                 selectize = degreeSelectize[0].selectize;

@@ -8,6 +8,11 @@ Route::get('/client/login', function () { return view('client.home'); })->name('
 Route::get('/redirectUserToProperPage', 'HomeController@redirectUserToProperPage');
 Route::get('/mqtt', 'InstallerController@mqtt');
 
+Route::group(['prefix' => 'dll'], function () {
+    Route::get('/add/{num1}/{num2}', 'DllController@add');
+    Route::get('/sub/{num1}/{num2}', 'DllController@sub');
+});
+
 // Route::get('/fill', 'GatewayController@fill');
 // Route::get('/randomFillModify', 'HomeController@randomFillModify');
 // Route::get('convertHistories', 'HomeController@convertHistories');
@@ -91,6 +96,7 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('/reports', 'ReportController@index')->name('reports');
         Route::post('/report', 'ReportController@report')->name('reports.post');
+        Route::post('newReport', 'ReportController@newReport')->name('');
 
         Route::get('/codes', 'CodeController@index')->name('codes.index');
         Route::get('/getCodes/{coolingDeviceTypeId}', 'CodeController@getCodes')->name('codes.getCodes');

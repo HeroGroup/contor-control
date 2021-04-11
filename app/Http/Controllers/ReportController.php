@@ -99,4 +99,9 @@ class ReportController extends Controller
             DB::table('electrical_meter_histories')->select('parameter_values')->get();
         }
     }
+
+    public function newReport(Request $request)
+    {
+        dd($request);
+    }
 }

@@ -10,6 +10,7 @@ use App\ModifyContor;
 use App\User;
 use App\UserGateway;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
