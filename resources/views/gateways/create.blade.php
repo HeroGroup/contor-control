@@ -35,6 +35,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="sim_card_number" class="col-sm-2 control-label">شماره سیم کارت</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="sim_card_number" name="sim_card_number" value="{{old('sim_card_number')}}" maxlength="11">
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="model" class="col-sm-2 control-label">مدل کنتور</label>
                     <div class="col-sm-4">
                         {!! Form::select('model', $electricalMeterTypes, old('model'), array('class' => 'form-control', 'id' => 'model', 'placeholder' => 'مدل کنتور را انتخاب کنید...')) !!}

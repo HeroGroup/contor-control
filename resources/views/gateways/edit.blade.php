@@ -34,6 +34,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="sim_card_number" class="col-sm-2 control-label">شماره سیم کارت</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="sim_card_number" name="sim_card_number" value="{{old('sim_card_number')}}" maxlength="11">
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="model" class="col-sm-2 control-label">مدل کنتور</label>
                     <div class="col-sm-4">
                         {!! Form::select('model', $electricalMeterTypes, $gateway->electricalMeters->first()->electrical_meter_type_id, array('class' => 'form-control', 'id' => 'model', 'placeholder' => 'مدل کنتور را انتخاب کنید...')) !!}
@@ -48,7 +55,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="customer_address" class="col-sm-2 control-label">نام مشترک</label>
+                    <label for="customer_address" class="col-sm-2 control-label">آدرس مشترک</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="customer_address" name="customer_address" value="{{$gateway->electricalMeters->first()->customer_address}}" />
                     </div>

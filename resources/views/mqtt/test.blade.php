@@ -3,11 +3,13 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
-        var name = "unknown";
+        var name = "unknown", topic = "ami";
         window.onload = function() {
+            topic = prompt("Enter topic name you want to join", topic);
             name = prompt("Enter name", name);
 
-            document.getElementsByClassName("card-header")[0].innerHTML = name;
+            document.getElementById("username").innerHTML = "Username: " + name;
+            document.getElementById("topic").innerHTML = "Topic: " + topic;
 
             client = new Paho.MQTT.Client("mqtt.flespi.io", Number(80), name);
 
@@ -26,7 +28,7 @@
 
         function onConnect() {
             console.log("onConnect");
-            client.subscribe("ami");
+            client.subscribe(topic);
         }
 
         function onConnectionLost(responseObject) {
@@ -50,15 +52,15 @@
 
         function addMessageToList(message) {
             var today = new Date(),
-				hours = today.getHours(),
-				minutes = today.getMinutes(),
-				seconds = today.getSeconds(),
-				time = (hours.length<2 ? '0'.hours : hours) + ":" + (minutes.length < 2 ? '0'.minutes : minutes) + ":" + (seconds.length < 2 ? '0'.seconds : seconds);
+                hours = today.getHours(),
+                minutes = today.getMinutes(),
+                seconds = today.getSeconds(),
+                time = (hours.length<2 ? '0'.hours : hours) + ":" + (minutes.length < 2 ? '0'.minutes : minutes) + ":" + (seconds.length < 2 ? '0'.seconds : seconds);
 
             var node = document.createElement("LI"),
-				textNode = document.createTextNode(message),
-				span = document.createElement("SPAN");
-			span.classList.add("message-time");
+                textNode = document.createTextNode(message),
+                span = document.createElement("SPAN");
+            span.classList.add("message-time");
 
             var timeText = document.createTextNode(time);
 
@@ -66,13 +68,13 @@
             node.appendChild(textNode);
             node.appendChild(span);
 
-			node.classList.add("message-item");
+            node.classList.add("message-item");
             // node.style.backgroundColor = "#f9d6d5";
             // node.style.transition = "background-color 300ms linear";
             // node.style.padding = "5px 10px";
             // node.style.direction = "ltr";
 
-			setTimeout(function() {
+            setTimeout(function() {
                 node.style.backgroundColor = "white";
             }, 2000);
 
@@ -92,18 +94,22 @@
             // client.send(message);
             // console.log("message sent: " + send);
             // }, 2000);
-            var send = $("#message").val();
-            client.send("ami", name + ": " + send);
+            var message = $("#message").val();
+            // client.send(topic, name + ": " + messgae);
+            client.send(topic, message);
             // console.log("message sent: " + send);
             $("#message").val("");
         }
     </script>
 
-	<div class="container">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"></div>
+                    <div class="card-header">
+                        <span id="topic" style="float:left">Topic: ami</span>
+                        <span id="username">Username: unknown</span>
+                    </div>
                     <div class="card-body">
                         <div style="width:100%;direction:ltr;">
                             <div style="width:75%;display:inline-block;">

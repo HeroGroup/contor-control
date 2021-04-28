@@ -1,4 +1,5 @@
 <?php
+Route::get('/uniqid', function() { return uniqid(); });
 
 Auth::routes(['register' => false]);
 
@@ -17,6 +18,7 @@ Route::group(['prefix' => 'dll'], function () {
 // Route::get('/randomFillModify', 'HomeController@randomFillModify');
 // Route::get('convertHistories', 'HomeController@convertHistories');
 // Route::get('getCurrent', 'HomeController@getCurrent');
+
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'admin'], function () {
         Route::get('/', 'HomeController@dashboard');

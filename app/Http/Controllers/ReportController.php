@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ElectricalMeter;
 use App\ElectricalMeterHistory;
 use App\Gateway;
+use App\UserGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,19 +13,21 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $electricalMeters = ElectricalMeter::pluck('serial_number', 'id')->toArray();
-        $gateways = Gateway::pluck('serial_number', 'id')->toArray();
-        $listParvande = ElectricalMeter::whereNotNull('parvande')->pluck('parvande', 'id')->toArray();
-        $listShenase = ElectricalMeter::whereNotNull('shenase_moshtarak')->pluck('shenase_moshtarak', 'id')->toArray();
+        $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
+        $electricalMeters = ElectricalMeter::whereIn('gateway_id',$userGateways)->pluck('serial_number', 'id')->toArray();
+        $gateways = Gateway::whereIn('id',$userGateways)->pluck('serial_number', 'id')->toArray();
+        $listParvande = ElectricalMeter::whereIn('gateway_id',$userGateways)->whereNotNull('parvande')->pluck('parvande', 'id')->toArray();
+        $listShenase = ElectricalMeter::whereIn('gateway_id',$userGateways)->whereNotNull('shenase_moshtarak')->pluck('shenase_moshtarak', 'id')->toArray();
         return view('reports', compact('electricalMeters', 'gateways', 'listParvande', 'listShenase'));
     }
 
     public function report(Request $request)
     {
-        $electricalMeters = ElectricalMeter::pluck('serial_number', 'id')->toArray();
-        $gateways = Gateway::pluck('serial_number', 'id')->toArray();
-        $listParvande = ElectricalMeter::whereNotNull('parvande')->pluck('parvande', 'id')->toArray();
-        $listShenase = ElectricalMeter::whereNotNull('shenase_moshtarak')->pluck('shenase_moshtarak', 'id')->toArray();
+        $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
+        $electricalMeters = ElectricalMeter::whereIn('gateway_id',$userGateways)->pluck('serial_number', 'id')->toArray();
+        $gateways = Gateway::whereIn('id',$userGateways)->pluck('serial_number', 'id')->toArray();
+        $listParvande = ElectricalMeter::whereIn('gateway_id',$userGateways)->whereNotNull('parvande')->pluck('parvande', 'id')->toArray();
+        $listShenase = ElectricalMeter::whereIn('gateway_id',$userGateways)->whereNotNull('shenase_moshtarak')->pluck('shenase_moshtarak', 'id')->toArray();
         $shenase_moshtarak = $request->shenase_moshtarak;
         $parvande = $request->parvande;
         $electrical_meter_id = $request->electrical_meter_id;

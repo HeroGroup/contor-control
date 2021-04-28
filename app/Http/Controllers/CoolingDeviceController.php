@@ -9,6 +9,7 @@ use App\CoolingDevicePattern;
 use App\Exports\SplitsExport;
 use App\Gateway;
 use App\Pattern;
+use App\UserGateway;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,7 +17,11 @@ class CoolingDeviceController extends Controller
 {
     public function index($gateway=0)
     {
-        $coolingDevices = $gateway > 0 ? CoolingDevice::where('gateway_id', $gateway)->orderBy('serial_number', 'asc')->get() : CoolingDevice::orderBy('serial_number', 'asc')->get();
+        $userGateways = UserGateway::where('user_id',auth()->id())->select('gateway_id')->get();
+        $coolingDevices = $gateway > 0 ?
+            CoolingDevice::where('gateway_id', $gateway)->whereIn('gateway_id',$userGateways)->orderBy('serial_number', 'asc')->get() :
+            CoolingDevice::whereIn('gateway_id',$userGateways)->orderBy('serial_number', 'asc')->get();
+
         $patterns = Pattern::where('pattern_type', 1)->pluck('name', 'id')->toArray();
 
         return view('coolingDevices.index', compact('gateway', 'coolingDevices', 'patterns'));

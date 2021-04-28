@@ -64,6 +64,7 @@ class AdminGatewayController extends Controller
             'gateway_id' => $gateway->id,
             'unique_id' => strval(intval(ElectricalMeter::max('unique_id'))+1),
             'serial_number' => $request->meter_serial_number, // strval(intval(ElectricalMeter::max('serial_number'))+1),
+            'sim_card_number' => $request->sim_card_number,
             'electrical_meter_type_id' => $request->model,
             'customer_name' => $request->customer_name,
             'customer_address' => $request->customer_address,
@@ -92,6 +93,7 @@ class AdminGatewayController extends Controller
         $electricalMeter = ElectricalMeter::where('gateway_id', $gateway->id)->first();
         $electricalMeter->update([
             'serial_number' => $request->meter_serial_number,
+            'sim_card_number' => $request->sim_card_number,
             'electrical_meter_type_id' => $request->model ? $request->model : null,
             'customer_name' => $request->customer_name,
             'customer_address' => $request->customer_address,
