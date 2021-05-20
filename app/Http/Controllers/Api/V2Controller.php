@@ -12,8 +12,25 @@ use App\CoolingDeviceHistory;
 
 class V2Controller extends Controller
 {
+    public function getDeviceIds()
+    {
+        try {
+            $gateways = Gateway::where('version', 'LIKE', 'V2')->get(['serial_number']);
+            return $this->success("success", $gateways);
+        } catch (\Exception $exception) {
+            return $this->fail($exception->getMessage());
+        }
+    }
+
+    public function nodes(Request $request)
+    {
+        return $this->success("success", [$request->gateway_id,$request->nodes]);
+    }
+
     public function postElectricityMeterData(Request $request)
     {
+        return $this->success('data posted successfully', $request->all());
+
         // $request->gateway_id string
         // $request->contor_data string
         // $request->nodes array of strings separated with exclamation (!)
@@ -63,6 +80,7 @@ class V2Controller extends Controller
             return $this->fail($exception->getLine().': '.$exception->getMessage());
         }
     }
+
     public function getLatestElectricalMeterConfig($gatewayId)
     {
         $values = [
@@ -107,6 +125,6 @@ class V2Controller extends Controller
 
     public function getTime()
     {
-        return $this->success("", ["server_time" => date('H:i')]);
+        return $this->success("success", ["server_time" => date('Y-m-d H:i:s')]);
     }
 }

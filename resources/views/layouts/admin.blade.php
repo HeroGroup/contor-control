@@ -104,7 +104,7 @@
             });
 
             $('.data-table').DataTable({
-                pageLength: 25,
+                pageLength: 50,
                 language: {
                     "decimal":        "",
                     "emptyTable":     "رکوردی وجود ندارد.",

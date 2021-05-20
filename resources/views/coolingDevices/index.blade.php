@@ -66,11 +66,15 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu pull-left" role="menu">
-                                    <li>
-                                        <a href="{{route('coolingDevices.changeStatus',$coolingDevice->id)}}">
-                                            <span class="text-dark">تغییر وضعیت</span>
-                                        </a>
-                                    </li>
+                                    @if(\App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first() && \App\CoolingDevicePattern::where('cooling_device_id', $coolingDevice->id)->first()->pattern_id == 2)
+                                        <span></span>
+                                    @else
+                                        <li id="change-status-list-item-{{$coolingDevice->id}}">
+                                            <a href="{{route('coolingDevices.changeStatus',$coolingDevice->id)}}">
+                                                <span class="text-dark">تغییر وضعیت</span>
+                                            </a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a href="{{route('coolingDevices.edit',$coolingDevice->id)}}">
                                             <span class="text-warning">ویرایش</span>
@@ -109,12 +113,19 @@
     </div>
     <script>
         $("select[name=patterns]").change(function() {
+            var itemId = $(this).attr('id'), itemValue = $(this).val();
+            if(itemValue === "2") { // دستی
+                $("#change-status-list-item-"+itemId).css({"display":"none"});
+            } else {
+                $("#change-status-list-item-"+itemId).css({"display":"block"});
+            }
+
             $.ajax("{{route('coolingDevices.patterns.store')}}", {
                 type: "post",
                 data: {
                     "_token": "{{@csrf_token()}}",
-                    "device": $(this).attr('id'),
-                    "pattern": $(this).val()
+                    "device": itemId,
+                    "pattern": itemValue
                 },
                 success: function (res) {
                     swal(res.message);

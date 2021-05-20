@@ -49,8 +49,10 @@ class ReportController extends Controller
                     $input = $request->parvande;
                 else if($request->has('electrical_meter_id') && $request->electrical_meter_id > 0)
                     $input = $request->electrical_meter_id;
-                else if($request->has('gateway_id'))
-                    $input = ElectricalMeter::where('gateway_id',$request->gateway_id)->first()->id;
+                else if($request->has('gateway_id')) {
+                    $input = ElectricalMeter::where('gateway_id',$request->gateway_id)->first() ?
+                        ElectricalMeter::where('gateway_id',$request->gateway_id)->first()->id : 0;
+                }
 
                 $result = DB::table('electrical_meter_histories')
                     ->where('electrical_meter_id', $input)

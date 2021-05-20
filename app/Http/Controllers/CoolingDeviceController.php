@@ -22,7 +22,7 @@ class CoolingDeviceController extends Controller
             CoolingDevice::where('gateway_id', $gateway)->whereIn('gateway_id',$userGateways)->orderBy('serial_number', 'asc')->get() :
             CoolingDevice::whereIn('gateway_id',$userGateways)->orderBy('serial_number', 'asc')->get();
 
-        $patterns = Pattern::where('pattern_type', 1)->pluck('name', 'id')->toArray();
+        $patterns = Pattern::where('pattern_type', 1)->orderBy('id','asc')->pluck('name', 'id')->toArray();
 
         return view('coolingDevices.index', compact('gateway', 'coolingDevices', 'patterns'));
     }

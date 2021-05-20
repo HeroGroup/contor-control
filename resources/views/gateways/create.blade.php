@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <label for="serial_number" class="col-sm-2 control-label">شناسه دستگاه</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{old('serial_number')}}" required maxlength="10">
+                        <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{old('serial_number')}}" required maxlength="18">
                     </div>
                 </div>
 
@@ -87,6 +87,13 @@
                     <label for="city_id" class="col-sm-2 control-label">شهر</label>
                     <div class="col-sm-4">
                         {!! Form::select('city_id', $cities, old('city_id'), array('class' => 'form-control', 'id' => 'city_id', 'placeholder' => 'شهر کنترلر انتخاب کنید...')) !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="version" class="col-sm-2 control-label">شهر</label>
+                    <div class="col-sm-4">
+                        {!! Form::select('version', config('enums.versions'), old('version'), array('class' => 'form-control', 'id' => 'version', 'placeholder' => 'ورژن انتخاب کنید...')) !!}
                     </div>
                 </div>
 

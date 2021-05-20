@@ -15,6 +15,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="contor_serial_number" class="col-sm-4 col-form-label">شماره سریال کنتور</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="contor_serial_number" name="contor_serial_number" value="{{old('contor_serial_number')}}" required />
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="title" class="col-sm-4 col-form-label">عنوان (اختیاری)</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="title" name="title" value="{{old('title')}}"  />

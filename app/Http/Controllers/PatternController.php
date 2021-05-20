@@ -15,7 +15,7 @@ class PatternController extends Controller
 {
     public function index()
     {
-        $patterns = Pattern::where('pattern_type', 1)->get();
+        $patterns = Pattern::where('pattern_type', 1)->orderBy('id','asc')->get();
         return view('patterns.index', compact('patterns'));
     }
 

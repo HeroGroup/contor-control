@@ -1,4 +1,0 @@
-LIBRARY   ADT_IPS
-EXPORTS
-   add   @1
-   sub   @2

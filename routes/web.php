@@ -133,10 +133,14 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('/getElectricityMeterFieldModify/{gateway}', 'GatewayController@getElectricityMeterFieldModify')->name('getElectricityMeterFieldModify');
     Route::post('postElectricityMeterFieldModifyConfirm', 'GatewayController@confirmFieldModify')->name('confirmFieldModify');
 
-    Route::group(['prefix' => 'v2'], function() {
-        Route::get('/getTime', 'Api\V2Controller@getTime')->name('getTime');
-        Route::get('/getLatestElectricalMeterConfig/{gatewayId}', 'Api\V2Controller@getLatestElectricalMeterConfig')->name('v2.getLatestElectricalMeterConfig');
-        Route::post('/postElectricityMeterData', 'Api\V2Controller@@postElectricityMeterData')->name('v2.postElectricityMeterData');
+    Route::namespace('Api')->group(function () {
+        Route::group(['prefix' => 'v2'], function() {
+            Route::get('/getDeviceIds', 'V2Controller@getDeviceIds')->name('getDeviceIds');
+            Route::post('/nodes', 'V2Controller@nodes')->name('nodes');
+            Route::get('/getTime', 'V2Controller@getTime')->name('getTime');
+            Route::get('/getLatestElectricalMeterConfig/{gatewayId}', 'V2Controller@getLatestElectricalMeterConfig')->name('v2.getLatestElectricalMeterConfig');
+            Route::post('/postElectricityMeterData', 'V2Controller@postElectricityMeterData')->name('v2.postElectricityMeterData');
+        });
     });
 });
 /*  ============================================================================    */

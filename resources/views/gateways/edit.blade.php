@@ -90,6 +90,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="version" class="col-sm-2 control-label">شهر</label>
+                    <div class="col-sm-4">
+                        {!! Form::select('version', config('enums.versions'), old('version'), array('class' => 'form-control', 'id' => 'version', 'placeholder' => 'ورژن انتخاب کنید...')) !!}
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-4 text-left">
                         <a class="btn btn-default" href="{{route('gateways.index')}}">انصراف</a>
                         <button type="submit" class="btn btn-success">ذخیره</button>

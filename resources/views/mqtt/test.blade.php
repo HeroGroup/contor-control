@@ -55,7 +55,7 @@
                 hours = today.getHours(),
                 minutes = today.getMinutes(),
                 seconds = today.getSeconds(),
-                time = (hours.length<2 ? '0'.hours : hours) + ":" + (minutes.length < 2 ? '0'.minutes : minutes) + ":" + (seconds.length < 2 ? '0'.seconds : seconds);
+                time = (hours.toString().length<2 ? '0'+hours : hours) + ":" + (minutes.toString().length < 2 ? '0'+minutes : minutes) + ":" + (seconds.toString().length < 2 ? '0'+seconds : seconds);
 
             var node = document.createElement("LI"),
                 textNode = document.createTextNode(message),
@@ -79,6 +79,8 @@
             }, 2000);
 
             document.getElementById("messages").appendChild(node);
+            var list = document.getElementById("messages");
+            list.insertBefore(node, list.childNodes[0]);
         }
 
         // var sendInterval;

@@ -16,6 +16,7 @@ class Gateway extends Model
         'city_id',
         'modiriat',
         'sim_card_number',
+        'version'
     ];
 
     public function electricalMeters()
