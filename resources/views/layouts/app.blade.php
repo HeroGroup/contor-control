@@ -40,10 +40,10 @@
                             @endif
                             @role('installer')
                             <li class="bb">
-                                <a class="dropdown-item" href="/newGatewayTypeB">درگاه تایپ B جدید</a>
+                                <a class="dropdown-item" href="/newGatewayTypeB">کنترلر کنتور جدید</a>
                             </li>
                             <li class="bb">
-                                <a class="dropdown-item" href="/newGatewayTypeA">درگاه تایپ A جدید</a>
+                                <a class="dropdown-item" href="/newGatewayTypeA">کنترلر اسپلیت جدید</a>
                             </li>
                             <li class="bb">
                                 <a class="dropdown-item" href="/newSplit">اسپلیت جدید</a>

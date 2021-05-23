@@ -29,6 +29,10 @@ class V2Controller extends Controller
 
     public function postElectricityMeterData(Request $request)
     {
+        $log = logIncomingData($request->getContent(), $request->header('User-Agent'));
+        if (!$log)
+            return $this->fail("invalid or empty data");
+
         return $this->success('data posted successfully', $request->all());
 
         // $request->gateway_id string

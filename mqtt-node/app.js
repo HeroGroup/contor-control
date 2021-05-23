@@ -56,7 +56,7 @@ const socketConnection = (topics) => {
                         apiCall('/api/v2/nodes',incomingJson).then((res) => {});
 
                         // publish rtc afterwards
-                        setTimeout(currentTimestamp(), 5000);
+                        // setTimeout(currentTimestamp(), 5000);
                         break;
                 }
             } catch (e) {
